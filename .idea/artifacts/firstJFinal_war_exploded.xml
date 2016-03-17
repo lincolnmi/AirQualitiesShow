@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="firstJFinal:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/firstJFinal_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="firstJFinal/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="firstJFinal" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Gradle: org.eclipse.jetty:jetty-util:9.3.8.v20160314" />
+          <element id="library" level="project" name="Gradle: cglib:cglib-nodep:3.1" />
+          <element id="library" level="project" name="Gradle: com.jfinal:jfinal:2.2" />
+          <element id="library" level="project" name="Gradle: org.freemarker:freemarker:2.3.23" />
+          <element id="library" level="project" name="Gradle: org.eclipse.jetty:jetty-server:9.3.8.v20160314" />
+          <element id="library" level="project" name="Gradle: org.eclipse.jetty:jetty-http:9.3.8.v20160314" />
+          <element id="library" level="project" name="Gradle: org.eclipse.jetty:jetty-io:9.3.8.v20160314" />
+          <element id="library" level="project" name="Gradle: com.jfinal:jfinal:1.9" />
+          <element id="library" level="project" name="Gradle: c3p0:c3p0:0.9.1.2" />
+          <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.38" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,76 @@
+<#include "/backpage/template/_editor_layout.html"/> <@layout>
+<div class="span11">
+	<div class="row-fluid">
+		<div class="page-header">
+			<h1>
+				New Post <small>add post</small>
+			</h1>
+		</div>
+		<form class="form-horizontal" method="post"
+			action="private/post/addPost" id="form">
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="title">Title</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="title" name="title" required/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="content">Content</label>
+					<div class="controls">
+						<textarea class="ckeditor" id="ckeditor"></textarea>
+						<input name="content" id="content" type="text" style="display:none"/>						
+					</div>
+				</div>
+				<div class="control-group" id="text-area">
+					<label class="control-label" for="name">Files</label>
+					<div class="controls" id="upload-area">
+						<a class="btn" id="upload-file">Upload File</a> <input type="file"
+							id="file" name="up-file" value="test" style="display: none;"
+							 data-url="private/material/fileUpload/" />
+						<span id="upload-result" style="line-height:20px;" ></span>
+						<div id="progress" style="height: 10px;width: 200px;">
+    						<div class="bar" style="width:1%;height:20px;background:green;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="control-group" id="text-area">
+					<label class="control-label" for="name"></label>
+					<div class="controls">
+						<ul class="list_ul" id="filename-list">
+
+						</ul>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="role">Type</label>
+					<div class="controls">
+						<select id="role" name="type">
+							<option value="NOTICE">Notice</option>
+							<option value="NEWS" selected>News</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="active">Draft?</label>
+					<div class="controls">
+						<input type="checkbox" id="active" value="off" name="draft" />
+					</div>
+				</div>
+				<div class="form-actions">
+					<input type="button" class="btn btn-success btn-large" id="save"
+						value="Save" /> <a class="btn" href="private/post">Discard</a>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+</@layout> <@javascript>
+<script src="resource/static/back_src/js/vendor/jquery.ui.widget.js"></script>
+	<script src="resource/static/back_src/js/jquery.iframe-transport.js"></script>
+	<script src="resource/static/back_src/js/jquery.fileupload.js"></script>
+<script src="resource/static/back_src/js/page/add_post.js"></script>
+<script>
+</script>
+</@javascript>

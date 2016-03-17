@@ -1,0 +1,111 @@
+<#include "/backpage/template/_layout.html"/>
+<@css>
+<link href="resource/static/css/datatables.css" rel="stylesheet">
+</@css>
+<@layout>
+<div class="span10">
+		  <div class="row-fluid">
+			<div class="page-header">
+				<h1>Materials <small>All materials</small></h1>
+			</div>
+			<a href="private/material/addMaterialView" class="btn btn-success">New Material</a>
+			<div style="padding-bottom:10px;"></div>
+		<#if msg??> 
+		<div class="alert alert-success">${msg}</div>
+		</#if> 
+			<table class="table table-striped table-bordered table-condensed" id="example">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Title</th>
+						<th>Create Time</th>
+						<th>Update Time</th>
+						<th>Author</th>
+						<th>Status</th>
+						<th>Operations
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				<#list materials as m>
+				<tr class="list-users">
+					<td>${m.id}</td>
+					<td><a href="private/material/editView/${m.id}">${m.title}</a></td>
+					<td>${m.create_time?string('yyyy-MM-dd hh:mm:ss')}</td>
+					<td>${m.update_time?string('yyyy-MM-dd hh:mm:ss')}</td>
+					<td>${m.author}</td>
+					<td>
+						<#if m.isDraft == 0>
+							<span class="label label-success">Active</span>						
+						<#else>
+							<span class="label">Draft</span>
+						</#if>
+					</td>
+					<td>
+						<div class="btn-group">
+							<a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="private/material/editView/${m.id}"><i class="icon-pencil"></i> Edit</a></li>
+								<li><a href="private/material/delete/${m.id}" onclick="return confirm('Are you sure delete this item?')"><i class="icon-trash"></i> Delete</a></li>
+								<!-- <li class="nav-header">Active</li>
+								<#if m.isDraft == 1>
+									<li><a href=""><i class="icon-lock"></i> Make <strong>Draft</strong></a></li>						
+								<#else>
+									<li><a href="#"><i class="icon-lock"></i> Make <strong>Active</strong></a></li>
+								</#if> -->
+							</ul>
+						</div>
+					</td>
+				</tr>
+				</#list>
+				
+				</tbody>
+			</table>
+			<!-- <div class="pagination">
+				<ul>
+					<li><a href="#">Prev</a></li>
+					<li class="active">
+						<a href="#">1</a>
+					</li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">Next</a></li>
+				</ul>
+			</div> -->
+			
+		  </div>
+        </div>
+
+</@layout>
+
+<@javascript>
+<script src="resource/static/js/jquery.dataTables.js"></script>
+<script src="resource/static/js/datatables.js" type="text/javascript"></script>
+<script type="text/javascript">
+	jQuery(function($) {
+		$(document).ready(
+				function() {
+					var Otable = $('#example').dataTable({
+						"sPaginationType" : "bs_four_button"
+					});
+					$('#example').each(
+							function() {
+								var datatable = $(this);
+								// SEARCH - Add the placeholder for Search and Turn this into in-line form control
+								var search_input = datatable.closest(
+										'.dataTables_wrapper').find(
+										'div[id$=_filter] input');
+								search_input.attr('placeholder', 'Search');
+								search_input.addClass('form-control input-sm');
+								// LENGTH - Inline-Form control
+								var length_sel = datatable.closest(
+										'.dataTables_wrapper').find(
+										'div[id$=_length] select');
+								length_sel.addClass('form-control input-sm');
+							});
+					Otable.fnSort( [ [3,'desc'] ] );
+				});
+	});
+</script>
+</@javascript>

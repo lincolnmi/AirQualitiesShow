@@ -1,0 +1,142 @@
+<#include "/page/template/_layout.html"/>
+
+<@layout>
+ <section class="news-section">
+	  	<div class="container flowcontent" >
+			<div class="row">
+				<div class="col-md-8 pull-left" style="padding-right:0px;">
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+					  <!-- Indicators -->
+					  <ol class="carousel-indicators">
+					    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+					    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+					    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					  </ol>
+					
+					  <!-- Wrapper for slides -->
+					  <div class="carousel-inner">
+					    <div class="item active" id="slider0">
+					      <a href="news/content/42"><img src="resource/static/image/index1.png" alt="The first png"></a>
+					      <div class="carousel-caption">
+					        <a href="news/content/42" class="image-link"></a>
+					      </div>
+					    </div>
+					    <div class="item" id="slider1">
+					      <a href="news/content/34"><img src="resource/static/image/2012index.png" alt="The first png"></a>
+					      <div class="carousel-caption">
+					        <a href="news/content/34" class="image-link"></a>
+					      </div>
+					    </div>
+					    <div class="item" id="slider2">
+					      <a href="news/content/33"><img src="resource/static/image/2011index.png" alt="The first png"></a>
+					      <div class="carousel-caption">
+					        <a href="news/content/33" class="image-link"></a>
+					      </div>
+					    </div>
+					    
+					  </div>
+					
+					  <!-- Controls -->
+					  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+					    <span class="glyphicon glyphicon-chevron-left"></span>
+					  </a>
+					  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+					    <span class="glyphicon glyphicon-chevron-right"></span>
+					  </a>
+					</div>
+				</div>
+				<div class="col-md-4 pull-right news-and-anounce" style="padding-left:0px;">
+					<div class="lastest-news">
+						<div class="col-md-12">
+							<h3 class="index-news-title"><span class="glyphicon glyphicon-envelope color-lead"></span>新闻
+								<!-- <span class="english-tag">news</span> -->
+								</h3>
+							<ul class="list-group slider-right-list">
+								 <#list news.getList() as n>
+								  <li class="list-group-item">
+ 								   <a href="news/content/${n.id}">
+  								   ${n.title}</a>
+ 								 </li>
+ 								 </#list>
+ 								 <span class="pull-right"><a href="news">更多新闻</a>&nbsp;&nbsp;&nbsp;</span>
+							</ul>
+							
+							<h3 class="index-news-title"><span class="glyphicon glyphicon-pushpin color-lead"></span>公告
+							<!-- <span class="english-tag">announcement</span> -->
+							</h3>
+							<ul class="list-group slider-right-list" >
+								  <#list notices.getList() as no>
+								  <li class="list-group-item">
+ 								   <a href="notice/content/${no.id}">${no.title}</a>
+ 								 </li>
+ 								 </#list>
+ 								  <span class="pull-right"><a href="notice">更多公告</a>&nbsp;&nbsp;&nbsp;</span>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+	  	</div>
+	  </section>
+
+	  <section>
+	  	<div class="container">
+	  	<div class="row">
+          <div class="col-sm-4 col-md-4">
+            <div class="info-thumbnail-link">
+            <div class="thumbnail info-thumbnail with-icon background-clouds color-text">
+              <img src="resource/static/image/aboutus.png" alt="...">
+
+              <div class="caption bordered background-white">
+                 <h3 class="h3-refine"><span class="glyphicon glyphicon-info-sign color-lead"></span>关于我们
+                  	<!-- <span class="english-tag">aboutus</span> -->
+                  	</h3>
+                  <p class="description" style="height: 154px;">大中华区主机用户社区（Chinese System z User Community）是一个非盈利性技术组织，由同济大学、IBM硅谷实验室、国际DB2用户协会（IDUG）于2008年共同发起，提供国内主机领域最为资深与权威的用户交流平台，致力于主机开发与管理领域的技术共享、探讨、研究、合作及主机人才培养。</p>
+                <p class="buttons"><a href="about" class="btn btn-lead">查看更多</a></p>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-4">
+            <div class="info-thumbnail-link">
+            <div class="thumbnail info-thumbnail with-icon background-clouds color-text">
+              <img src="resource/static/image/Homepage_AnnualConference.JPG" alt="...">
+
+              <div class="caption bordered background-white">
+               <h3 class="h3-refine"><span class="glyphicon glyphicon-eye-open color-lead"></span>愿景与使命
+                  	<!-- <span class="english-tag">mission</span> -->
+                  	</h3>
+                
+                <ul class="description" style="height: 154px;">
+                	<li style="margin-left:-20px;">愿景：开放融合、技术创新。</li>
+                	<li style="margin-left:-20px;">使命：为主机客户和主机人才的成长创造价值。</li>
+                </ul>
+                <p class="buttons"><a href="about/visionandmission" class="btn btn-lead">查看更多</a></p>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4 col-md-4">
+            <div class="info-thumbnail-link">
+            <div class="thumbnail info-thumbnail with-icon background-clouds color-text">
+              <img src="resource/static/image/Homepage_VisionMission.JPG" alt="...">
+ 
+              <div class="caption bordered background-white">
+               <h3 class="h3-refine"><span class="glyphicon glyphicon-road color-lead"></span> 技术年会
+                  <!-- <span class="english-tag">history</span> -->
+                  </h3>
+                  <p class="description" style="height: 154px;">于每年秋季召开的CDUG年会是CDUG最引人注目的活动，被邀请的嘉宾包括海内外主机领域的各类知名专家，例如来自IBM硅谷实验室的主机技术专家、DB2产品的创始者、IBM中国区专家、IDUG专家、精通主机技术的企业专家以及著名高校的主机领域研究人员。</p>
+                <p class="buttons"><a href="about/history" class="btn btn-lead">查看更多</a></p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+	  		</div>
+	  </section>	
+</@layout>
+
+<@javascript>
+<script src="resource/static/js/page/index.js"></script>
+</@javascript>

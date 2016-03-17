@@ -1,0 +1,56 @@
+<#include "/backpage/template/_layout.html"/>
+
+<@layout>
+<div class="span9">
+		  <div class="row-fluid">
+			<div class="page-header">
+				<h1>User Profile <small>edit user</small></h1>
+			</div>
+			<#if result??>
+				<#if result=="Fail">
+					<div class="alert alert-danger">Update profile fail!</div>
+				<#else>
+					<div class="alert alert-success">Update profile success!</div>
+				</#if>		
+			</#if>
+			<form class="form-horizontal" method="post" action="private/user/myprofile">
+				<fieldset>
+					
+					<div class="control-group">
+						<label class="control-label" for="email">Account</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="email" readonly="readonly" name="email" required value="${user.email}"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="password">Password</label>
+						<div class="controls">
+							<input type="password" class="input-xlarge" id="password" name="password" required value="${user.password}"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="city">Name</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="name" name="name" required value="${user.name}"/>
+						</div>
+					</div>	
+					<div class="control-group">
+						<label class="control-label" for="role">Role</label>
+						<div class="controls" style="padding-top:5px;">
+								<#if user.role == 'ADMIN'>
+									<span class="badge">Admin</span>
+								<#else>
+									<label>Common User</label>									
+								</#if>
+						</div>
+					</div>	
+					
+					<div class="form-actions">
+						<input type="submit" class="btn btn-success btn-large" value="Save User" /> <a class="btn" href="private/user">Discard</a>
+					</div>					
+				</fieldset>
+			</form>
+		  </div>
+        </div>
+
+</@layout>

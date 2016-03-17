@@ -1,0 +1,52 @@
+<#include "/backpage/template/_layout.html"/>
+
+<@layout>
+<div class="span9">
+		  <div class="row-fluid">
+			<div class="page-header">
+				<h1>New User <small>User registration</small></h1>
+			</div>
+			<form class="form-horizontal" method="post" action="private/user/addUser">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label" for="email">Account</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="email" required  name="email"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="password">Password</label>
+						<div class="controls">
+							<input type="password" class="input-xlarge" id="password" required name="password" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="city">Name</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="name" required name="name"/>
+						</div>
+					</div>	
+					<div class="control-group">
+						<label class="control-label" for="role">Role</label>
+						<div class="controls">
+							<select id="role" name="role">
+								<option value="ADMIN">Admin</option>
+								<option value="USER" selected>User</option>
+							</select>
+						</div>
+					</div>	
+					<div class="control-group">
+						<label class="control-label" for="active">Active?</label>
+						<div class="controls">
+							<input type="checkbox" id="active"  name="active" />
+						</div>
+					</div>
+					<div class="form-actions">
+						<input type="submit" class="btn btn-success btn-large" value="Save User" /> <a class="btn" href="private/user">Discard</a>
+					</div>					
+				</fieldset>
+			</form>
+		  </div>
+        </div>
+
+</@layout>

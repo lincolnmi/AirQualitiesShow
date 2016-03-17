@@ -1,0 +1,70 @@
+<#include "/backpage/template/_layout.html"/>
+
+<@layout>
+<div class="span9">
+		  <div class="row-fluid">
+			<div class="page-header">
+				<h1>User Profile <small>edit user</small></h1>
+			</div>
+			<#if result??>
+				<#if result=="Fail">
+					<div class="alert alert-danger">Update user fail!</div>
+				<#else>
+					<div class="alert alert-success">Update user success!</div>
+				</#if>		
+			</#if>
+			<form class="form-horizontal" method="post" action="private/user/update">
+				<fieldset>
+					
+					<div class="control-group">
+						<label class="control-label" for="email">Account</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="email"  name="email" required value="${user.email}"/>
+							<input type="text" name="id" value="${user.id}" style="display:none"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="password">Password</label>
+						<div class="controls">
+							<input type="password" class="input-xlarge" id="password" name="password" required value="${user.password}"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="city">Name</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="name" name="name" required value="${user.name}"/>
+						</div>
+					</div>	
+					<div class="control-group">
+						<label class="control-label" for="role">Role</label>
+						<div class="controls">
+							<select id="role" name="role">
+								<#if user.role == 'ADMIN'>
+									<option value="ADMIN" selected>Admin</option>
+									<option value="USER">User</option>
+								<#else>									
+									<option value="ADMIN">Admin</option>
+									<option value="USER" selected>User</option>
+								</#if>
+							</select>
+						</div>
+					</div>	
+					<div class="control-group">
+						<label class="control-label" for="active">Active?</label>
+						<div class="controls">
+							<#if user.isActive == 1>
+								<input type="checkbox" id="active" checked checked name="active" />
+							<#elseif user.isActive ==0>
+								<input type="checkbox" id="active" name="active" />
+							</#if>
+						</div>
+					</div>
+					<div class="form-actions">
+						<input type="submit" class="btn btn-success btn-large" value="Save User" /> <a class="btn" href="private/user">Discard</a>
+					</div>					
+				</fieldset>
+			</form>
+		  </div>
+        </div>
+
+</@layout>

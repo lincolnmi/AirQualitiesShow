@@ -1,0 +1,106 @@
+<#include "/backpage/template/_editor_layout.html"/> <@layout>
+<div class="span11">
+	<div class="row-fluid">
+		<div class="page-header">
+			<h1>
+				Edit Material <small></small>
+			</h1>
+		</div>
+		<#if msg??> 
+		<div class="alert alert-success">${msg}</div>
+		</#if> 
+		<form class="form-horizontal" method="post" id="form" action="private/material/editView">
+			<!-- <form class="form-horizontal"> -->
+			<fieldset>
+				<div class="control-group">
+					<label class="control-label" for="name">Title</label>
+					<div class="controls">
+						<input type="text" class="input-xlarge" id="title" name="title" required value="${material.title}"/>
+						<input type="text" name="id" value=${material.id} style="display:none;"/>						
+					</div>
+				</div>
+
+				<div class="control-group" id="text-area">
+					<label class="control-label" for="name">Content</label>
+					<div class="controls">
+						<textarea class="ckeditor" id="ckeditor">${material.content}</textarea>
+						<input name="content" id="content" type="text"  style="display:none"/>
+					</div>
+				</div>
+				<div class="control-group" id="text-area">
+					<label class="control-label" for="name">Files</label>
+					<div class="controls" id="upload-area">
+						<a class="btn" id="upload-file">Upload File</a> <input type="file"
+							id="file" name="up-file" value="test" style="display: none;"
+							 data-url="private/material/fileUpload/" />
+						<span id="upload-result" style="line-height:20px;" ></span>
+						<div id="progress" style="height: 10px;width: 200px;">
+    						<div class="bar" style="width:1%;height:20px;background:green;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="control-group" id="text-area">
+					<label class="control-label" for="name"></label>
+					<div class="controls">
+						<ul class="list_ul" id="filename-list">
+							<#list files as file>
+							<li><span class="badge badge-success filename">${file.file_name}<i
+									class="icon-remove remove-file" onclick="r(this);"></i></span><input type="text" value="${file.id}"
+								name="file" class="file-id" style="display: none;"></li>
+							</#list>
+						</ul>
+					</div>
+				</div>
+				
+				
+				<#list tags as firstTag>
+				<div class="control-group">
+					<label class="control-label" for="role">${firstTag.name}</label>
+					<div class="controls">
+						<ul class="list_ul">
+							<#list firstTag.getSecondTags() as secondTag>
+							<li>
+								<#if secondTag.isChecked()>
+								<input type="checkbox" name="secondTag" checked="checked" class="solution"
+									value="${secondTag.id}" /> 
+								<#else>
+								<input type="checkbox" name="secondTag" class="solution"
+									value="${secondTag.id}" />
+								</#if>
+							<span>${secondTag.name}</span></li>
+							</#list>
+						</ul>
+					</div>
+				</div>
+				</#list>
+				
+				<div class="control-group">
+					<label class="control-label" for="active">Draft?</label>
+					<div class="controls">
+						<#if material.isDraft == 1>
+						<input type="checkbox" id="active" checked name="draft" />
+						<#else>
+						<input type="checkbox" id="active" name="draft" />
+						</#if>
+					</div>
+				</div>
+				<div class="form-actions">
+					<input type="button" class="btn btn-success btn-large" id="save"
+						value="Save" /> <a class="btn"
+						href="private/material">Discard</a>
+				</div>
+			</fieldset>
+		</form>
+		<!-- </form> -->
+	</div>
+</div>
+
+</@layout> <@javascript>
+<!-- <script src="resource/static/back_src/js/ajaxfileupload.js"></script>
+ -->	<script src="resource/static/back_src/js/vendor/jquery.ui.widget.js"></script>
+	<script src="resource/static/back_src/js/jquery.iframe-transport.js"></script>
+	<script src="resource/static/back_src/js/jquery.fileupload.js"></script>
+<script src="resource/static/back_src/js/page/add_material.js"></script>
+
+</@javascript>
+
