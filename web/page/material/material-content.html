@@ -14,21 +14,21 @@
                 </p>
                 <hr>
                 <p>
-                    <span class="glyphicon glyphicon-time"></span> 发布于 ${material.create_time?string('yyyy-MM-dd hh:mm:ss')}
-                    &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-user"></span> 发布人 ${material.author}
+                    <span class="glyphicon glyphicon-time"></span> ${material.create_time?string('yyyy-MM-dd hh:mm:ss')}
+                    &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-user"></span> From ${material.author}
                  </p>
                 <hr>
                 
                 ${material.content}
 
                 <hr>
-				<h3>资料下载</h3>
+				<h3>Download</h3>
 				<div class="table-responsive">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-									<th>文件</th>
-									<th>大小</th>
+									<th>File</th>
+									<th>Size</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -37,7 +37,7 @@
 								<tr>
 									<td>${mf.file_name}</td>
 									<td>${mf.file_size}</td>
-									<td><a href="download/${mf.id}" target="_blank">下载</a></td>								
+									<td><a href="download/${mf.id}" target="_blank">Download</a></td>
 								</tr>
 								</#list>
 							</tbody>

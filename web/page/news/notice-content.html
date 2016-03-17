@@ -9,24 +9,24 @@
 				<!-- the actual blog post: title/author/date/content -->
 				<h1>${post.title}</h1>
 				<p class="lead">
-					由 <a>${post.author}</a> 发布
+					From <a>${post.author}</a>
 				</p>
 				<hr>
 				<p>
-					<span class="glyphicon glyphicon-time"></span> 发布于
+					<span class="glyphicon glyphicon-time"></span>
 					${post.create_time?string('yyyy-MM-dd hh:mm:ss')}
-					&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-hand-up"> 访问量：${post.view_count}</span>
+					&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-hand-up"> PV:${post.view_count}</span>
 				</p>
 				<hr>
 				<div class="content">
 					${post.content} <#if files.size()!=0>
-					<h3>资料下载</h3>
+					<h3>Download</h3>
 					<div class="table-responsive">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
-									<th>文件</th>
-									<th>大小</th>
+									<th>File</th>
+									<th>Size</th>
 									<th></th>
 								</tr>
 							</thead>
@@ -35,7 +35,7 @@
 								<tr>
 									<td>${mf.file_name}</td>
 									<td>${mf.file_size}</td>
-									<td><a href="download/${mf.id}" target="_blank">下载</a></td>
+									<td><a href="download/${mf.id}" target="_blank">Download</a></td>
 								</tr>
 								</#list>
 							</tbody>
