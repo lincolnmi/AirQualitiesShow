@@ -13,26 +13,26 @@
 			<!-- <form class="form-horizontal"> -->
 			<fieldset>
 				<div class="control-group">
-					<label class="control-label" for="name">Title</label>
+					<label class="control-label" for="title">Title</label>
 					<div class="controls">
-						<input type="text" class="input-xlarge" id="title" name="title" required value="${material.title}"/>
-						<input type="text" name="id" value=${material.id} style="display:none;"/>						
+						<input type="text" class="input-xlarge" id="title" name="title" required value="${publication.title}"/>
+						<input type="text" name="id" value=${publication.id} style="display:none;"/>
 					</div>
 				</div>
 
 				<div class="control-group" id="text-area">
-					<label class="control-label" for="name">Content</label>
+					<label class="control-label" for="content">Content</label>
 					<div class="controls">
-						<textarea class="ckeditor" id="ckeditor">${material.content}</textarea>
+						<textarea class="ckeditor" id="ckeditor">${publication.content}</textarea>
 						<input name="content" id="content" type="text"  style="display:none"/>
 					</div>
 				</div>
 				<div class="control-group" id="text-area">
-					<label class="control-label" for="name">Files</label>
+					<label class="control-label" for="files">Files</label>
 					<div class="controls" id="upload-area">
 						<a class="btn" id="upload-file">Upload File</a> <input type="file"
 							id="file" name="up-file" value="test" style="display: none;"
-							 data-url="private/material/fileUpload/" />
+							 data-url="private/publication/fileUpload/" />
 						<span id="upload-result" style="line-height:20px;" ></span>
 						<div id="progress" style="height: 10px;width: 200px;">
     						<div class="bar" style="width:1%;height:20px;background:green;"></div>
@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="control-group" id="text-area">
-					<label class="control-label" for="name"></label>
+					<label class="control-label" for="content"></label>
 					<div class="controls">
 						<ul class="list_ul" id="filename-list">
 							<#list files as file>
@@ -52,10 +52,17 @@
 					</div>
 				</div>
 
+                <div class="control-group">
+                    <label class="control-label" for="title">Year</label>
+                    <div class="controls">
+                        <input type="text" class="input-large" id="year" name="year" required value="${publication.year}"/>
+                    </div>
+                </div>
+
 				<div class="form-actions">
 					<input type="button" class="btn btn-success btn-large" id="save"
 						value="Save" /> <a class="btn"
-						href="private/material">Discard</a>
+						href="private/publication">Discard</a>
 				</div>
 			</fieldset>
 		</form>

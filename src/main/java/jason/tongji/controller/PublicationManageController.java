@@ -37,32 +37,26 @@ public class PublicationManageController extends Controller {
 					setAttr("msg", "Operation Success!");
 				}
 			}
-			render("/backpage/publications/list_publication.html");
+			render("/backpage/publication/list_publication.html");
 		} else {
 			redirect("/private/login/");
 		}
 	}
 
-	public void tags() {
-		setAttr("tags", FirstTag.dao.getFirstTags());
-		render("/backpage/material/tags.html");
-	}
-
 	public void delete() {
 		String id = getPara(0);
-		if (Publication.dao.deleteMaterial(Integer.parseInt(id))) {
+		if (Publications.dao.deleteById(Integer.parseInt(id))) {
 			setAttr("result", "success");
-			redirect("/private/material");
+			redirect("/private/publication");
 		} else {
 			setAttr("result", "fail");
 			render("/backpage/feedback/error.html");
 		}
 	}
 
-	public void addMaterialView() {
+	public void addPublicationView() {
 		if ("GET".equals(getRequest().getMethod())) {
-			setAttr("tags", FirstTag.dao.getFirstTags());
-			render("/backpage/material/add_material.html");
+			render("/backpage/publication/add_publication.html");
 		}
 	}
 
@@ -76,59 +70,49 @@ public class PublicationManageController extends Controller {
 					setAttr("msg", "Operation Success!");
 				}
 			}
-			setAttr("material", Publication.dao.findById(mid));
-			setAttr("tags", FirstTag.dao.getFirstTags(mid));
-			setAttr("files", Files.dao.getFilesByMaterialId(mid));
-			render("/backpage/material/edit.html");
+			setAttr("publication", Publications.dao.findById(mid));
+			setAttr("files", Files.dao.getFilesByPublicattionId(mid));
+			render("/backpage/publication/edit.html");
 		} else {
 			int mid = getParaToInt("id");
 			String title = getPara("title");
 			String content = getPara("content");
-			int draft = UITools.convertCheckboxValue(getPara("draft"));
+            int year = getParaToInt("year");
 			String[] file_ids = UITools.convertIdsValue(getParaValues("file"));
-			String[] tag_ids = UITools
-					.convertIdsValue(getParaValues("secondTag"));
 			try {
-				int rc = Publication.dao.updateMaterial(mid, title, content,
-						draft, file_ids, tag_ids);
+				int rc = Publications.dao.updatePublication(mid, title, content,year,file_ids);
 				if (rc != -1) {
-					redirect("/private/material/editView/" + rc + "-success");
+					redirect("/private/publication/editView/" + rc + "-success");
 				} else {
 					render("/backpage/feedback/error.html");
 				}
-
 			} catch (Exception e) {
-				// TODO: handle exception
 				render("/backpage/feedback/error.html");
 			}
 		}
 
 	}
 
-	public void addMaterial() {
+	public void addPublication() {
 		if ("POST".equals(getRequest().getMethod())) {
 			String title = getPara("title");
 			String content = getPara("content");
 			int draft = UITools.convertCheckboxValue(getPara("draft"));
 			Users user = (Users) getSessionAttr("loginUser");
 			String[] file_ids = UITools.convertIdsValue(getParaValues("file"));
-			String[] tag_ids = UITools
-					.convertIdsValue(getParaValues("secondTag"));
 
 			try {
-				int rc = Publication.dao.addMaterial(title, content,
+				int rc = Publications.dao.addPublication(title, content,
 						user.getStr("name"), user.getInt("id"), draft,
-						file_ids, tag_ids);
+						file_ids);
 				if (rc != -1) {
-					//redirect("/private/material/editView/" + rc + "-success");
-					redirect("/private/material/success");
+					redirect("/private/publication/success");
 				} else {
-					setAttr("msg", "Save material fail!");
+					setAttr("msg", "Save publication fail!");
 					render("/backpage/feedback/error.html");
 				}
 
 			} catch (Exception e) {
-				// TODO: handle exception
 				render("/backpage/feedback/error.html");
 			}
 		}

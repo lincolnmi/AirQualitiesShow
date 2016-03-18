@@ -144,4 +144,5 @@ public class UserManageController extends Controller {
 		setAttr("user", new Users().findById(uid));
 		render("/backpage/user/profile.html");
 	}
+
 }

@@ -48,15 +48,38 @@ public class Publications extends Model<Publications> {
 	}
 
 	@Before(Tx.class)
-	public int updatePublication(int mid, String title, String content,int year) {
-        if (dao.findById(mid).set("title", title).set("content", content)
-                .set("update_time", new Date()).set("year",year)
-                .update()) {
-            return mid;
+	public int updatePublication(int mid, String title, String content,int year,String[] fileids) {
+        if (deleteRelatedRows(mid)) {
+            for (String id : fileids) {
+                PublicationFile.dao.set("publication_id", mid)
+                        .set("file_id", Integer.parseInt(id)).save();
+            }
+            if (dao.findById(mid).set("title", title).set("content", content)
+                    .set("update_time", new Date()).set("year", year)
+                    .update()) {
+                return mid;
+            } else {
+                return -1;
+            }
         } else {
             return -1;
         }
 	}
+
+    private boolean deleteRelatedRows(int id) {
+        final int mid = id;
+        final int fileCount = PublicationFile.dao.count(mid);
+        boolean succeed = Db.tx(new IAtom() {
+            @Override
+            public boolean run() throws SQLException {
+                int count1 = Db
+                        .update("delete from publication_file where publication_id="
+                                + mid);
+                return (count1 == fileCount);
+            }
+        });
+        return succeed;
+    }
 
 	public ArrayList<Publications> getAllPublications() {
 		ArrayList<Publications> list = (ArrayList<Publications>) dao
@@ -67,16 +90,21 @@ public class Publications extends Model<Publications> {
 	@Before(Tx.class)
 	// Transaction support
 	public int addPublication(String title, String content, String author,
-			int user_id, int year) {
+			int user_id, int year,String[] fileids) {
 		Publications publications = new Publications().set("title", title)
 				.set("content", content).set("user_id", user_id)
 				.set("year", year).set("update_time", new Date())
 				.set("create_time", new Date()).set("author", author);
 		boolean msave_reuslt = publications.save();
 		int mid = publications.get("id");
-		if (!msave_reuslt) {
-			return -1;
-		}
+		if (msave_reuslt) {
+            for (String id : fileids) {
+                PublicationFile.dao.set("publication_id", mid)
+                        .set("file_id", Integer.parseInt(id)).save();
+            }
+		} else {
+            return -1;
+        }
 		return mid;
 	}
 

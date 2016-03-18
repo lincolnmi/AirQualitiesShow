@@ -15,9 +15,9 @@ public class Files extends Model<Files> {
 		return file;
 	}
 
-	public ArrayList<Files> getFilesByMaterialId(int id) {
+	public ArrayList<Files> getFilesByPublicattionId(int id) {
 		return (ArrayList<Files>) dao
-				.find("select * from files where id in (select file_id from material_file where material_id="
+				.find("select * from files where id in (select file_id from publication_file where publication_id="
 						+ id + ")");
 	}
 

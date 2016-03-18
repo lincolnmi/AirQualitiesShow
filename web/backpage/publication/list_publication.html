@@ -8,7 +8,7 @@
 			<div class="page-header">
 				<h1>Publications <small>All Publications</small></h1>
 			</div>
-			<a href="private/publication/addPublication" class="btn btn-success">New Publication</a>
+			<a href="private/publication/addPublicationView" class="btn btn-success">New Publication</a>
 			<div style="padding-bottom:10px;"></div>
 		<#if msg??> 
 		<div class="alert alert-success">${msg}</div>
@@ -21,24 +21,25 @@
 						<th>Create Time</th>
 						<th>Update Time</th>
 						<th>Author</th>
-						<th>Operations
-						</th>
+                        <th>Year</th>
+						<th>Operations</th>
 					</tr>
 				</thead>
 				<tbody>
-				<#list materials as m>
+				<#list publications as publication>
 				<tr class="list-users">
-					<td>${m.id}</td>
-					<td><a href="private/material/editView/${m.id}">${m.title}</a></td>
-					<td>${m.create_time?string('yyyy-MM-dd hh:mm:ss')}</td>
-					<td>${m.update_time?string('yyyy-MM-dd hh:mm:ss')}</td>
-					<td>${m.author}</td>
+					<td>${publication.id}</td>
+					<td><a href="private/publication/editView/${publication.id}">${publication.title}</a></td>
+					<td>${publication.create_time?string('yyyy-MM-dd hh:mm:ss')}</td>
+					<td>${publication.update_time?string('yyyy-MM-dd hh:mm:ss')}</td>
+					<td>${publication.author}</td>
+                    <td>${publication.year}</td>
 					<td>
 						<div class="btn-group">
 							<a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">Actions <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="private/publication/editView/${m.id}"><i class="icon-pencil"></i> Edit</a></li>
-								<li><a href="private/publication/delete/${m.id}" onclick="return confirm('Are you sure delete this item?')"><i class="icon-trash"></i> Delete</a></li>
+								<li><a href="private/publication/editView/${publication.id}"><i class="icon-pencil"></i> Edit</a></li>
+								<li><a href="private/publication/delete/${publication.id}" onclick="return confirm('Are you sure delete this item?')"><i class="icon-trash"></i> Delete</a></li>
                             </ul>
 						</div>
 					</td>

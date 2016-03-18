@@ -17,8 +17,18 @@ public class PublicationController extends Controller {
 		setAttr(GlobalConfig.NAV_KEY, GlobalConfig.NAV_PUBLICATION);
 		int id = Integer.parseInt(getPara(0));
 		setAttr("publication", Publications.dao.findById(id));
-		setAttr("publication_files", Files.dao.getFilesByMaterialId(id));
+		setAttr("publication_files", Files.dao.getFilesByPublicattionId(id));
         Publications.dao.addViewCount(id);
 		render("/page/publication/publication-content.html");
 	}
+
+    public void byYear() {
+        setAttr(GlobalConfig.NAV_KEY, GlobalConfig.NAV_PUBLICATION);
+        int id = Integer.parseInt(getPara(0));
+        setAttr("publication", Publications.dao.findById(id));
+        setAttr("publication_files", Files.dao.getFilesByPublicattionId(id));
+        Publications.dao.addViewCount(id);
+        render("/page/publication/publication-content.html");
+    }
+
 }

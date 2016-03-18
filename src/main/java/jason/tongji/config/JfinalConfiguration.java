@@ -41,13 +41,10 @@ public class JfinalConfiguration extends JFinalConfig {
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		me.add(arp);
 		arp.addMapping("posts", Posts.class);
-		arp.addMapping("materials", Publication.class);
+		arp.addMapping("publications", Publications.class);
 		arp.addMapping("files", Files.class);
 		arp.addMapping("users", Users.class);
-		arp.addMapping("material_file", PublicationFile.class);
-		arp.addMapping("firsttag", FirstTag.class);
-		arp.addMapping("secondtag", SecondTag.class);
-		arp.addMapping("material_second_tag", MaterialSecondTag.class);
+		arp.addMapping("publication_file", PublicationFile.class);
 		arp.addMapping("post_file", PostFile.class);
 		// add spring framework
 	}
