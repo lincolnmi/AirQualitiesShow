@@ -7,6 +7,8 @@ public class FrontgroundRouter extends Routes {
 	public void config(){
 		add("/", CommonController.class);
         add("/news", NewsController.class);
+        add("/daqiang", DaqiangController.class);
+        add("/publication", PublicationController.class);
         add("/notice", NoticeController.class);
         add("/about", AboutController.class);
         add("/material", MaterialController.class);
