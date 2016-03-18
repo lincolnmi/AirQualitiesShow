@@ -1,19 +1,18 @@
 package jason.tongji.controller;
 
-import jason.tongji.config.GlobalConfig;
-import jason.tongji.interceptor.LoginInterceptor;
-import jason.tongji.interceptor.OwnerRequiredInterceptor;
-import jason.tongji.model.Files;
-import jason.tongji.model.FirstTag;
-import jason.tongji.model.Materials;
-import jason.tongji.model.Users;
-import jason.tongji.tool.DataHanlder;
-import jason.tongji.tool.UITools;
 import com.jfinal.aop.Before;
 import com.jfinal.aop.ClearInterceptor;
 import com.jfinal.core.Controller;
 import com.jfinal.core.JFinal;
 import com.jfinal.upload.UploadFile;
+import jason.tongji.config.GlobalConfig;
+import jason.tongji.interceptor.LoginInterceptor;
+import jason.tongji.interceptor.OwnerRequiredInterceptor;
+import jason.tongji.model.Files;
+import jason.tongji.model.Publications;
+import jason.tongji.model.Users;
+import jason.tongji.tool.DataHanlder;
+import jason.tongji.tool.UITools;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,15 +20,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Before(LoginInterceptor.class)
-public class MaterialManageController extends Controller {
+public class PublicationManageController extends Controller {
+
 	public void index() {
 		Users user = getSessionAttr("loginUser");
 		if (user != null) {
 			if (user.isAdmin()) {
-				setAttr("materials", Materials.dao.getMaterials());
+				setAttr("publications", Publications.dao.getAllPublications());
 			} else {
-				setAttr("materials",
-						Materials.dao.getMaterials(user.getInt("id")));
+				setAttr("publications",
+                        Publications.dao.getPublications(user.getInt("id")));
 			}
 			String flag = getPara(0);
 			if (flag != null) {
@@ -37,7 +37,7 @@ public class MaterialManageController extends Controller {
 					setAttr("msg", "Operation Success!");
 				}
 			}
-			render("/backpage/material/list_material.html");
+			render("/backpage/publications/list_publication.html");
 		} else {
 			redirect("/private/login/");
 		}
@@ -50,7 +50,7 @@ public class MaterialManageController extends Controller {
 
 	public void delete() {
 		String id = getPara(0);
-		if (Materials.dao.deleteMaterial(Integer.parseInt(id))) {
+		if (Publication.dao.deleteMaterial(Integer.parseInt(id))) {
 			setAttr("result", "success");
 			redirect("/private/material");
 		} else {
@@ -76,7 +76,7 @@ public class MaterialManageController extends Controller {
 					setAttr("msg", "Operation Success!");
 				}
 			}
-			setAttr("material", Materials.dao.findById(mid));
+			setAttr("material", Publication.dao.findById(mid));
 			setAttr("tags", FirstTag.dao.getFirstTags(mid));
 			setAttr("files", Files.dao.getFilesByMaterialId(mid));
 			render("/backpage/material/edit.html");
@@ -89,7 +89,7 @@ public class MaterialManageController extends Controller {
 			String[] tag_ids = UITools
 					.convertIdsValue(getParaValues("secondTag"));
 			try {
-				int rc = Materials.dao.updateMaterial(mid, title, content,
+				int rc = Publication.dao.updateMaterial(mid, title, content,
 						draft, file_ids, tag_ids);
 				if (rc != -1) {
 					redirect("/private/material/editView/" + rc + "-success");
@@ -116,7 +116,7 @@ public class MaterialManageController extends Controller {
 					.convertIdsValue(getParaValues("secondTag"));
 
 			try {
-				int rc = Materials.dao.addMaterial(title, content,
+				int rc = Publication.dao.addMaterial(title, content,
 						user.getStr("name"), user.getInt("id"), draft,
 						file_ids, tag_ids);
 				if (rc != -1) {

@@ -11,7 +11,6 @@ public class FrontgroundRouter extends Routes {
         add("/publication", PublicationController.class);
         add("/notice", NoticeController.class);
         add("/about", AboutController.class);
-        add("/material", MaterialController.class);
         add("/download", DownloadController.class);
 	}
 }

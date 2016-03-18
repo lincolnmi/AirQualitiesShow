@@ -1,7 +1,7 @@
 package jason.tongji.interceptor;
 
-import jason.tongji.model.Materials;
 import jason.tongji.model.Posts;
+import jason.tongji.model.Publication;
 import jason.tongji.model.Users;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
@@ -26,7 +26,7 @@ public class OwnerRequiredInterceptor implements Interceptor {
 			
 			if (key.equals("material")) {
 				
-				int muser_Id = Materials.dao.getUserId(id);
+				int muser_Id = Publication.dao.getUserId(id);
 				if (muser_Id == -1) {
 					controller.renderText("No this object"); // to 404
 				} else if (user.getInt("id") != muser_Id) {
