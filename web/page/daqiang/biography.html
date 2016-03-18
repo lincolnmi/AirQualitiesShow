@@ -1,0 +1,46 @@
+<#include "/page/template/_layout.html"/>
+
+<@css>
+<!--引用百度地图API-->
+<style type="text/css">
+    html,body{margin:0;padding:0;}
+    .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+    .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+</@css>
+
+<@layout> <#include
+"/page/about/_daqiang_breadcrumbs.html"/>
+<section class="normal-section">
+	<div class="container">
+		<#include "/page/daqiang/_about_left_bar.html"/>
+		<div class="col-md-9 mainpanel">
+			<div class="inner content-panel">
+				<h2 class="content-title">
+					<span>联系我们<span>
+				</h2>
+				<div class="content about-content">
+					<p>&nbsp;</p>
+					<div style="width:670px;height:400px;border:#ccc solid 1px;margin-left:20px;" id="dituContent"></div>				
+					<p>&nbsp;</p>
+					<p>网址：<a href="http://cdug.tongji.edu.cn">http://cdug.tongji.edu.cn</a></p>
+
+					<p>邮箱：mail2cdug@gmail.com</p>
+
+					<p>电话：(86) 21 - 6958 9975</p>
+
+					<p>地址：上海市曹安公路4800号同济大学嘉定校区济事楼，同济大学软件学院</p>
+					
+					<p>邮编：201804</p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</@layout>
+
+<@javascript>
+</@javascript>
+
