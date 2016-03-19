@@ -9,6 +9,7 @@ public class FrontgroundRouter extends Routes {
         add("/news", NewsController.class);
         add("/daqiang", DaqiangController.class);
         add("/publication", PublicationController.class);
+        add("/teaching", TeachingController.class);
         add("/notice", NoticeController.class);
         add("/about", AboutController.class);
         add("/download", DownloadController.class);

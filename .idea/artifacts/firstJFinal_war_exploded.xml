@@ -18,6 +18,7 @@
           <element id="library" level="project" name="Gradle: com.jfinal:jfinal:1.9" />
           <element id="library" level="project" name="Gradle: c3p0:c3p0:0.9.1.2" />
           <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.38" />
+          <element id="library" level="project" name="Gradle: com.jfinal:cos:26Dec2008" />
         </element>
       </element>
     </root>

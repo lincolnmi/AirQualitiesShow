@@ -41,7 +41,7 @@
             </#if>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Publication<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="/publication/selectedPapers">Selected Papers</a></li>
+                <li><a href="/publication/selected">Selected Papers</a></li>
                 <li><a href="/publication/byYear">By year</a></li>
                 <li><a href="/publication/allPapers">All papers</a></li>
               </ul>
@@ -52,9 +52,24 @@
             <#else>
                 <li>
             </#if>
-            <a href="teaching">Teaching</a></li>
+            <a href="/teaching">Teaching</a></li>
 
-            <li><a href="about">About us</a></li>
+              <#if controller == "about">
+                  <li class="active">
+                      <#else>
+                  <li>
+              </#if>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">About us<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                  <li><a href="/about">MCC Lab</a></li>
+                  <li><a href="/about/visionandmission">Vision and Mission</a></li>
+                  <li><a href="/about/activities/">Professional Activities</a></li>
+                  <li><a href="/about/member/">Member</a></li>
+                  <li><a href="/about/potential/">Join us</a></li>
+                  <li><a href="/about/contact/">Contact us</a></li>
+              </ul>
+              </li>
+
           </ul>
         </div><!--/.nav-collapse -->
        </div>

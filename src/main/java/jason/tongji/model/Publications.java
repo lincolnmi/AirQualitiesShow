@@ -4,7 +4,9 @@ import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.IAtom;
 import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.tx.Tx;
+import jason.tongji.config.JfinalConfiguration;
 import jason.tongji.tool.DataHanlder;
 
 import java.sql.SQLException;
@@ -48,14 +50,14 @@ public class Publications extends Model<Publications> {
 	}
 
 	@Before(Tx.class)
-	public int updatePublication(int mid, String title, String content,int year,String[] fileids) {
+	public int updatePublication(int mid, String title, String content,int year,int isSelected, String[] fileids) {
         if (deleteRelatedRows(mid)) {
             for (String id : fileids) {
                 PublicationFile.dao.set("publication_id", mid)
                         .set("file_id", Integer.parseInt(id)).save();
             }
             if (dao.findById(mid).set("title", title).set("content", content)
-                    .set("update_time", new Date()).set("year", year)
+                    .set("update_time", new Date()).set("year", year).set("isSelected",isSelected)
                     .update()) {
                 return mid;
             } else {
@@ -90,11 +92,11 @@ public class Publications extends Model<Publications> {
 	@Before(Tx.class)
 	// Transaction support
 	public int addPublication(String title, String content, String author,
-			int user_id, int year,String[] fileids) {
+			int user_id, int year,int isSelected,String[] fileids) {
 		Publications publications = new Publications().set("title", title)
 				.set("content", content).set("user_id", user_id)
 				.set("year", year).set("update_time", new Date())
-				.set("create_time", new Date()).set("author", author);
+				.set("create_time", new Date()).set("author", author).set("isSelected",isSelected);
 		boolean msave_reuslt = publications.save();
 		int mid = publications.get("id");
 		if (msave_reuslt) {
@@ -108,4 +110,43 @@ public class Publications extends Model<Publications> {
 		return mid;
 	}
 
+    public Page<Publications> getSelectedPublicationsByPage(int pageIndex) {
+        return dao.paginate(
+                pageIndex,
+                JfinalConfiguration.getPostsPageSize(),
+                "select *",
+                "from publications where isSelected=1 order by year desc"
+        );
+    }
+
+    public Page<Publications> getPublicationsByPage(int pageIndex) {
+        return dao.paginate(
+                pageIndex,
+                JfinalConfiguration.getPostsPageSize(),
+                "select *",
+                "from publications order by year desc"
+                );
+    }
+
+    public String getListPreview() {
+        return getPreview(100);
+    }
+
+    private String getPreview(int size) {
+        String content = DataHanlder.htmlRemoveTag(this.get("content")
+                .toString());
+        if (content.length() > size) {
+            return (content.substring(0, size) + "...").replaceAll("\n", "");
+        } else {
+            return content.replaceAll("\n", "");
+        }
+    }
+
+    public int countSelectedPublications() {
+        return dao.find("select * from publications where isSelected=1").size();
+    }
+
+    public int countAllPublications() {
+        return dao.find("select * from publications").size();
+    }
 }

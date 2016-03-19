@@ -1,0 +1,82 @@
+#distance {
+	background-color:#EFEFEF;	
+}
+
+#main_content{
+	overflow:hidden;
+	font-family: "Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif,Times New Roman;
+	font-size : 1.4em;
+	height: 100%;
+	margin: 20px 20px 20px 20px;
+	line-height:125%;
+}
+
+.head {
+	text-align: center;
+	margin: 20px 20px 20px 20px;
+}
+
+.left{ 
+	width:450px; 
+	margin-bottom:-3000px; 
+	padding-bottom:3000px; 
+	float:left;
+}
+
+.right{
+	width:400px; 
+	margin-bottom:-3000px; 
+	padding-bottom:3000px; 
+	float:left;
+	margin: 20px 20px 20px 40px;
+}
+
+#paper {
+}
+
+.name {
+	font-weight:bold;	
+	display: inline;
+}
+
+.journal {
+	font-weight:bold;
+	font-style: italic;
+	text-decoration:underline;
+	display: inline;
+}
+
+.button {
+	font-size: 100%;
+	padding: 0.5em 1.5em 0.5em;
+	color: #0d020d;
+	border: 1px solid #e981e9;
+	border: none rgba(0, 0, 0, 0);
+	background-color: #ec93ec;
+	border-radius: 1px;
+	text-decoration: none;
+}
+
+.hidden {
+	display:none;
+	visibility: hidden;
+}
+
+#bio {
+	font-family: "Lucida Grande","Lucida Sans Unicode",Arial,Verdana,sans-serif,Times New Roman;
+	font-size:1.4em;
+}
+
+.bio_head {
+	font-size:18px;
+	margin:10px 5px 15px 20px;
+	font-weight:bold;
+	font-style: italic;
+	text-decoration:underline;
+}
+
+.bio_content {
+    font-size:10px;
+	margin:10px 5px 15px 20px;
+}
+

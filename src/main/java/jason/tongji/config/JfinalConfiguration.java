@@ -10,6 +10,7 @@ import com.jfinal.plugin.c3p0.C3p0Plugin;
 public class JfinalConfiguration extends JFinalConfig {
 	
 	private static int postsPageSize;
+    private static int publicationPageSize;
 	private static String baseURL;
 	/*
 	 * Set up basic infomation
@@ -68,7 +69,15 @@ public class JfinalConfiguration extends JFinalConfig {
 		return postsPageSize;
 	}
 
-	public static void setPostsPageSize(int postsPageSize) {
+    public static int getPublicationPageSize() {
+        return publicationPageSize;
+    }
+
+    public static void setPublicationPageSize(int publicationPageSize) {
+        JfinalConfiguration.publicationPageSize = publicationPageSize;
+    }
+
+    public static void setPostsPageSize(int postsPageSize) {
 		JfinalConfiguration.postsPageSize = postsPageSize;
 	}
 

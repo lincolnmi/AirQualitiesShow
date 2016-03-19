@@ -13,6 +13,7 @@ import jason.tongji.model.Publications;
 import jason.tongji.model.Users;
 import jason.tongji.tool.DataHanlder;
 import jason.tongji.tool.UITools;
+import jason.tongji.validator.PublicationValidator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -60,7 +61,7 @@ public class PublicationManageController extends Controller {
 		}
 	}
 
-	@Before(OwnerRequiredInterceptor.class)
+	@Before({OwnerRequiredInterceptor.class,PublicationValidator.class})
 	public void editView() {
 		if ("GET".equals(getRequest().getMethod())) {
 			int mid = getParaToInt(0);
@@ -78,9 +79,10 @@ public class PublicationManageController extends Controller {
 			String title = getPara("title");
 			String content = getPara("content");
             int year = getParaToInt("year");
+            int isSelected = UITools.convertCheckboxValue(getPara("isSelected"));
 			String[] file_ids = UITools.convertIdsValue(getParaValues("file"));
 			try {
-				int rc = Publications.dao.updatePublication(mid, title, content,year,file_ids);
+				int rc = Publications.dao.updatePublication(mid, title, content,year,isSelected,file_ids);
 				if (rc != -1) {
 					redirect("/private/publication/editView/" + rc + "-success");
 				} else {
@@ -93,17 +95,18 @@ public class PublicationManageController extends Controller {
 
 	}
 
+    @Before(PublicationValidator.class)
 	public void addPublication() {
 		if ("POST".equals(getRequest().getMethod())) {
 			String title = getPara("title");
 			String content = getPara("content");
-			int draft = UITools.convertCheckboxValue(getPara("draft"));
+            int year = getParaToInt("year");
+			int isSelected = UITools.convertCheckboxValue(getPara("isSelected"));
 			Users user = (Users) getSessionAttr("loginUser");
 			String[] file_ids = UITools.convertIdsValue(getParaValues("file"));
-
 			try {
 				int rc = Publications.dao.addPublication(title, content,
-						user.getStr("name"), user.getInt("id"), draft,
+						user.getStr("name"), user.getInt("id"), year, isSelected,
 						file_ids);
 				if (rc != -1) {
 					redirect("/private/publication/success");

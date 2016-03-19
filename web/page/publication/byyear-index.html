@@ -16,10 +16,10 @@
                 <#list publications.getList() as publication>
                     <div class="post-row">
                         <h3 class="post-title-in-list">
-                            <a href="notice/content/${n.id}">${publication.title}</a>
+                            <a href="publication/content/${publication.id}">${publication.title}</a>
                         </h3>
                         <ul class="inline post-properties">
-                            <li><i class="glyphicon glyphicon-calendar"></i> ${publication.create_time?string('yyyy-MM-dd hh:mm:ss')}</li>
+                            <li><i class="glyphicon glyphicon-calendar"></i> ${publication.year}</li>
                             <li><i class="glyphicon glyphicon-user"></i>  ${publication.author}</li>
                             <li><i class="glyphicon glyphicon-hand-up"></i> ${publication.view_count}</li>
                         </ul>
@@ -30,14 +30,14 @@
                 <ul class="pagination">
                     <#if isFirstPage>
                         <li class="disabled"><a>«</a></li> <#else>
-                        <li><a href="notice/${pageIndex-1}">«</a></li> </#if> <#list pages
+                        <li><a href="publication/byYearIndex/${pageIndex-1}">«</a></li> </#if> <#list pages
                         as p> <#if pageIndex == p>
-                    <li class="active"><a href="notice/${p}">${p} <span
+                    <li class="active"><a href="publication/byYearIndex/${p}">${p} <span
                             class="sr-only">(current)</span></a></li> <#else>
-                    <li><a href="notice/${p}">${p}</a></li> </#if> </#list> <#if
+                    <li><a href="publication/byYearIndex/${p}">${p}</a></li> </#if> </#list> <#if
                         isLastPage>
                     <li class="disable"><a>»</a></li> <#else>
-                    <li><a href="notice/${pageIndex+1}">»</a></li> </#if>
+                    <li><a href="publication/byYearIndex/${pageIndex+1}">»</a></li> </#if>
                 </ul>
 			</div>
 		</div>
