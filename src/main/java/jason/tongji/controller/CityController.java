@@ -1,6 +1,7 @@
 package jason.tongji.controller;
 
 import com.jfinal.core.Controller;
+import jason.tongji.model.AirData;
 import jason.tongji.model.MonitorLocation;
 
 import java.io.UnsupportedEncodingException;
@@ -30,8 +31,10 @@ public class CityController extends Controller {
         Calendar calendar = Calendar.getInstance();
         String timePoint = getTime(calendar);
         List<MonitorLocation> monitorLocations = MonitorLocation.dao.getMonitorLocations(cityName,timePoint);
+        AirData airData = AirData.dao.getAirDataByCity(cityName,timePoint);
+        setAttr("airData",airData);
         setAttr("cityName",cityName);
-        setAttr("timePoint",timePoint);
+        setAttr("timePoint",timePoint.replace("T"," ").replace("Z"," "));
         setAttr("monitorlocations",monitorLocations);
         render("/page/city/city.html");
     }

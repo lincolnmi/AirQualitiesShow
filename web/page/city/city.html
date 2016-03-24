@@ -1,7 +1,21 @@
 <#include "/page/template/_layout.html"/>
 <@layout>
 
-<div class="citydata_banner_width banner_bg_level2">
+<#if airData.quality=="优">
+    <div class="citydata_banner_width banner_bg_level1">
+        <#elseif  airData.quality=="良">
+    <div class="citydata_banner_width banner_bg_level2">
+        <#elseif  airData.quality=="轻度污染">
+    <div class="citydata_banner_width banner_bg_level3">
+        <#elseif  airData.quality=="中度污染">
+    <div class="citydata_banner_width banner_bg_level4">
+        <#elseif  airData.quality=="重度污染">
+    <div class="citydata_banner_width banner_bg_level5">
+        <#elseif  airData.quality=="严重污染">
+    <div class="citydata_banner_width banner_bg_level6">
+        <#else>
+    <div class="citydata_banner_width banner_bg_level1">
+</#if>
     <div class="citydata_banner">
         <div class="citydata_banner_top">
             <div class="citydata_changecity">
@@ -16,16 +30,19 @@
         <div class="citydata_banner_opacity">
             <div class="cbo_left">
                 <div class="cbol_aqi">
-                    <div class="cbol_aqi_num">65</div>
+                    <div class="cbol_aqi_num">${airData.aqi}</div>
                     <div class="cbol_aqi_name">AQI</div>
-                </div>
-                <div class="cbol_wuranwu">
-                    <a class="cbol_wuranwu_num " >PM10</a>
-                    <a class="cbol_wuranwu_name" >Pollution</a>
                 </div>
                 <div class="cbol_nongdu">
                     <a class="cbol_nongdu_num " >
-                        <span class="cbol_nongdu_num_1">30</span>
+                        <span class="cbol_nongdu_num_1">${airData.pm10}</span>
+                        <span class="cbol_nongdu_num_2">μg/m³</span>
+                    </a>
+                    <a class="cbol_nongdu_name">PM10</a>
+                </div>
+                <div class="cbol_nongdu">
+                    <a class="cbol_nongdu_num " >
+                        <span class="cbol_nongdu_num_1">${airData.pm25}</span>
                         <span class="cbol_nongdu_num_2">μg/m³</span>
                     </a>
                     <a class="cbol_nongdu_name">PM2.5</a>

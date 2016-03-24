@@ -19,6 +19,13 @@ public class AirData extends Model<AirData> {
         return (ArrayList<AirData>) dao.find(sql);
     }
 
+    public AirData getAirDataByCity(String cityName,String timePoint) {
+        timePoint = "2016-03-23T19:00:00Z";
+        String sql = "select * from airdata where timePoint = '"+timePoint+"' AND area = '" + cityName +"'";
+        System.out.println(sql);
+        return dao.find(sql).get(0);
+    }
+
     public ArrayList<AirData> getLastWeekAirData(String timePoint) {
         String sql = "select truncate(AVG(aqi),0) as aqi,area,truncate(AVG(co),2) as co,truncate(AVG(no2),0) as no2,"
         + "truncate(AVG(o3),0) as o3,truncate(AVG(pm25),0) as pm25,truncate(AVG(pm10),0) as pm10,truncate(AVG(so2),0) as so2"
