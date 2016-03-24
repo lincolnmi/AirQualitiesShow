@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="mcc">
+    <output-path>$PROJECT_DIR$/out/artifacts/mcc</output-path>
+    <root id="archive" name="mcc.war">
+      <element id="artifact" artifact-name="firstJFinal:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,76 +1,12 @@
 <!-- nav bar -->
-  	 <div class="navbar navbar-default navbar-static-top" role="navigation" style="width:100%;min-height:80px;background-color: #196090;">
-      <div class="container">
-        <div class="navbar-header" id="header-logo">
-          <a href=""><img id="logo" src="resource/static/image/logo.png"/></a>
-        </div>
-        <div class="navbar-collapse collapse" style="height:100%">
-          <ul class="nav navbar-nav navbar-right">
-          	<#if controller == "index">
-                <li  class="active">
-            <#else>
-                <li>
-            </#if>
-                <a href="">Home</a>
-            </li>
-
-            <#if controller == "publication">
-              <li class="active">
-            <#else>
-              <li>
-            </#if>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Daqiang Zhang<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="/daqiang/biography">Biography</a></li>
-              <li><a href="/daqiang/research">Research</a></li>
-            </ul>
-            </li>
-
-			<#if controller == "news">
-                <li class="active">
-            <#else>
-                <li>
-            </#if>
-                <a href="news">News</a>
-            </li>
-            
-            <#if controller == "publication">
-                <li class="active">
-            <#else>
-                <li>
-            </#if>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Publication<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/publication/selected">Selected Papers</a></li>
-                <li><a href="/publication/byYear">By year</a></li>
-                <li><a href="/publication/allPapers">All papers</a></li>
-              </ul>
-            </li>
-
-            <#if controller == "material">
-                <li class="active">
-            <#else>
-                <li>
-            </#if>
-            <a href="/teaching">Teaching</a></li>
-
-              <#if controller == "about">
-                  <li class="active">
-                      <#else>
-                  <li>
-              </#if>
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">About us<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                  <li><a href="/about">MCC Lab</a></li>
-                  <li><a href="/about/visionandmission">Vision and Mission</a></li>
-                  <li><a href="/about/activities/">Professional Activities</a></li>
-                  <li><a href="/about/member/">Member</a></li>
-                  <li><a href="/about/potential/">Join us</a></li>
-                  <li><a href="/about/contact/">Contact us</a></li>
-              </ul>
-              </li>
-
-          </ul>
-        </div><!--/.nav-collapse -->
-       </div>
-      </div> <!-- End of Nav Bar-->
+<div class="menu_width">
+    <div class="menu">
+        <div class="menu_logo" ><a href="/"></a></div>
+        <ul class="menu_list">
+            <li class="menu_1"><a  href="/"><i></i><span>Home</span></a></li>
+            <li class="menu_2"><a  href="/"><i></i><span>Monitor</span></a></li>
+            <li class="menu_3"><a  href="rank"><i></i><span>Rank</span></a></li>
+            <div class="clear"></div>
+        </ul>
+    </div>
+</div>

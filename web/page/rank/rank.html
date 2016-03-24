@@ -1,0 +1,66 @@
+<#include "/page/template/_layout.html"/>
+<@layout>
+    <div class="banner_datadetails_width">
+        <div class="banner_datadetails">
+            <!--当前城市-->
+            <div class="rank_banner">
+                <div class="rank_banner_left">
+                    <!-- <p class="rank_bannertitle">全国空气质量（AQI）实时排行</p> -->
+                    <p class="rank_bannertitle">国内城市排名</p>
+                    <p class="rank_bannerinfo">* 限全国已监测空气质量的城市排名</p>
+                </div>
+                <div class="rank_banner_right">
+                    <!--这里的统计时间，按照文档上的。。不同的排行，时间段不一样-->
+                    <span>统计时间：${timePoint}</span>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <!--污染物导航-->
+            <ul class="wuranwu_nav rankdate_nav">
+                <li><a  class="current"  href="/rank.html">实时排行</a><i>|</i></li>
+                <li><a  href="/rank/1day.html">昨日排行</a><i>|</i></li>
+                <li><a  href="/rank/7day.html">近7日排行</a><i>|</i></li>
+                <li><a  href="/rank/30day.html">上月排行</a></li>
+                <!-- <li><a  href="/rank.html">2013年度排行</a></li> -->
+            </ul>
+        </div>
+    </div>
+    <div class="main_width">
+        <div class="main">
+            <!--最优，最差排序-->
+            <div class="rank_paixu rank_paixu_hover">
+                <a class="rank_paixu_dropdown" href="javascript:void(0)"><span class="rank_paixu_text1">按最差排名</span><i></i></a>
+                <div class="rank_paixu_active" style="display:none;">
+                    <a href="javascript:void(0)" class="rank_paixu_text2">按最优排名</a>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="pj_area_data rank_data">
+                <div class="pj_area_data_title">
+                    <span class="pjadt_ranknum">Rank</span>
+                    <a><span class="pjadt_quality">Quality</span></a>
+                    <span class="pjadt_location">&nbsp;&nbsp;City</span>
+                    <span class="pjadt_sheng">&nbsp;&nbsp;&nbsp;&nbsp;Province</span>
+                    <span class="pjadt_pm25">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AQI<i class=""></i></span>
+                    <span class="pjadt_pm25">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pm2.5</span>
+                    <div class="clear"></div>
+                </div>
+
+                <ul class="pj_area_data_details rrank_box">
+                    <#list airData as air>
+                        <li class="pj_area_data_item level5 ">
+                            <b></b>
+                            <span class="pjadt_ranknum">1</span>
+                            <span class="pjadt_quality"><em class="pjadt_quality_bglevel_5">${air.quality}</em></span>
+                            <a class="pjadt_location" href="/city/${air.area}">${air.area}</a>
+                            <span class="pjadt_sheng">江苏</span>
+                            <span class="pjadt_aqi">${air.aqi}<i class=""></i></span>
+                            <span class="pjadt_pm25">${air.pm25} <em>μg/m³</em><i class="63.00"></i></span>
+                        </li>
+                    </#list>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</@layout>
