@@ -93,10 +93,11 @@
                                         <em class="pjadt_quality_bglevel_4">
                                     <#elseif  air.quality=="重度污染">
                                         <em class="pjadt_quality_bglevel_5">
-                                    <#elseif  air.quality=="严度污染">
+                                    <#elseif  air.quality=="严重污染">
                                         <em class="pjadt_quality_bglevel_6">
                                     </#if>
-                                        ${air.quality}</em>
+                                        ${air.quality}
+                                    </em>
                                 </span>
                                 <a class="pjadt_location" href="/city/${air.area}">${air.area}</a>
                                 <span class="pjadt_sheng">${cityProvinces.get(air.area)}</span>

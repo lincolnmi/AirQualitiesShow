@@ -6,6 +6,8 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import jason.tongji.interceptor.GlobalSetup;
 import jason.tongji.model.AirData;
+import jason.tongji.model.City;
+import jason.tongji.model.MonitorLocation;
 
 public class JfinalConfiguration extends JFinalConfig {
 	
@@ -43,6 +45,8 @@ public class JfinalConfiguration extends JFinalConfig {
 		ActiveRecordPlugin arp = new ActiveRecordPlugin(c3p0Plugin);
 		me.add(arp);
         arp.addMapping("airdata", AirData.class);
+        arp.addMapping("cities", City.class);
+        arp.addMapping("monitorlocation", MonitorLocation.class);
 		// add spring framework
 	}
 

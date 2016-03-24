@@ -7,5 +7,6 @@ public class FrontgroundRouter extends Routes {
 	public void config(){
 		add("/", CommonController.class);
         add("/rank", RankController.class);
+        add("/city", CityController.class);
 	}
 }

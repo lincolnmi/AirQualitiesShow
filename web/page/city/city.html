@@ -1,0 +1,120 @@
+<#include "/page/template/_layout.html"/>
+<@layout>
+
+<div class="citydata_banner_width banner_bg_level2">
+    <div class="citydata_banner">
+        <div class="citydata_banner_top">
+            <div class="citydata_changecity">
+                <a href="javascript:void(0)" class="minicity_clk"></a>
+                <span class="city_name">${cityName}</span>
+                <span class="city_description">Air Quality Index</span>
+            </div>
+            <div class="citydata_updatetime">Update Time: ${timePoint}</div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="citydata_banner_opacity">
+            <div class="cbo_left">
+                <div class="cbol_aqi">
+                    <div class="cbol_aqi_num">65</div>
+                    <div class="cbol_aqi_name">AQI</div>
+                </div>
+                <div class="cbol_wuranwu">
+                    <a class="cbol_wuranwu_num " >PM10</a>
+                    <a class="cbol_wuranwu_name" >Pollution</a>
+                </div>
+                <div class="cbol_nongdu">
+                    <a class="cbol_nongdu_num " >
+                        <span class="cbol_nongdu_num_1">30</span>
+                        <span class="cbol_nongdu_num_2">μg/m³</span>
+                    </a>
+                    <a class="cbol_nongdu_name">PM2.5</a>
+                </div>
+            </div>
+            <div class="cbo_right">
+                <div class="cbor_gauge">
+                    <span class="cbor_gauge_level2">良</span>
+                    <p class="cbor_gauge_img"></p>
+                    <p class="cbor_gauge_num">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500</p>
+                </div>
+                <div class="cbor_tips">
+                    <p>
+                        <span>温馨提示：</span>
+                        可以正常在户外活动，易敏感人群应减少外出。                                      </p>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cbo_opacity"></div>
+    </div>
+</div>
+<div class="main_width">
+    <div class="main">
+        <div class="panel_jiance">
+            <p class="pg_title">${cityName} Each Monitor Locations Real-time Data</p>
+            <div data-widget-cid="widget-1" class="pj_area ui-switchable">
+                <div class="pj_area_data ui-switchable-content">
+                    <div class="pj_area_data_title">
+                        <span class="pjadt_location">Location</span>
+                        <a class="pjadt_aqi aqi_arrow_top" href="javascript:void(0)" style="cursor:default;">
+                            <span>AQI</span>
+                        </a>
+                        <span class="pjadt_quality">Quality</span>
+                        <span class="pjadt_wuranwu">Pollution</span>
+                        <span class="pjadt_pm25">PM2.5</span>
+                        <span class="pjadt_pm10">PM10</span>
+                        <div class="clear"></div>
+                    </div>
+                    <ul class="pj_area_data_details ui-switchable-panel">
+                        <#list monitorlocations as monitorlocation>
+                            <#if monitorlocation_index%2==0 >
+                                <li class="pj_area_data_item level5 ">
+                            <#else><li class="pj_area_data_item level1 pj_area_data_item_darkbg ">
+                            </#if>
+                            <b></b>
+                            <a class="pjadt_location" href="http://www.pm25.com/city/mon/aqi/%E4%B8%8A%E6%B5%B7/%E6%99%AE%E9%99%80.html">${monitorlocation.monitorName}</a>
+                            <span class="pjadt_aqi">${monitorlocation.aqi}<i class=""></i></span>
+                            <span class="pjadt_quality">
+                                <#if monitorlocation.quality=="优">
+                                    <em class="pjadt_quality_bglevel_1">
+                                <#elseif  monitorlocation.quality=="良">
+                                    <em class="pjadt_quality_bglevel_2">
+                                <#elseif  monitorlocation.quality=="轻度污染">
+                                    <em class="pjadt_quality_bglevel_3">
+                                <#elseif  monitorlocation.quality=="中度污染">
+                                    <em class="pjadt_quality_bglevel_4">
+                                <#elseif  monitorlocation.quality=="重度污染">
+                                    <em class="pjadt_quality_bglevel_5">
+                                <#elseif  monitorlocation.quality=="严重污染">
+                                    <em class="pjadt_quality_bglevel_6">
+                                <#else>
+                                    <em class="pjadt_quality_bglevel_1">
+                                </#if>
+                                <#if monitorlocation.quality=="">
+                                    --</em>
+                                <#else>
+                                    ${monitorlocation.quality}</em>
+                                </#if>
+
+                            </span>
+                            <a class="pjadt_wuranwu" >
+                                <#if monitorlocation.quality=="">
+                                    --
+                                <#else>
+                                    ${monitorlocation.primaryPollution}
+                                </#if>
+                            </a>
+                            <span class="pjadt_pm25">${monitorlocation.pm25} <em>μg/m³</em><i class=""></i></span>
+                            <span class="pjadt_pm10">${monitorlocation.pm10}<em>μg/m³</em><i class=""></i></span>
+                            <div class="clear"></div>
+                            </li>
+                        </#list>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</@layout>
