@@ -11,7 +11,7 @@
                 </div>
                 <div class="rank_banner_right">
                     <!--这里的统计时间，按照文档上的。。不同的排行，时间段不一样-->
-                    <span>统计时间：${timePoint}</span>
+                    <span>Time: ${timePoint}</span>
                 </div>
                 <div class="clear"></div>
             </div>
@@ -34,7 +34,7 @@
                     <i>|</i>
                 </li>
                 <li>
-                    <#if rankHeader == "lastDay">
+                    <#if rankHeader == "lastWeek">
                         <a  class="current"  href="/rank/lastWeek">LastWeek</a>
                         <#else>
                             <a href="/rank/lastWeek">LastWeek</a>
