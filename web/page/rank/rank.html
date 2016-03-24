@@ -17,11 +17,38 @@
             </div>
             <!--污染物导航-->
             <ul class="wuranwu_nav rankdate_nav">
-                <li><a  class="current"  href="/rank.html">实时排行</a><i>|</i></li>
-                <li><a  href="/rank/1day.html">昨日排行</a><i>|</i></li>
-                <li><a  href="/rank/7day.html">近7日排行</a><i>|</i></li>
-                <li><a  href="/rank/30day.html">上月排行</a></li>
-                <!-- <li><a  href="/rank.html">2013年度排行</a></li> -->
+                <li>
+                    <#if rankHeader == "today">
+                        <a  class="current"  href="/rank">Today</a>
+                    <#else>
+                        <a href="/rank">Today</a>
+                    </#if>
+                    <i>|</i>
+                </li>
+                <li>
+                    <#if rankHeader == "lastDay">
+                        <a  class="current"  href="/rank/lastDay">LastDay</a>
+                        <#else>
+                            <a href="/rank/lastDay">LastDay</a>
+                    </#if>
+                    <i>|</i>
+                </li>
+                <li>
+                    <#if rankHeader == "lastDay">
+                        <a  class="current"  href="/rank/lastWeek">LastWeek</a>
+                        <#else>
+                            <a href="/rank/lastWeek">LastWeek</a>
+                    </#if>
+                    <i>|</i>
+                </li>
+                <li>
+                    <#if rankHeader == "lastMonth">
+                        <a  class="current"  href="/rank/lastMonth">LastMonth</a>
+                        <#else>
+                            <a href="/rank/lastMonth">LastMonth</a>
+                    </#if>
+                    <i>|</i>
+                </li>
             </ul>
         </div>
     </div>
@@ -48,15 +75,35 @@
 
                 <ul class="pj_area_data_details rrank_box">
                     <#list airData as air>
-                        <li class="pj_area_data_item level5 ">
-                            <b></b>
-                            <span class="pjadt_ranknum">1</span>
-                            <span class="pjadt_quality"><em class="pjadt_quality_bglevel_5">${air.quality}</em></span>
-                            <a class="pjadt_location" href="/city/${air.area}">${air.area}</a>
-                            <span class="pjadt_sheng">江苏</span>
-                            <span class="pjadt_aqi">${air.aqi}<i class=""></i></span>
-                            <span class="pjadt_pm25">${air.pm25} <em>μg/m³</em><i class="63.00"></i></span>
-                        </li>
+                        <#if cityProvinces.containsKey(air.area)>
+                            <#if air_index%2==0 >
+                            <li class="pj_area_data_item level5 ">
+                            <#else><li class="pj_area_data_item level1 pj_area_data_item_darkbg ">
+                            </#if>
+                                <b></b>
+                                <span class="pjadt_ranknum">${air_index+1}</span>
+                                <span class="pjadt_quality">
+                                    <#if air.quality=="优">
+                                        <em class="pjadt_quality_bglevel_1">
+                                    <#elseif  air.quality=="良">
+                                        <em class="pjadt_quality_bglevel_2">
+                                    <#elseif  air.quality=="轻度污染">
+                                        <em class="pjadt_quality_bglevel_3">
+                                    <#elseif  air.quality=="中度污染">
+                                        <em class="pjadt_quality_bglevel_4">
+                                    <#elseif  air.quality=="重度污染">
+                                        <em class="pjadt_quality_bglevel_5">
+                                    <#elseif  air.quality=="严度污染">
+                                        <em class="pjadt_quality_bglevel_6">
+                                    </#if>
+                                        ${air.quality}</em>
+                                </span>
+                                <a class="pjadt_location" href="/city/${air.area}">${air.area}</a>
+                                <span class="pjadt_sheng">${cityProvinces.get(air.area)}</span>
+                                <span class="pjadt_aqi">${air.aqi}<i class=""></i></span>
+                                <span class="pjadt_pm25">${air.pm25} <em>μg/m³</em><i class="63.00"></i></span>
+                            </li>
+                        </#if>
                     </#list>
                 </ul>
 
