@@ -69,6 +69,25 @@ public class RankController extends Controller {
         render("/page/rank/rank.html");
     }
 
+    public void lastMonth() {
+        setAttr(GlobalConfig.NAV_KEY, GlobalConfig.NAV_RANK);
+        String timePoint = getLastMonthTime();
+        ArrayList<AirData> airData = AirData.dao.getLastWeekAirData(timePoint);
+        HashMap<String,String> cityProvinces = CityProvince.getCityProvinces();
+        Iterator<AirData> it = airData.iterator();
+        while(it.hasNext()){
+            AirData air = it.next();
+            if(!cityProvinces.containsKey(air.get("area"))){
+                it.remove();
+            }
+        }
+        setAttr("rankHeader", "lastMonth");
+        setAttr("airData", airData);
+        setAttr("timePoint",timePoint.replace("T", " ").replace("Z"," "));
+        setAttr("cityProvinces", cityProvinces);
+        render("/page/rank/rank.html");
+    }
+
     private String getTime(Calendar calendar) {
         int minute = calendar.get(Calendar.MINUTE);
         if (minute>10) {
