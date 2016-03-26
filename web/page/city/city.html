@@ -133,11 +133,11 @@
 
         <!--曲线图-->
         <div class="panel_graph">
-            <p class="pg_title">上海 空气质量指数(AQI)变化趋势</p>
+            <p class="pg_title">${cityName} 空气质量指数(AQI)变化趋势</p>
             <div class="pg_area">
                 <div class="pg_area_tab">
-                    <a class="tab_24h current" href="javascript:void(0)">最近24小时<i></i></a>
-                    <a class="tab_30d" href="javascript:void(0)">最近30天<i></i></a>
+                    <a class="tab_24h current" href="javascript:void(0)">Last 24 Hours<i></i></a>
+                    <a class="tab_30d" href="javascript:void(0)">Last 30 Days<i></i></a>
                     <div class="clear"></div>
                 </div>
                 <!--曲线图从这里开始,放到这里-->
@@ -157,50 +157,6 @@
 </@script>
 
 <@javascript>
-<script>
-    var myChart = echarts.init(document.getElementById('pg_content_24h'), 'shine');
+<script src="resource/static/js/graph-last24-aqi.js"></script>
 
-    var option = {
-        color: ['#79b05f'],
-        tooltip : {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['AQI']
-        },
-        xAxis : [
-            {
-                type : 'category',
-                boundaryGap : false,
-                data : ["25\u65e514\u65f6","25\u65e515\u65f6","25\u65e516\u65f6","25\u65e517\u65f6","25\u65e518\u65f6","25\u65e519\u65f6","25\u65e520\u65f6","25\u65e521\u65f6","25\u65e522\u65f6","25\u65e523\u65f6","26\u65e500\u65f6","26\u65e501\u65f6","26\u65e502\u65f6","26\u65e503\u65f6","26\u65e504\u65f6","26\u65e505\u65f6","26\u65e506\u65f6","26\u65e507\u65f6","26\u65e508\u65f6","26\u65e509\u65f6","26\u65e510\u65f6","26\u65e511\u65f6","26\u65e512\u65f6","26\u65e513\u65f6"],
-                axisLine: {
-                    lineStyle : {
-                        color: '#d4d4d4'
-                    }
-                }
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                axisLabel : {
-                    formatter: '{value} '
-                },
-                axisLine: {
-                    lineStyle : {
-                        color: '#d4d4d4'
-                    }
-                }
-            }
-        ],
-        series : [
-            {
-                name:'AQI',
-                type:'line',
-                data:[60,68,74,74,79,76,64,50,35,41,48,54,63,56,58,65,68,77,86,86,82,83,73,71]            }
-        ]
-    };
-    // 为echarts对象加载数据
-    myChart.setOption(option);
-</script>
 </@javascript>
