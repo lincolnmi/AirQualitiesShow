@@ -32,6 +32,11 @@ public class CityController extends Controller {
         String timePoint = getTime(calendar);
         List<MonitorLocation> monitorLocations = MonitorLocation.dao.getMonitorLocations(cityName,timePoint);
         AirData airData = AirData.dao.getAirDataByCity(cityName,timePoint);
+
+        timePoint = getLastDayTime();
+        List<AirData> last24AirData = AirData.dao.getLast24HourAirDataByCity(cityName,timePoint);
+
+        setAttr("last24AirData",last24AirData);
         setAttr("airData",airData);
         setAttr("cityName",cityName);
         setAttr("timePoint",timePoint.replace("T"," ").replace("Z"," "));
@@ -64,5 +69,11 @@ public class CityController extends Controller {
         }
         timePoint += hour + ":00:00Z";
         return timePoint;
+    }
+
+    private String getLastDayTime() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(calendar.DAY_OF_MONTH,-1);
+        return getTime(calendar);
     }
 }
