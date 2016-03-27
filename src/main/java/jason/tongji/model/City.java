@@ -16,4 +16,11 @@ public class City extends Model<City> {
         ArrayList<City> city = (ArrayList<City>) City.dao.find(sql);
         return city.get(0).getInt("city_id");
     }
+
+    public String getCityName(int cityId) {
+        String sql = "select * from cities where city_id= " + cityId;
+        System.out.println(sql);
+        ArrayList<City> city = (ArrayList<City>) City.dao.find(sql);
+        return city.get(0).getStr("city_name");
+    }
 }

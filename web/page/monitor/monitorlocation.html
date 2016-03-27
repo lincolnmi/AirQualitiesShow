@@ -1,0 +1,195 @@
+<#include "/page/template/_layout.html"/>
+<@layout>
+
+<#if monitorlocation.quality=="优">
+    <div class="citydata_banner_width banner_bg_level1">
+<#elseif  monitorlocation.quality=="良">
+    <div class="citydata_banner_width banner_bg_level2">
+<#elseif  monitorlocation.quality=="轻度污染">
+    <div class="citydata_banner_width banner_bg_level3">
+<#elseif  monitorlocation.quality=="中度污染">
+    <div class="citydata_banner_width banner_bg_level4">
+<#elseif  monitorlocation.quality=="重度污染">
+    <div class="citydata_banner_width banner_bg_level5">
+<#elseif  monitorlocation.quality=="严重污染">
+    <div class="citydata_banner_width banner_bg_level6">
+<#else>
+    <div class="citydata_banner_width banner_bg_level1">
+</#if>
+<div class="citydata_banner">
+    <div class="citydata_banner_top">
+        <div class="citydata_changecity">
+            <a href="javascript:void(0)" class="minicity_clk"></a>
+            <span class="city_name">${monitorlocation.monitorName}</span>
+            <span class="city_description">Air Quality Index</span>
+        </div>
+        <div class="citydata_updatetime">Update Time: ${timePoint}</div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="citydata_banner_opacity">
+        <div class="cbo_left">
+            <div class="cbol_aqi">
+                <div class="cbol_aqi_num">${monitorlocation.aqi}</div>
+                <div class="cbol_aqi_name">AQI</div>
+            </div>
+            <div class="cbol_nongdu">
+                <a class="cbol_nongdu_num " >
+                    <span class="cbol_nongdu_num_1">${monitorlocation.pm10}</span>
+                    <span class="cbol_nongdu_num_2">μg/m³</span>
+                </a>
+                <a class="cbol_nongdu_name">PM10</a>
+            </div>
+            <div class="cbol_nongdu">
+                <a class="cbol_nongdu_num " >
+                    <span class="cbol_nongdu_num_1">${monitorlocation.pm25}</span>
+                    <span class="cbol_nongdu_num_2">μg/m³</span>
+                </a>
+                <a class="cbol_nongdu_name">PM2.5</a>
+            </div>
+        </div>
+        <div class="cbo_right">
+            <div class="cbor_gauge">
+                <span class="cbor_gauge_level2">良</span>
+                <p class="cbor_gauge_img"></p>
+                <p class="cbor_gauge_num">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500</p>
+            </div>
+            <div class="cbor_tips">
+                <p>
+                    <span>温馨提示：</span>
+                    可以正常在户外活动，易敏感人群应减少外出。                                      </p>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="cbo_opacity"></div>
+</div>
+</div>
+<div class="main_width">
+    <div class="main">
+        <div class="banner_datadetails_width">
+            <div class="banner_datadetails">
+                <!--面包屑导航-->
+                <ul class="crumb">
+                    <li><a href="/home">Home</a><i>&gt;</i></li>
+                    <li><a href="/city/${cityName}">${cityName}</a><i>&gt;</i></li>
+                    <li><span>${monitorlocation.monitorName}</span></li>
+                </ul>
+                <!--当前城市-->
+                <div class="bdd_city">
+                    <div class="bdd_city_left">
+                        <span class="bddcl_title">${cityName}</span>
+                        <div class="bddcl_content ">
+                            <a class="bddcl_dropdown" href="javascript:void(0)"><span>${monitorlocation.monitorName}</span><i></i></a>
+                            <div class="bddcl_content_active hide">
+                                <ul>
+                                    <li class="dontSelect current"><a href="/city/${cityName}"><i>&bull;</i>${cityName}</a></li>
+                                    <#list monitorLocations as location>
+                                        <li><a href="/monitorLocation/${location.monitorName}"><i>&bull;</i>${location.monitorName}</a></li>
+                                    </#list>
+                                </ul>
+                            </div>
+                        </div>
+                        <span class="bddcl_info">Detailed Data</span>
+                    </div>
+                    <div class="bdd_city_right">
+                        <span>Update Time: ${timePoint}</span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <!--污染物导航-->
+                <ul class="wuranwu_nav">
+                    <li>
+                        <#if pollution=="AQI">
+                            <a class="current" href="/monitorLocation/AQI/${monitorlocation.monitorName}">
+                        <#else>
+                            <a class=""  href="/monitorLocation/AQI/${monitorlocation.monitorName}">
+                        </#if>
+                        AQI</a><i>|</i>
+                    </li>
+                    <li>
+                        <#if pollution=="PM25">
+                            <a class="current" href="/monitorLocation/PM25/${monitorlocation.monitorName}">
+                                <#else>
+                            <a class=""  href="/monitorLocation/PM25/${monitorlocation.monitorName}">
+                        </#if>
+                        PM2.5</a><i>|</i>
+                    </li>
+                    <li>
+                        <#if pollution=="PM10">
+                            <a class="current" href="/monitorLocation/PM10/${monitorlocation.monitorName}">
+                                <#else>
+                            <a class=""  href="/monitorLocation/PM10/${monitorlocation.monitorName}">
+                        </#if>
+                        PM10</a><i>|</i>
+                    </li>
+                    <li>
+                        <#if pollution=="SO2">
+                            <a class="current" href="/monitorLocation/SO2/${monitorlocation.monitorName}">
+                                <#else>
+                            <a class=""  href="/monitorLocation/SO2/${monitorlocation.monitorName}">
+                        </#if>
+                        SO2</a><i>|</i>
+                    </li>
+                    <li>
+                        <#if pollution=="NO2">
+                            <a class="current" href="/monitorLocation/NO2/${monitorlocation.monitorName}">
+                                <#else>
+                            <a class=""  href="/monitorLocation/NO2/${monitorlocation.monitorName}">
+                        </#if>
+                        NO2</a><i>|</i>
+                    </li>
+                    <li>
+                        <#if pollution=="CO">
+                            <a class="current" href="/monitorLocation/CO/${monitorlocation.monitorName}">
+                                <#else>
+                            <a class=""  href="/monitorLocation/CO/${monitorlocation.monitorName}">
+                        </#if>
+                        CO</a><i>|</i>
+                    </li>
+                    <li>
+                        <#if pollution=="O3">
+                            <a class="current" href="/monitorLocation/O3/${monitorlocation.monitorName}">
+                                <#else>
+                            <a class=""  href="/monitorLocation/O3/${monitorlocation.monitorName}">
+                        </#if>
+                        O3</a><i>|</i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--曲线图-->
+        <div class="panel_graph panel_onlyone">
+            <p class="pg_title">Last 24 hours ${pollution} Trend</p>
+            <div class="pg_area">
+
+                <!--曲线图从这里开始,放到这里-->
+                <div id="pg_content_24h" class="pg_content" style="background-color:#f7f7f7;"></div>
+
+            </div>
+        </div>
+        <!--特殊城市曲线图，与上边的曲线图不共存，是特殊城市的只显示下方的，需要删掉上方的-->
+        <div class="panel_graph panel_onlyone">
+            <p class="pg_title">最近30天 空气质量指数(AQI)变化趋势</p>
+            <div class="pg_area">
+
+                <!--曲线图从这里开始,放到这里-->
+                <div id="pg_content_30d" class="pg_content" style="background-color:#f7f7f7;"></div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</@layout>
+
+<@script>
+<script src="resource/static/js/echarts.min.js"></script>
+</@script>
+
+<@javascript>
+<script src="resource/static/js/location-last24-pollution.js"></script>
+</@javascript>
