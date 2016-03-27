@@ -15,5 +15,7 @@ dependencies {
     compile 'org.eclipse.jetty:jetty-server:9.3.8.v20160314'
     compile 'c3p0:c3p0:0.9.1.2'
     compile 'mysql:mysql-connector-java:5.1.38'
+    compile 'com.jfinal:cos:26Dec2008'
+
 
 }
