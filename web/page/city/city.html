@@ -50,14 +50,28 @@
             </div>
             <div class="cbo_right">
                 <div class="cbor_gauge">
-                    <span class="cbor_gauge_level2">良</span>
+                    <#if airData.quality=="优">
+                        <span class="cbor_gauge_level1">优</span>
+                    <#elseif  airData.quality=="良">
+                        <span class="cbor_gauge_level2">良</span>
+                    <#elseif  airData.quality=="轻度污染">
+                        <span class="cbor_gauge_level3">轻度污染</span>
+                    <#elseif  airData.quality=="中度污染">
+                        <span class="cbor_gauge_level4">中度污染</span>
+                    <#elseif  airData.quality=="重度污染">
+                        <span class="cbor_gauge_level5">重度污染</span>
+                    <#elseif  airData.quality=="严重污染">
+                        <span class="cbor_gauge_level6">严重污染</span>
+                    <#else>
+                        <span class="cbor_gauge_level1">优</span>
+                    </#if>
                     <p class="cbor_gauge_img"></p>
-                    <p class="cbor_gauge_num">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500</p>
+                    <p class="cbor_gauge_num">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;200&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;&nbsp;500</p>
                 </div>
                 <div class="cbor_tips">
                     <p>
                         <span>温馨提示：</span>
-                        可以正常在户外活动，易敏感人群应减少外出。                                      </p>
+                        ${tips}                                      </p>
                 </div>
             </div>
             <div class="clear"></div>

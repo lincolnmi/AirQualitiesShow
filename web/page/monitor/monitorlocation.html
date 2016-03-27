@@ -50,14 +50,28 @@
         </div>
         <div class="cbo_right">
             <div class="cbor_gauge">
-                <span class="cbor_gauge_level2">良</span>
+                <#if monitorlocation.quality=="优">
+                    <span class="cbor_gauge_level1">优</span>
+                <#elseif  monitorlocation.quality=="良">
+                    <span class="cbor_gauge_level2">良</span>
+                <#elseif  monitorlocation.quality=="轻度污染">
+                    <span class="cbor_gauge_level3">轻度污染</span>
+                <#elseif  monitorlocation.quality=="中度污染">
+                    <span class="cbor_gauge_level4">中度污染</span>
+                <#elseif  monitorlocation.quality=="重度污染">
+                    <span class="cbor_gauge_level5">重度污染</span>
+                <#elseif  monitorlocation.quality=="严重污染">
+                    <span class="cbor_gauge_level6">严重污染</span>
+                <#else>
+                    <span class="cbor_gauge_level1">优</span>
+                </#if>
                 <p class="cbor_gauge_img"></p>
-                <p class="cbor_gauge_num">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;500</p>
+                <p class="cbor_gauge_num">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50&nbsp;&nbsp;&nbsp;&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;200&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;&nbsp;500</p>
             </div>
             <div class="cbor_tips">
                 <p>
                     <span>温馨提示：</span>
-                    可以正常在户外活动，易敏感人群应减少外出。                                      </p>
+                    ${tips}                                      </p>
             </div>
         </div>
         <div class="clear"></div>
@@ -188,6 +202,30 @@
 
 <@script>
 <script src="resource/static/js/echarts.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.bddcl_dropdown').click(function (e) {
+            e.stopPropagation();
+            if ($('.bddcl_content_active').hasClass("hide")) {
+                $('.bddcl_content_active').removeClass('hide');
+                $('.bddcl_content').addClass('bddcl_content_hover');
+            } else {
+                $('.bddcl_content_active').addClass("hide");
+                $('.bddcl_content').removeClass('bddcl_content_hover');
+            }
+        });
+        // 点击其他地方层消失
+        $(document).click(function () {
+            if (!$('.bddcl_content_active').hasClass("hide")) {
+                $('.bddcl_content_active').addClass("hide");
+                $('.bddcl_content').removeClass('bddcl_content_hover');
+            }
+        });
+        $('.dontSelect').click(function(){
+            $('.bddcl_content_active').addClass("hide");
+        });
+    });
+</script>
 </@script>
 
 <@javascript>
