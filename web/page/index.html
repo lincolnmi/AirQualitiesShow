@@ -1,9 +1,592 @@
 <#include "/page/template/_layout.html"/>
 
+<@css>
+<link href="resource/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="resource/static/css/index.css" rel="stylesheet" media="screen">
+<link href="resource/static/css/tinyscrollbar.css" rel="stylesheet" media="screen">
+</@css>
 <@layout>
+<div class="banner_index_width">
+    <div class="banner_index">
+        <!--切换城市-->
+        <div class="bi_location">
+            <a class="bi_location_add minicity_clk" href="javascript:void(0)"></a>
+            <h2 class="bi_loaction_city">上海</h2>
+            <div class="bi_location_content ">
+                <a class="bi_location_content_dropdown" href="javascript:void(0)"><span class="mon_span">选择监测点</span><i></i></a>
+                <div class="bi_location_content_active hide">
+                    <ul>
+                        <li><a class="dontSelect current" href="javascript:void(0)" mon="选择监测点" aqi="59" pm25="31" qua="良" lv="2" url="/city/上海.html"><i>•</i>全部监测点</a></li>
+                        <li><a href="javascript:void(0)" mon="普陀" aqi="60" pm25="33" qua="良" lv="2" url="/city/mon/aqi/上海/普陀.html"><i>•</i>普陀</a></li>
+                        <li><a href="javascript:void(0)" mon="十五厂" aqi="56" pm25="32" qua="良" lv="2" url="/city/mon/aqi/上海/十五厂.html"><i>•</i>十五厂</a></li>
+                        <li><a href="javascript:void(0)" mon="虹口" aqi="54" pm25="25" qua="良" lv="2" url="/city/mon/aqi/上海/虹口.html"><i>•</i>虹口</a></li>
+                        <li><a href="javascript:void(0)" mon="徐汇上师大" aqi="56" pm25="32" qua="良" lv="2" url="/city/mon/aqi/上海/徐汇上师大.html"><i>•</i>徐汇上师大</a></li>
+                        <li><a href="javascript:void(0)" mon="杨浦四漂" aqi="56" pm25="31" qua="良" lv="2" url="/city/mon/aqi/上海/杨浦四漂.html"><i>•</i>杨浦四漂</a></li>
+                        <li><a href="javascript:void(0)" mon="青浦淀山湖" aqi="55" pm25="34" qua="良" lv="2" url="/city/mon/aqi/上海/青浦淀山湖.html"><i>•</i>青浦淀山湖</a></li>
+                        <li><a href="javascript:void(0)" mon="静安监测站" aqi="51" pm25="30" qua="良" lv="2" url="/city/mon/aqi/上海/静安监测站.html"><i>•</i>静安监测站</a></li>
+                        <li><a href="javascript:void(0)" mon="浦东川沙" aqi="45" pm25="23" qua="优" lv="1" url="/city/mon/aqi/上海/浦东川沙.html"><i>•</i>浦东川沙</a></li>
+                        <li><a href="javascript:void(0)" mon="浦东新区监测站" aqi="55" pm25="29" qua="良" lv="2" url="/city/mon/aqi/上海/浦东新区监测站.html"><i>•</i>浦东新区监测站</a></li>
+                        <li><a href="javascript:void(0)" mon="浦东张江" aqi="53" pm25="—" qua="良" lv="2" url="/city/mon/aqi/上海/浦东张江.html"><i>•</i>浦东张江</a></li>
+                        <li><a href="javascript:void(0)" mon="美国领事馆" aqi="102" pm25="41" qua="轻度污染" lv="3" url="/city/mon/aqi/上海/美国领事馆.html"><i>•</i>美国领事馆</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!--AQI展示-->
+        <div class="bi_aqiarea">
+            <div class="bi_aqiarea_top">
+                <a class="bi_aqiarea_num" href="/city/shanghai.html">59</a>
+                <!--划上去可以摊开页面底部的曲线图-->
+                <p class="bi_aqiarea_right">
+                    <span class="bi_aqiarea_wuran wuranlevel_2">良</span>
+                    <span class="bi_aqiarea_tips">AQI指数</span>
+                </p>
+                <div class="clear"></div>
+            </div>
+            <div class="bi_aqiarea_bottom">
+                <p>PM2.5浓度：<span class="pm25_span">31</span>微克/立方米</p>
+                <p>击败了全国 55% 的城市，目前城市排名 161 </p>
+            </div>
+        </div>
+
+        <!--[if lte IE 8]>
+        <style type="text/css">
+            a.bi_opentanmu{display:none;}
+        </style>
+        <![endif]-->
+        <!--增加打开弹幕按钮--2014-10-25-->
+        <a class="bi_opentanmu" href="javascript:void(0)"></a>
+        <!-- <a class="bi_opentanmu" href="javascript:void(0)" style="display:none;"></a> -->
+
+        <!--天气位置-->
+        <div class="bi_infoarea">
+            <!--       <div class="bi_info">
+                       &lt;!&ndash;鼠标划到分享按钮上的时候，先增加个“bi_info_hover”，再把下边的“bi_info_active”变为"display:block"&ndash;&gt;
+                       <a class="bi_info_share " href=""><i></i><span>分享</span></a>
+                       <div class="bi_info_share_active" style="display:none">
+                           <a class="bi_info_share_active_sina" title="分享到新浪微博" href="javascript:void(0)"></a>
+                           <a class="bi_info_share_active_qzone" title="分享到QQ空间" href="javascript:void(0)"></a>
+                       </div>
+                       <p class="bi_info_weather"><img src="http://p1.qhimg.com/d/_hao360/weather/7.png" title="小雨"> <span>小雨</span> 16~10℃</p>
+                       <div class="clear"></div>
+                   </div>-->
+            <p class="bi_info_tips">数据来源：中国环境监测总站&nbsp;&nbsp;&nbsp;&nbsp;最后更新：2016-03-22 18:00</p>
+        </div>
+
+        <!-- 我的生活指南-->
+        <div class="index_main_width1">
+            <div class="index_main1">
+                <div class="im_shenghuo1">
+                    <p id="shzn" class="im_shenghuo_title1">今日生活指南</p>
+                    <ul class="im_shenghuo_details1">
+                        <!--这下边的内容会根据大图状态不同，它的颜色不同“im_shenghuo_item_color_sunny”-名字是大图区域名字的后缀-->
+
+                        <li class="im_shenghuo_kouzhao1">
+                            <!--鼠标划到对应的li上的时候，显示这个div-->
+                            <div class="im_shenghuo_item_hover1" style="display:none;" >
+                                <p class="im_shenghuo_item_hover_title1"><i></i><span>请佩戴</span></p>
+                                <p class="im_shenghuo_item_hover_info1">出入密集场所请佩戴口罩</p>
+                            </div>
+                            <dl>
+                                <dt><i></i></dt>
+                                <dd>口罩指数</dd>
+                            </dl>
+                        </li>
+
+                        <li class="im_shenghuo_yundong1">
+                            <!--鼠标划到对应的li上的时候，显示这个div-->
+                            <div class="im_shenghuo_item_hover1" style="display:none;" >
+                                <p class="im_shenghuo_item_hover_title1"><i></i><span>室内运动</span></p>
+                                <p class="im_shenghuo_item_hover_info1">请减少室外运动</p>
+                            </div>
+                            <dl>
+                                <dt><i></i></dt>
+                                <dd>运动指数</dd>
+                            </dl>
+                        </li>
+
+                        <li class="im_shenghuo_chuxing1" style="border-right:none;">
+                            <!--鼠标划到对应的li上的时候，显示这个div-->
+                            <div class="im_shenghuo_item_hover1 " style="display:none;">
+                                <p class="im_shenghuo_item_hover_title1"><i></i><span>适合出行</span></p>
+                                <p class="im_shenghuo_item_hover_info1">出行请带好雨具</p>
+                            </div>
+                            <dl>
+                                <dt><i></i></dt>
+                                <dd>出行指数</dd>
+                            </dl>
+                        </li>
+
+                        <li class="im_shenghuo_kaichuang1">
+                            <!--鼠标划到对应的li上的时候，显示这个div-->
+                            <div class="im_shenghuo_item_hover1 " style="display:none;">
+                                <p class="im_shenghuo_item_hover_title1"><i></i><span>开窗通风</span></p>
+                                <p class="im_shenghuo_item_hover_info1">请减少开窗通风时间</p>
+                            </div>
+                            <dl>
+                                <dt><i></i></dt>
+                                <dd>开窗指数</dd>
+                            </dl>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--banner部分-底部-夜晚-->
+<div class="weather_neight_width">
+    <div class="shatan_width">
+        <div class="weather_neight_shatan"><i class="weather_neight_shatan_content"></i></div>
+    </div>
+    <div class="weather_neight">
+        <div class="weather_neight_liuxing"><i class="weather_neight_liuxing_content"></i></div>
+        <div class="weather_neight_yueliang"><i class="weather_neight_yueliang_content"></i></div>
+        <div class="weather_neight_zhangpeng"><i class="weather_neight_zhangpeng_content"></i></div>
+        <div class="weather_neight_paiwu"><i class="weather_neight_paiwu_content"></i></div>
+        <div class="weather_neight_shu"><i class="weather_neight_shu_content"></i></div>
+        <div class="weather_neight_caoduo"><i class="weather_neight_caoduo_content"></i></div>
+        <div class="weather_neight_z"><i class="weather_neight_z_content"></i></div>
+    </div>
+</div>
+
+<div id="scrollbar1" class="minicity ui-switchable" style="display:block;" data-widget-cid="widget-0">
+    <div class="minicity_title">
+        <a class="mt_close"><i></i></a>
+        <p>
+            <span class="minicity_title_wenzi">选择城市</span>
+            <a href="/map.html" class="mt_maplink" target="_blank">进入地图模式&gt;&gt;</a>
+        </p>
+    </div>
+    <div class="scrollbar" style="height: 499px;">
+        <div class="track" style="height: 499px;">
+            <div class="thumb" style="top: 0px; height: 54.3077px;">
+                <div class="end"></div>
+            </div>
+        </div>
+    </div>
+    <div class="minicity_content viewport" style="height: 499px;">
+        <div class="overview ui-switchable-content" style="top: 0px;">
+            <!--工具条上方的热门城市部分内容-->
+            <div class="hot_city">
+                <div class="city_default">
+                    <p class="city_default_one">
+                        <span>当前城市：</span><i class="current_city">上海</i>
+                        <a href="#" class="city_default_shezhi " city="上海" citypy="shanghai">设置为默认城市</a>
+                    </p>
+                    <p class="city_default_two"  style="display:none; ">
+                        <span style="font-weight:normal;">默认城市：</span>
+                        <a href="" class="default_city"></a>
+                        <a href="javascript:void(0)" class="city_default_shanchu">[删除]</a>
+                    </p>
+                    <div class="clear"></div>
+                </div>
+                <dl>
+                    <dt>热门城市:</dt>
+                    <dd>
+                        <a href="/beijing.html">北京</a>
+                        <a href="/shanghai.html">上海</a>
+                        <a href="/guangzhou.html">广州</a>
+                        <a href="/shenzhen.html">深圳</a>
+                        <a href="/hangzhou.html">杭州</a>
+                        <a href="/tianjin.html">天津</a>
+                        <a href="/chengdu.html">成都</a>
+                        <a href="/nanjing.html">南京</a>
+                        <a href="/xian.html">西安</a>
+                        <a href="/wuhan.html">武汉</a>
+                    </dd>
+                </dl>
+                <div class="clear"></div>
+            </div>
+
+            <!--筛选工具条-->
+            <div class="city_control">
+                <div class="city_control_tab"><!---当前是谁，就在谁上边加“city_control_current”-->
+                    <a class="city_control_current tab_pc" href="javascript:void(0)">按省份</a>
+                    <a class="tab_fc" href="javascript:void(0)">按城市</a>
+                </div>
+                <div class="c_search">
+                    <div class="search_city">
+                        <input type="text" value="" placeholder="输入城市名" class="search_city_text" id="autocomplete">
+                        <input type="button" class="search_btn search_btn_active">
+                        <div class="clear"></div>
+                    </div>
+                    <!--即时显示搜索结果-->
+                    <div class="search_result_width" style="display:none;">
+                        <ul class="search_result">
+                            <li><a href="">保定</a></li>
+                            <li><a href="">北京</a></li>
+                            <li><a href="">包头</a></li>
+                            <li><a href="">宝鸡</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="city_province ui-switchable-panel" style="display:block;">
+                <div class="city_province" style="display:block;">
+                    <!--一般城市-->
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>安徽</dt>
+                            <dd>
+                                <a href="/hefei.html">合肥</a>
+                                <a href="/wuhu.html">芜湖</a>
+                                <a href="/maanshan.html">马鞍山</a>
+                                <a href="/anqing.html">安庆</a>
+                                <a href="/bozhou.html">亳州</a>
+                                <a href="/bengbu.html">蚌埠</a>
+                                <a href="/chuzhou.html">滁州</a>
+                                <a href="/chaohu.html">巢湖</a>
+                                <a href="/chizhou.html">池州</a>
+                                <a href="/huaibei.html">淮北</a>
+                                <a href="/huainan.html">淮南</a>
+                                <a href="/huangshan.html">黄山</a>
+                                <a href="/huangshanfengjingqu.html">黄山风景区</a>
+                                <a href="/jiuhuashanfengjingqu.html">九华山风景区</a>
+                                <a href="/tongling.html">铜陵</a>
+                                <a href="/fuyangshi.html">阜阳</a>
+                                <a href="/suzhoushi.html">宿州</a>
+                                <a href="/xuancheng.html">宣城</a>
+                                <a href="/liuan.html">六安</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <!--一般城市-->
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div><div class="city_province_item">
+                    <dl>
+                        <dt>福建</dt>
+                        <dd>
+                            <a href="/xiamen.html">厦门</a>
+                            <a href="/quanzhou.html">泉州</a>
+                            <a href="/fuzhou.html">福州</a>
+                            <a href="/longyan.html">龙岩</a>
+                            <a href="/nanping.html">南平</a>
+                            <a href="/putian.html">莆田</a>
+                            <a href="/sanming.html">三明</a>
+                            <a href="/zhangzhou.html">漳州</a>
+                            <a href="/ningde.html">宁德</a>
+                        </dd>
+                    </dl>
+                    <div class="clear"></div>
+                </div><div class="city_province_item">
+                    <dl>
+                        <dt>福建</dt>
+                        <dd>
+                            <a href="/xiamen.html">厦门</a>
+                            <a href="/quanzhou.html">泉州</a>
+                            <a href="/fuzhou.html">福州</a>
+                            <a href="/longyan.html">龙岩</a>
+                            <a href="/nanping.html">南平</a>
+                            <a href="/putian.html">莆田</a>
+                            <a href="/sanming.html">三明</a>
+                            <a href="/zhangzhou.html">漳州</a>
+                            <a href="/ningde.html">宁德</a>
+                        </dd>
+                    </dl>
+                    <div class="clear"></div>
+                </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>福建</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="city_province_item">
+                        <dl>
+                            <dt>厦门</dt>
+                            <dd>
+                                <a href="/xiamen.html">厦门</a>
+                                <a href="/quanzhou.html">泉州</a>
+                                <a href="/fuzhou.html">福州</a>
+                                <a href="/longyan.html">龙岩</a>
+                                <a href="/nanping.html">南平</a>
+                                <a href="/putian.html">莆田</a>
+                                <a href="/sanming.html">三明</a>
+                                <a href="/zhangzhou.html">漳州</a>
+                                <a href="/ningde.html">宁德</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .autocomplete-suggestions{position:absolute; z-index:50; background-color:#fff; width:200px;box-shadow:0 1px 5px rgba(0,0,0,.2);-moz-box-shadow:0 1px 5px rgba(0,0,0,.2);-webkit-box-shadow:0 1px 5px rgba(0,0,0,.2);-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius:5px; overflow-x:hidden;margin-top:5px;}
+    .autocomplete-suggestion{}
+    .autocomplete-suggestion a{display:block;line-height:30px; text-indent:5px; border-bottom:#ececec solid 1px; margin:0px 10px;}
+    .autocomplete-suggestion a:hover{color:#4a9828; background-color:#ececec;}
+    .minicity {right: -900px;}
+</style>
 
 </@layout>
 
-<@javascript>
+<script type="text/javascript">
+    seajs.use('jquery.tinyscrollbar', function($, Tabs, Cookie) {
 
+        $(document).ready(function () {
+            new Tabs({
+                element: '.minicity',
+                triggers: '.city_control_tab a',
+                triggerType: 'click',
+                activeTriggerClass: 'city_control_current',
+                panels: '.city_province',
+                activeIndex: 0
+            });
+
+            $('.tab_pc').click(function () {
+                $('.pc_a_z').show();
+                $('.fc_a_z').hide();
+            });
+
+            $('.tab_fc').click(function () {
+                $('.pc_a_z').hide();
+                $('.fc_a_z').show();
+            });
+
+            $('.minicity_clk').click(function () {
+                $('.minicity').animate({right: 0}, 'slow');
+            });
+            $('.mt_close').click(function () {
+                $('.minicity').animate({right: '-900px'}, 'slow');
+            });
+
+            var h = $(window).height() - 132;
+            if (h < 0)h = 0;
+            $(".viewport").css('height', h);
+            $('#scrollbar1').tinyscrollbar();
+
+            window.onresize = function () {
+                var h = $(window).height() - 132;
+                if (h < 0)h = 0;
+                $(".viewport").css('height', h);
+                $(".scrollbar").css('height', h);
+                $(".track").css('height', h);
+                $('#scrollbar1').tinyscrollbar();
+            }
+
+            $('.city_citys').addClass('hide');
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+        $('.bi_location_content_dropdown').click(function (e) {
+            e.stopPropagation();
+            if ($('.bi_location_content_active').hasClass("hide")) {
+                $('.bi_location_content_active').removeClass('hide');
+                $('.bi_location_content ').addClass('bi_location_content_hover');
+            } else {
+                $('.bi_location_content_active').addClass("hide");
+                $('.bi_location_content ').removeClass('bi_location_content_hover');
+            }
+        });
+
+        // 点击其他地方层消失
+        $(document).click(function () {
+            if (!$('.bi_location_content_active').hasClass("hide")) {
+                $('.bi_location_content_active').addClass("hide");
+                $('.bi_location_content ').removeClass('bi_location_content_hover');
+            }
+        });
+
+        $('.dontSelect').click(function () {
+            $('.bi_location_content_active').addClass("hide");
+            $('.bi_location_content ').removeClass('bi_location_content_hover');
+        });
+
+        $('.bi_location_content_active li a').click(function (e) {
+            var e = $(e.target);
+            var lv = e.attr('lv');
+            $('.mon_span').text(e.attr('mon'));
+            $('.bi_aqiarea_num').text(e.attr('aqi')).attr('href', e.attr('url'));
+            $('.pm25_span').text(e.attr('pm25'));
+            $('.bi_aqiarea_wuran').text(e.attr('qua')).removeClass('wuranlevel_1 wuranlevel_2 wuranlevel_3 wuranlevel_4 wuranlevel_5 wuranlevel_6').addClass('wuranlevel_' + lv);
+        });
+    });
+</script>
+<script>
+    seajs.config({
+        base: "resource/static/js"
+    });
+</script>
+<@javascript>
+    <script src="resource/static/js/sea.js"></script>
 </@javascript>
