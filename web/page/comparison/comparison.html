@@ -1,0 +1,52 @@
+<#include "/page/template/_layout.html"/>
+<@layout>
+<div class="banner_datadetails_width">
+    <div class="banner_datadetails">
+        <!--当前城市-->
+        <div class="rank_banner">
+            <div class="rank_banner_left">
+                <!-- <p class="rank_bannertitle">全国空气质量（AQI）实时排行</p> -->
+                <p class="rank_bannertitle">区域性比较</p>
+                <p class="rank_bannerinfo">* 限全国已监测空气质量的城市排名</p>
+            </div>
+            <div class="rank_banner_right">
+                <!--这里的统计时间，按照文档上的。。不同的排行，时间段不一样-->
+                <span>Time: ${timePoint}</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    </div>
+</div>
+<div class="main_width">
+    <div class="map">
+
+        <!--曲线图-->
+        <div class="panel_graph panel_onlyone">
+            <p class="pg_title">Last 24 hours Trend</p>
+            <div class="map_area">
+
+                <!--曲线图从这里开始,放到这里-->
+                <div id="pg_content_aqi_map" class="map_content" style="background-color:#f7f7f7;"></div>
+
+            </div>
+        </div>
+
+        <div class="panel_graph panel_onlyone">
+            <p class="pg_title">Last 30 hours Trend</p>
+            <div class="pg_area">
+
+                <!--曲线图从这里开始,放到这里-->
+                <div id="pg_content_30h" class="map_content" style="background-color:#f7f7f7;"></div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</@layout>
+
+<script src="resource/static/js/echarts-all.js"></script>
+<@javascript>
+<script src="resource/static/js/aqi-map.js"></script>
+</@javascript>
