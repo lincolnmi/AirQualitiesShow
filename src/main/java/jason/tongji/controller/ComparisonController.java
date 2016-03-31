@@ -37,9 +37,9 @@ public class ComparisonController extends Controller {
         for (String key:provincecities.keySet()) {
             double aqi = 0;
             int count = 0;
-            for (String city:provincecities.get(key)) {
-                city = getCityName(city);
-                System.out.println(city);
+            for (String value:provincecities.get(key)) {
+                String city  = getCityName(value);
+                //System.out.println(city);
                 if (cities.containsKey(city)) {
                     aqi += Double.valueOf(cities.get(city));
                     count++;
@@ -48,6 +48,7 @@ public class ComparisonController extends Controller {
             aqi /= count;
             provinces.put(key,aqi+"");
         }
+        System.out.println("provinces");
         return provinces;
     }
 
@@ -55,21 +56,44 @@ public class ComparisonController extends Controller {
         HashMap<String,String> cities = new HashMap<String, String>();
         for (AirData airData:airDatas) {
             String city = getCityName(airData.getStr("area"));
-            String aqi = airData.getDouble("aqi")+"";
-            cities.put(city,aqi);
-            System.out.println(city);
+            String aqi = airData.getDouble("aqi") + "";
+            cities.put(city, aqi);
+            if (city.equals("北京市")) {
+                for (String area:SpecialCities.getBeijing()) {
+                    cities.put(area, aqi);
+                }
+            }
+            if (city.equals("天津市")) {
+                for (String area:SpecialCities.getTianjin()) {
+                    cities.put(area, aqi);
+                }
+            }
+            if (city.equals("重庆市")) {
+                for (String area:SpecialCities.getChongqing()) {
+                    cities.put(area, aqi);
+                }
+            }
+            if (city.equals("上海市")) {
+                for (String area:SpecialCities.getShanghai()) {
+                    cities.put(area, aqi);
+                }
+            }
         }
+        System.out.println("cities");
         return cities;
     }
 
     private String getCityName(String city) {
         HashMap<String,String> specialCities = SpecialCities.getInstances();
-        if (!specialCities.containsKey(city)) {
-            city += "市";
+        String result = "";
+        if (specialCities.containsKey(city)) {
+            result = specialCities.get(city);
+        } else if (city.indexOf("地区")!=-1) {
+            result = city;
         } else {
-            city = specialCities.get(city);
+            result = city + "市";
         }
-        return city;
+        return result;
     }
 
     private void update(HashMap<String,String> provinces,HashMap<String,String> cities) {
