@@ -14,6 +14,7 @@ public class AirData extends Model<AirData> {
     public static AirData dao = new AirData();
 
     public ArrayList<AirData> getAirData(String timePoint) {
+        timePoint = "2016-03-23T19:00:00Z";
         String sql = "select * from airdata where timePoint = '"+timePoint+"'";
         System.out.println(sql);
         return (ArrayList<AirData>) dao.find(sql);
