@@ -27,8 +27,22 @@ public class ComparisonController extends Controller {
         ArrayList<AirData> airDatas = AirData.dao.getAirData(timePoint);
         HashMap<String,String> cities = getCitiesData(airDatas);
         HashMap<String,String> provinces = getProvincesData(cities);
-        update(provinces,cities);
+        update(provinces,cities,"/resource/static/js/aqi-map.js");
+
+        //lastDay();
         render("/page/comparison/comparison.html");
+    }
+
+    public void lastDay() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH,-1);
+        String timePoint = getTime(calendar);
+        setAttr("timePoint",timePoint.replace("T", " ").replace("Z"," "));
+
+        ArrayList<AirData> airDatas = AirData.dao.getAirData(timePoint);
+        HashMap<String,String> cities = getCitiesData(airDatas);
+        HashMap<String,String> provinces = getProvincesData(cities);
+        update(provinces,cities,"/resource/static/js/aqi-map-lastday.js");
     }
 
     private HashMap<String, String> getProvincesData(HashMap<String,String> cities) {
@@ -96,7 +110,7 @@ public class ComparisonController extends Controller {
         return result;
     }
 
-    private void update(HashMap<String,String> provinces,HashMap<String,String> cities) {
+    private void update(HashMap<String,String> provinces,HashMap<String,String> cities,String fileName) {
         StringBuilder sb = new StringBuilder();
         String path = this.getClass().getClassLoader().getResource("/").getPath();
         System.out.println(path);

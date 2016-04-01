@@ -183,14 +183,21 @@
 
             </div>
         </div>
+
+        <div class="panel_graph panel_onlyone">
+            <p class="pg_title">Last Week ${pollution} Trend</p>
+            <div class="pg_area">
+                <!--曲线图从这里开始,放到这里-->
+                <div id="pg_content_7d" class="pg_content" style="background-color:#f7f7f7;"></div>
+            </div>
+        </div>
+
         <!--特殊城市曲线图，与上边的曲线图不共存，是特殊城市的只显示下方的，需要删掉上方的-->
         <div class="panel_graph panel_onlyone">
-            <p class="pg_title">最近30天 空气质量指数(AQI)变化趋势</p>
+            <p class="pg_title">Last Month ${pollution} Trend</p>
             <div class="pg_area">
-
                 <!--曲线图从这里开始,放到这里-->
                 <div id="pg_content_30d" class="pg_content" style="background-color:#f7f7f7;"></div>
-
             </div>
         </div>
 
@@ -230,4 +237,6 @@
 
 <@javascript>
 <script src="resource/static/js/location-last24-pollution.js"></script>
+<script src="resource/static/js/location-last7-pollution.js"></script>
+<script src="resource/static/js/location-last30-pollution.js"></script>
 </@javascript>
