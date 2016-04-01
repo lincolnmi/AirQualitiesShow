@@ -30,7 +30,6 @@ public class Forecast {
             int length = ins.numInstances();
             for (int i =0; i < length; i++) {
                 testInst = ins.instance(i);
-
                 cfs.classifyInstance(testInst);
             }
         }catch(Exception e){

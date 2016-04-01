@@ -38,11 +38,19 @@ public class CityController extends Controller {
         AirData airData = AirData.dao.getAirDataByCity(cityName,timePoint);
         String color = Helper.getColorByQuality(airData.getStr("quality"));
         timePoint = getLastDayTime();
-        List<AirData> last24AirData = AirData.dao.getLast24HourAirDataByCity(cityName,timePoint);
-        String tips = Helper.getTips(airData.getStr("quality"));
+        List<AirData> last24AirData = AirData.dao.getLast24HourAirDataByCity(cityName, timePoint);
+        initEchartsDataScript(last24AirData,color,"pg_content_24h","graph-last24-aqi.js");
 
-        initEchartsDataScript(last24AirData,color);
-        setAttr("airData",airData);
+        color = Helper.getColorByQuality(airData.getStr("quality"));
+        List<AirData> lastWeekAirData = getLastWeekAirData(cityName, timePoint);
+        initEchartsDataScript(lastWeekAirData,color,"pg_content_7d","graph-last7d-aqi.js");
+
+        color = Helper.getColorByQuality(airData.getStr("quality"));
+        List<AirData> lastMonthAirData = getLastMonthAirData(cityName, timePoint);
+        initEchartsDataScript(lastMonthAirData,color,"pg_content_30d","graph-last30d-aqi.js");
+
+        String tips = Helper.getTips(airData.getStr("quality"));
+        setAttr("airData", airData);
         setAttr("cityName",cityName);
         setAttr("timePoint",timePoint.replace("T"," ").replace("Z"," "));
         setAttr("monitorlocations",monitorLocations);
@@ -50,8 +58,15 @@ public class CityController extends Controller {
         render("/page/city/city.html");
     }
 
-    private void initEchartsDataScript(List<AirData> last24AirData,String color) {
-        echartsDataScript.setId("pg_content_24h");
+    private List<AirData> getLastMonthAirData(String cityName, String timePoint) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH,-1);
+        timePoint = getTime(calendar);
+        return AirData.dao.getRangeAirData(cityName,timePoint);
+    }
+
+    private void initEchartsDataScript(List<AirData> last24AirData,String color,String id,String fileName) {
+        echartsDataScript.setId(id);
         ArrayList<String> colors = new ArrayList<String>();
         colors.add(color);
         echartsDataScript.setColors(colors);
@@ -77,8 +92,15 @@ public class CityController extends Controller {
         echartsDataScript.setSeries_data(data);
         String path = this.getClass().getClassLoader().getResource("/").getPath();
         System.out.println(path);
-        path = path.replace("/WEB-INF/classes/","/resource/static/js/graph-last24-aqi.js");
+        path = path.replace("/WEB-INF/classes/","/resource/static/js/"+fileName);
         echartsDataScript.writeJS(path);
+    }
+
+    private List<AirData> getLastWeekAirData(String cityName, String timePoint) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH,-7);
+        timePoint = getTime(calendar);
+        return AirData.dao.getRangeAirData(cityName,timePoint);
     }
 
     private String getTime(Calendar calendar) {

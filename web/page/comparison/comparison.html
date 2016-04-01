@@ -23,25 +23,21 @@
 
         <!--曲线图-->
         <div class="panel_graph panel_onlyone">
-            <p class="pg_title">Last 24 hours Trend</p>
+            <p class="pg_title">Real-time Comparison</p>
             <div class="map_area">
-
                 <!--曲线图从这里开始,放到这里-->
                 <div id="pg_content_aqi_map" class="map_content" style="background-color:#f7f7f7;"></div>
-
             </div>
         </div>
 
-        <div class="panel_graph panel_onlyone">
-            <p class="pg_title">Last 30 hours Trend</p>
-            <div class="pg_area">
-
-                <!--曲线图从这里开始,放到这里-->
-                <div id="pg_content_30h" class="map_content" style="background-color:#f7f7f7;"></div>
-
+        <!--<div class="panel_graph panel_onlyone">
+            <p class="pg_title">Last Day Comparison</p>
+            <div class="map_area">
+                &lt;!&ndash;曲线图从这里开始,放到这里&ndash;&gt;
+                <div id="pg_content_last_aqi_map" class="map_content" style="background-color:#f7f7f7;"></div>
             </div>
         </div>
-
+-->
     </div>
 </div>
 </@layout>
@@ -49,4 +45,5 @@
 <script src="resource/static/js/echarts-all.js"></script>
 <@javascript>
 <script src="resource/static/js/aqi-map.js"></script>
+<!--<script src="resource/static/js/aqi-map-lastday.js"></script>-->
 </@javascript>
