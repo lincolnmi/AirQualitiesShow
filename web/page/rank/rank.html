@@ -65,20 +65,78 @@
             <div class="pj_area_data rank_data">
                 <div class="pj_area_data_title">
                     <span class="pjadt_ranknum">Rank</span>
-                    <a><span class="pjadt_quality">Quality</span></a>
+                    <div class="rank_data_quality rank_data_quality_hover">
+                        <a class="pjadt_quality" href="javascript:void(0)"><span class="shaixuan_q_text">空气质量状况</span><i></i></a>
+                        <ul class="rank_data_quality_active hide">
+                            <li><a class="shaixuan_q" href="javascript:void(0)" level="level0">所有等级</a></li>
+                            <li><a class="shaixuan_q" href="javascript:void(0)" level="level1">优</a></li>
+                            <li><a class="shaixuan_q" href="javascript:void(0)" level="level2">良</a></li>
+                            <li><a class="shaixuan_q" href="javascript:void(0)" level="level3">轻度污染</a></li>
+                            <li><a class="shaixuan_q" href="javascript:void(0)" level="level4">中度污染</a></li>
+                            <li><a class="shaixuan_q" href="javascript:void(0)" level="level5">重度污染</a></li>
+                            <li><a class="shaixuan_q" href="javascript:void(0)" level="level6">严重污染</a></li>
+                        </ul>
+                    </div>
                     <span class="pjadt_location">&nbsp;&nbsp;City</span>
-                    <span class="pjadt_sheng">&nbsp;&nbsp;&nbsp;&nbsp;Province</span>
+                    <div class="rank_data_shengfen rank_data_shengfen_hover">
+                        <a class="pjadt_sheng" href="javascript:void(0)"><span class="shaixuan_p_text">省份</span><i></i></a>
+                        <div class="rank_data_shengfen_active hide">
+                            <div class="rank_data_shengfen_active_line1">
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>北京</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>天津</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>上海</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>重庆</span></a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="rank_data_shengfen_active_line2">
+                                <a class="shaixuan_p" href="javascript:void(0)"><span style="background-color: #f4f4f4;color: #4a9828;">所有省份</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>云南</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>内蒙古</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>台湾</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>吉林</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>四川</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>宁夏</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>安徽</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>山东</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>山西</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>广东</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>广西</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>新疆</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>江苏</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>江西</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>河北</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>河南</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>浙江</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>海南</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>湖北</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>湖南</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>澳门</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>甘肃</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>福建</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>西藏</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>贵州</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>辽宁</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>陕西</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>青海</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>香港</span></a>
+                                <a class="shaixuan_p" href="javascript:void(0)"><span>黑龙江</span></a>
+                                <div class="clear">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <span class="pjadt_pm25">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AQI<i class=""></i></span>
                     <span class="pjadt_pm25">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pm2.5</span>
                     <div class="clear"></div>
                 </div>
 
-                <ul class="pj_area_data_details rrank_box">
+                <ul class="pj_area_data_details rank_box" style="display:none;">
                     <#list airData as air>
                         <#if cityProvinces.containsKey(air.area)>
                             <#if air_index%2==0 >
-                            <li class="pj_area_data_item level5 ">
-                            <#else><li class="pj_area_data_item level1 pj_area_data_item_darkbg ">
+                            <li class="pj_area_data_item ${air.quality} ${cityProvinces.get(air.area)}">
+                            <#else><li class="pj_area_data_item pj_area_data_item_darkbg ${air.quality} ${cityProvinces.get(air.area)}">
                             </#if>
                                 <b></b>
                                 <span class="pjadt_ranknum">${air_index+1}</span>
@@ -108,7 +166,126 @@
                     </#list>
                 </ul>
 
+                <ul class="pj_area_data_details rrank_box">
+                    <#list airData?reverse as air>
+                        <#if cityProvinces.containsKey(air.area)>
+                            <#if air_index%2==0 >
+                                <li class="pj_area_data_item ${air.quality} ${cityProvinces.get(air.area)}">
+                                    <#else><li class="pj_area_data_item pj_area_data_item_darkbg ${air.quality} ${cityProvinces.get(air.area)}">
+                            </#if>
+                            <b></b>
+                            <span class="pjadt_ranknum">${air_index+1}</span>
+                                <span class="pjadt_quality">
+                                    <#if air.quality=="优">
+                                        <em class="pjadt_quality_bglevel_1">
+                                    <#elseif  air.quality=="良">
+                                    <em class="pjadt_quality_bglevel_2">
+                                        <#elseif  air.quality=="轻度污染">
+                                    <em class="pjadt_quality_bglevel_3">
+                                        <#elseif  air.quality=="中度污染">
+                                    <em class="pjadt_quality_bglevel_4">
+                                        <#elseif  air.quality=="重度污染">
+                                    <em class="pjadt_quality_bglevel_5">
+                                        <#elseif  air.quality=="严重污染">
+                                    <em class="pjadt_quality_bglevel_6">
+                                </#if>
+                                        ${air.quality}
+                                </em>
+                            </span>
+                            <a class="pjadt_location" href="/city/${air.area}">${air.area}</a>
+                            <span class="pjadt_sheng">${cityProvinces.get(air.area)}</span>
+                            <span class="pjadt_aqi">${air.aqi}<i class=""></i></span>
+                            <span class="pjadt_pm25">${air.pm25} <em>μg/m³</em><i class="63.00"></i></span>
+                            </li>
+                        </#if>
+                    </#list>
+                </ul>
+
             </div>
         </div>
     </div>
 </@layout>
+<script>
+    $(document).ready(function(){
+        $('.pjadt_quality').click(function(e){
+            e.stopPropagation();
+            $('.rank_data_shengfen_active').addClass("hide");
+            if(!$('.rank_data_quality_active').hasClass("hide")){
+                $('.rank_data_quality_active').addClass("hide");
+            } else {
+                $('.rank_data_quality_active').removeClass('hide');
+            }
+        });
+
+        $('.pjadt_sheng').click(function(e){
+            e.stopPropagation();
+            $('.rank_data_quality_active').addClass("hide");
+            if(!$('.rank_data_shengfen_active').hasClass("hide")){
+                $('.rank_data_shengfen_active').addClass("hide");
+            } else {
+                $('.rank_data_shengfen_active').removeClass('hide');
+            }
+        });
+
+        // 点击其他地方层消失
+        $(document).click(function(){
+            if(!$('.rank_data_quality_active').hasClass("hide")){
+                $('.rank_data_quality_active').addClass("hide");
+            }
+            if(!$('.rank_data_shengfen_active').hasClass("hide")){
+                $('.rank_data_shengfen_active').addClass("hide");
+            }
+        });
+
+        $('.shaixuan_q').click(function(e){
+            var p = $(e.target).text();
+            $('.shaixuan_p_text').text('省份');
+            if(p == '所有等级') {
+                $('.pj_area_data_details li').show();
+                $('.shaixuan_q_text').text('空气质量状况');
+                return;
+            }
+            $('.pj_area_data_details li').hide();
+            $('.' + p).show();
+            $('.shaixuan_q_text').text(p);
+        });
+
+        $('.shaixuan_p').click(function(e){
+            var p = $(e.target).text();
+            var ptext = $(e.target).text();
+            $('.shaixuan_q_text').text('空气质量状况');
+            if(p == '所有省份') {
+                $('.pj_area_data_details li').show();
+                $('.shaixuan_p_text').text('省份');
+                return;
+            }
+            $('.pj_area_data_details li').hide();
+            $('.' + p).show();
+            $('.shaixuan_p_text').text(p);
+        });
+
+        $(".rank_paixu").hover(
+                function() {
+                    $('.rank_paixu_active').show();
+                }, function() {
+                    $('.rank_paixu_active').hide();
+                }
+        );
+        $('.rank_paixu_active').click(function(){
+            var rank_paixu_text = $('.rank_paixu_text1').text();
+            if(rank_paixu_text == '按最优排名'){
+                // 显示最差排行
+                $('.rank_box').hide();
+                $('.rrank_box').show();
+                $('.rank_paixu_text1').text('按最差排名');
+                $('.rank_paixu_text2').text('按最优排名');
+            } else {
+                // 显示最优排行
+                $('.rank_box').show();
+                $('.rrank_box').hide();
+                $('.rank_paixu_text1').text('按最优排名');
+                $('.rank_paixu_text2').text('按最差排名');
+            }
+        });
+    });
+</script>
