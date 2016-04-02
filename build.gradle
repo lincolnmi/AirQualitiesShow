@@ -16,6 +16,5 @@ dependencies {
     compile 'c3p0:c3p0:0.9.1.2'
     compile 'mysql:mysql-connector-java:5.1.38'
     compile 'com.jfinal:cos:26Dec2008'
-
-
+    compile 'nz.ac.waikato.cms.weka:weka-stable:3.6.11'
 }
