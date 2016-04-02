@@ -1,5 +1,6 @@
 package jason.tongji.tool;
 
+import sun.security.jca.GetInstance;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instance;
@@ -14,11 +15,13 @@ import java.util.ArrayList;
  */
 public class Forecast {
 
-    public String getFutureData() {
+    public static String getFutureData() {
         Instances ins = null;
         Classifier cfs = null;
         try{
-            File file= new File("E:\\data\\weather.arff");
+            String path = ForecastData.class.getClassLoader().getResource("/").getPath();
+            path = path.replace("/WEB-INF/classes/","/resource/static/data/train.arff");
+            File file= new File(path);
             ArffLoader loader = new ArffLoader();
             loader.setFile(file);
             ins = loader.getDataSet();
@@ -30,7 +33,8 @@ public class Forecast {
             int length = ins.numInstances();
             for (int i =0; i < length; i++) {
                 testInst = ins.instance(i);
-                cfs.classifyInstance(testInst);
+                double value = cfs.classifyInstance(testInst);
+                //System.out.println(value);
             }
         }catch(Exception e){
             e.printStackTrace();

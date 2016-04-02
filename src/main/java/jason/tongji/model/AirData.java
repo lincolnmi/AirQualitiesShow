@@ -13,6 +13,13 @@ import java.util.List;
 public class AirData extends Model<AirData> {
     public static AirData dao = new AirData();
 
+    public ArrayList<AirData> getAllAirData() {
+        String timePoint = "2016-03-28T12:00:00Z";
+        String sql = "select * from airdata where timePoint >='\"+timePoint+\"' ORDER BY timePoint";
+        System.out.println(sql);
+        return (ArrayList<AirData>) dao.find(sql);
+    }
+
     public ArrayList<AirData> getAirData(String timePoint) {
         timePoint = "2016-03-30T12:00:00Z";
         String sql = "select * from airdata where timePoint = '"+timePoint+"'";
