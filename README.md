@@ -1,8 +1,13 @@
 # AirQualitiesShow
 show air qualities
 
-server, backend, frontpage
+服务器+后台+前台
 
-pyhton crawl data
-backend jfinal framework
-frontpage, echarts, bootstrap
+#服务器
+pyhton抓取数据
+
+#后台
+jfinal framework
+
+#前台
+freemaker, echarts, bootstrap
