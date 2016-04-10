@@ -13,18 +13,38 @@ public class CityAir {
     private String yundong_content;
     private String kaichuan_head;
     private String kaichuan_content;
+    private String wuranLevel;
     private String background;
+    private String quality;
 
     public CityAir(String quality) {
+        setQuality(quality);
         setBackgroundByQuality(quality);
         setKouzhao(quality);
         setYundong(quality);
         setChuxing(quality);
         setKaichuan(quality);
+        setWuranLevelByQuality(quality);
+    }
+
+    private void setWuranLevelByQuality(String quality) {
+        if (quality.equals("优")) {
+            setWuranLevel("wuranlevel_1");
+        } else if (quality.equals("良")) {
+            setWuranLevel("wuranlevel_2");
+        } else if (quality.equals("轻度污染")) {
+            setWuranLevel("wuranlevel_3");
+        } else if (quality.equals("中度污染")) {
+            setWuranLevel("wuranlevel_4");
+        } else if (quality.equals("重度污染")) {
+            setWuranLevel("wuranlevel_5");
+        } else if (quality.equals("严重污染")) {
+            setWuranLevel("wuranlevel_6");
+        }
     }
 
     private void setKouzhao(String quality) {
-        if (quality==null||quality.equals("")||quality.equals("优")) {
+        if (quality.equals("优")) {
             setKouzhao_head("无需口罩");
             setKouzhao_content("请大口的呼吸自然空气");
         } else if (quality.equals("良")) {
@@ -38,7 +58,7 @@ public class CityAir {
     }
 
     private void setYundong(String quality) {
-        if (quality==null||quality.equals("")||quality.equals("优")) {
+        if (quality.equals("优")) {
             setYundong_head("室外运动");
             setYundong_content("非常适合室外运动");
         } else if (quality.equals("良")) {
@@ -54,7 +74,7 @@ public class CityAir {
     }
 
     private void setKaichuan(String quality) {
-        if (quality==null||quality.equals("")||quality.equals("优")) {
+        if (quality.equals("优")) {
             setKaichuan_head("开窗通风");
             setKaichuan_content("非常适合开窗通风");
         } else if (quality.equals("良")) {
@@ -71,7 +91,7 @@ public class CityAir {
 
 
     private void setChuxing(String quality) {
-        if (quality==null||quality.equals("")||quality.equals("优")) {
+        if (quality.equals("优")) {
             setChuxing_head("适合出行");
             setChuxing_content("非常适合出门呼吸新鲜空气");
         } else if (quality.equals("良")) {
@@ -87,7 +107,19 @@ public class CityAir {
     }
 
     private void setBackgroundByQuality(String quality) {
-
+        if (quality.equals("优")) {
+            setWuranLevel("wuranlevel_1");
+        } else if (quality.equals("良")) {
+            setWuranLevel("wuranlevel_2");
+        } else if (quality.equals("轻度污染")) {
+            setWuranLevel("wuranlevel_3");
+        } else if (quality.equals("中度污染")) {
+            setWuranLevel("wuranlevel_4");
+        } else if (quality.equals("重度污染")) {
+            setWuranLevel("wuranlevel_5");
+        } else if (quality.equals("严重污染")) {
+            setWuranLevel("wuranlevel_6");
+        }
     }
 
     public void setKouzhao_head(String kouzhao_head) {
@@ -152,6 +184,25 @@ public class CityAir {
 
     public String getKaichuan_content() {
         return kaichuan_content;
+    }
+
+    public void setWuranLevel(String wuranLevel) {
+        this.wuranLevel = wuranLevel;
+    }
+
+    public String getWuranLevel() {
+        return wuranLevel;
+    }
+
+    public void setQuality(String quality) {
+        if (quality==null||quality.equals("")){
+            quality = "优";
+        }
+        this.quality = quality;
+    }
+
+    public String getQuality() {
+        return quality;
     }
 
 }

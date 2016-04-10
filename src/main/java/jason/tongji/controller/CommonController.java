@@ -1,10 +1,7 @@
 package jason.tongji.controller;
 import com.jfinal.core.Controller;
 import jason.tongji.config.GlobalConfig;
-import jason.tongji.model.AirData;
-import jason.tongji.model.City;
-import jason.tongji.model.CityProvince;
-import jason.tongji.model.MonitorLocation;
+import jason.tongji.model.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -38,6 +35,7 @@ public class CommonController extends Controller {
         int rank = getRank(airDatas,airData);
         int size = airDatas.size();
         int percent = (int) ((size-rank)*1.0/size*100);
+        CityAir cityAir = new CityAir(airData.getStr("quality"));
         setAttr("currentCity", cityName);
         setAttr("provinceCities", provinceCities);
         setAttr("cityPrefixes", cityPrefixes);
@@ -45,6 +43,7 @@ public class CommonController extends Controller {
         setAttr("airData", airData);
         setAttr("percent", percent);
         setAttr("rank", rank);
+        setAttr("cityAir", cityAir);
 
         render("/page/index.html");
 	}

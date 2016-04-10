@@ -3,6 +3,7 @@ package jason.tongji.tool;
 import sun.security.jca.GetInstance;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
+import weka.classifiers.trees.J48;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ArffLoader;
@@ -26,16 +27,22 @@ public class Forecast {
             loader.setFile(file);
             ins = loader.getDataSet();
             ins.setClassIndex(ins.numAttributes()-1);
-            cfs = (Classifier)Class.forName("weka.classifiers.bayes.NaiveBayes").newInstance();
+
+            cfs = new J48();
             cfs.buildClassifier(ins);
             Instance testInst;
-            Evaluation testingEvaluation = new Evaluation(ins);
             int length = ins.numInstances();
+            int count = 0;
             for (int i =0; i < length; i++) {
                 testInst = ins.instance(i);
+                double realNum = testInst.classValue();
                 double value = cfs.classifyInstance(testInst);
-                //System.out.println(value);
+                double ratio = Math.abs(value - realNum)*1.0/realNum * 100;
+                if (ratio<=1) {
+                    count++;
+                }
             }
+            System.out.println(count*1.0/length*100+"%");
         }catch(Exception e){
             e.printStackTrace();
         }

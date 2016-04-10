@@ -12,6 +12,27 @@
 </@javascript>
 
 <@layout>
+
+<#function getLevel quality>
+    <#local level = 1>
+    <#if quality=="优">
+        <#local level = 1>
+    <#elseif quality=="良">
+        <#local level = 2>
+    <#elseif quality=="轻度污染">
+        <#local level = 3>
+    <#elseif quality=="中度污染">
+        <#local level = 4>
+    <#elseif quality=="重度污染">
+        <#local level = 5>
+    <#elseif quality=="严重污染">
+        <#local level = 6>
+    <#else>
+        <#local level = 1>
+    </#if>
+    <#return level>
+</#function>
+
 <div class="banner_index_width">
     <div class="banner_index">
         <!--切换城市-->
@@ -23,9 +44,9 @@
                 <a class="bi_location_content_dropdown" href="javascript:void(0)"><span class="mon_span">选择监测点</span><i></i></a>
                 <div class="bi_location_content_active hide">
                     <ul>
-                        <li><a class="dontSelect current" href="javascript:void(0)" mon="选择监测点" aqi="${airData.aqi}" pm25="${airData.pm25}" qua="${airData.quality}" lv="2"><i>•</i>全部监测点</a></li>
+                        <li><a class="dontSelect current" href="javascript:void(0)" mon="选择监测点" aqi="${airData.aqi}" pm25="${airData.pm25}" qua="${airData.quality}" lv="${getLevel(airData.quality)}"><i>•</i>全部监测点</a></li>
                         <#list monitorLocations as monitorLocation>
-                            <li><a href="javascript:void(0)" mon="${monitorLocation.monitorName}" aqi="${monitorLocation.aqi}" pm25="${monitorLocation.pm25}" qua="${monitorLocation.quality}" lv="2"><i>•</i>${monitorLocation.monitorName}</a></li>
+                            <li><a href="javascript:void(0)" mon="${monitorLocation.monitorName}" aqi="${monitorLocation.aqi}" pm25="${monitorLocation.pm25}" qua="${monitorLocation.quality}" lv="${getLevel(monitorLocation.quality)}"><i>•</i>${monitorLocation.monitorName}</a></li>
                         </#list>
                     </ul>
                 </div>
@@ -35,10 +56,10 @@
         <!--AQI展示-->
         <div class="bi_aqiarea">
             <div class="bi_aqiarea_top">
-                <a class="bi_aqiarea_num" href="../city/${currentCity}">59</a>
+                <a class="bi_aqiarea_num" href="../city/${currentCity}">${airData.pm25}</a>
                 <!--划上去可以摊开页面底部的曲线图-->
                 <p class="bi_aqiarea_right">
-                    <span class="bi_aqiarea_wuran wuranlevel_2">良</span>
+                    <span class="bi_aqiarea_wuran ${cityAir.wuranLevel}">${cityAir.quality}</span>
                     <span class="bi_aqiarea_tips">AQI指数</span>
                 </p>
                 <div class="clear"></div>
@@ -74,8 +95,8 @@
                         <li class="im_shenghuo_kouzhao1">
                             <!--鼠标划到对应的li上的时候，显示这个div-->
                             <div class="im_shenghuo_item_hover1"  style="display:none;" >
-                                <p class="im_shenghuo_item_hover_title1"><i></i><span>请佩戴</span></p>
-                                <p class="im_shenghuo_item_hover_info1">出入密集场所请佩戴口罩</p>
+                                <p class="im_shenghuo_item_hover_title1"><i></i><span>${cityAir.kouzhao_head}</span></p>
+                                <p class="im_shenghuo_item_hover_info1">${cityAir.kouzhao_content}</p>
                             </div>
                             <dl>
                                 <dt><i></i></dt>
@@ -86,8 +107,8 @@
                         <li class="im_shenghuo_yundong1">
                             <!--鼠标划到对应的li上的时候，显示这个div-->
                             <div class="im_shenghuo_item_hover1" style="display:none;">
-                                <p class="im_shenghuo_item_hover_title1"><i></i><span>室内运动</span></p>
-                                <p class="im_shenghuo_item_hover_info1">请减少室外运动</p>
+                                <p class="im_shenghuo_item_hover_title1"><i></i><span>${cityAir.yundong_head}</span></p>
+                                <p class="im_shenghuo_item_hover_info1">${cityAir.yundong_content}</p>
                             </div>
                             <dl>
                                 <dt><i></i></dt>
@@ -98,8 +119,8 @@
                         <li class="im_shenghuo_chuxing1" style="border-right:none;">
                             <!--鼠标划到对应的li上的时候，显示这个div-->
                             <div class="im_shenghuo_item_hover1 " style="display:none;">
-                                <p class="im_shenghuo_item_hover_title1"><i></i><span>适合出行</span></p>
-                                <p class="im_shenghuo_item_hover_info1">出行请带好雨具</p>
+                                <p class="im_shenghuo_item_hover_title1"><i></i><span>${cityAir.chuxing_head}</span></p>
+                                <p class="im_shenghuo_item_hover_info1">${cityAir.chuxing_content}</p>
                             </div>
                             <dl>
                                 <dt><i></i></dt>
@@ -110,8 +131,8 @@
                         <li class="im_shenghuo_kaichuang1">
                             <!--鼠标划到对应的li上的时候，显示这个div-->
                             <div class="im_shenghuo_item_hover1 " style="display:none;">
-                                <p class="im_shenghuo_item_hover_title1"><i></i><span>开窗通风</span></p>
-                                <p class="im_shenghuo_item_hover_info1">请减少开窗通风时间</p>
+                                <p class="im_shenghuo_item_hover_title1"><i></i><span>${cityAir.kaichuan_head}</span></p>
+                                <p class="im_shenghuo_item_hover_info1">${cityAir.kaichuan_content}</p>
                             </div>
                             <dl>
                                 <dt><i></i></dt>
