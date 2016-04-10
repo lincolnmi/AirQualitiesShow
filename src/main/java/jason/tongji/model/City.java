@@ -15,6 +15,16 @@ public class City extends Model<City> {
     public static final City dao = new City();
     private static HashMap<String,ArrayList<String>> cityPrefixes;
 
+    public static ArrayList<String> getAllCities() {
+        String sql = "select * from cities";
+        List<Record> records = Db.find(sql);
+        ArrayList<String> cities = new ArrayList<String>();
+        for (Record record:records) {
+            cities.add(record.getStr("city_name"));
+        }
+        return cities;
+    }
+
     public int getCityId(String cityName) {
         String sql = "select * from cities where city_name= '" + cityName +"'";
         System.out.println(sql);

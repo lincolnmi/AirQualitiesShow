@@ -1,4 +1,5 @@
 package jason.tongji.controller;
+import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
 import jason.tongji.config.GlobalConfig;
 import jason.tongji.model.*;
@@ -44,7 +45,7 @@ public class CommonController extends Controller {
         setAttr("percent", percent);
         setAttr("rank", rank);
         setAttr("cityAir", cityAir);
-
+        setAttr("timePoint", timePoint.replace("T"," ").replace("Z"," "));
         render("/page/index.html");
 	}
 

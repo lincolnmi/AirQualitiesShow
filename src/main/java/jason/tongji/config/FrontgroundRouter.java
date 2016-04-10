@@ -12,5 +12,6 @@ public class FrontgroundRouter extends Routes {
         add("/monitorLocation", MonitorLocationController.class);
         add("/home", HomeController.class);
         add("/comparison", ComparisonController.class);
+        add("/checkCity", CheckCityController.class);
 	}
 }
