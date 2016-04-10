@@ -5,39 +5,37 @@
 <link href="resource/static/css/index.css" rel="stylesheet" media="screen">
 <link href="resource/static/css/tinyscrollbar.css" rel="stylesheet" media="screen">
 </@css>
+
+<@javascript>
+<script src="resource/static/js/sea.js"></script>
+<script src="resource/static/js/common.js"></script>
+</@javascript>
+
 <@layout>
 <div class="banner_index_width">
     <div class="banner_index">
         <!--切换城市-->
         <div class="bi_location">
             <a class="bi_location_add minicity_clk" href="javascript:void(0)"></a>
-            <h2 class="bi_loaction_city">上海</h2>
+            <h2 class="bi_loaction_city">${currentCity}</h2>
+            <!--鼠标划上来后，在这里加“bi_location_content_hover”-->
             <div class="bi_location_content ">
                 <a class="bi_location_content_dropdown" href="javascript:void(0)"><span class="mon_span">选择监测点</span><i></i></a>
                 <div class="bi_location_content_active hide">
                     <ul>
-                        <li><a class="dontSelect current" href="javascript:void(0)" mon="选择监测点" aqi="59" pm25="31" qua="良" lv="2" url="/city/上海.html"><i>•</i>全部监测点</a></li>
-                        <li><a href="javascript:void(0)" mon="普陀" aqi="60" pm25="33" qua="良" lv="2" url="/city/mon/aqi/上海/普陀.html"><i>•</i>普陀</a></li>
-                        <li><a href="javascript:void(0)" mon="十五厂" aqi="56" pm25="32" qua="良" lv="2" url="/city/mon/aqi/上海/十五厂.html"><i>•</i>十五厂</a></li>
-                        <li><a href="javascript:void(0)" mon="虹口" aqi="54" pm25="25" qua="良" lv="2" url="/city/mon/aqi/上海/虹口.html"><i>•</i>虹口</a></li>
-                        <li><a href="javascript:void(0)" mon="徐汇上师大" aqi="56" pm25="32" qua="良" lv="2" url="/city/mon/aqi/上海/徐汇上师大.html"><i>•</i>徐汇上师大</a></li>
-                        <li><a href="javascript:void(0)" mon="杨浦四漂" aqi="56" pm25="31" qua="良" lv="2" url="/city/mon/aqi/上海/杨浦四漂.html"><i>•</i>杨浦四漂</a></li>
-                        <li><a href="javascript:void(0)" mon="青浦淀山湖" aqi="55" pm25="34" qua="良" lv="2" url="/city/mon/aqi/上海/青浦淀山湖.html"><i>•</i>青浦淀山湖</a></li>
-                        <li><a href="javascript:void(0)" mon="静安监测站" aqi="51" pm25="30" qua="良" lv="2" url="/city/mon/aqi/上海/静安监测站.html"><i>•</i>静安监测站</a></li>
-                        <li><a href="javascript:void(0)" mon="浦东川沙" aqi="45" pm25="23" qua="优" lv="1" url="/city/mon/aqi/上海/浦东川沙.html"><i>•</i>浦东川沙</a></li>
-                        <li><a href="javascript:void(0)" mon="浦东新区监测站" aqi="55" pm25="29" qua="良" lv="2" url="/city/mon/aqi/上海/浦东新区监测站.html"><i>•</i>浦东新区监测站</a></li>
-                        <li><a href="javascript:void(0)" mon="浦东张江" aqi="53" pm25="—" qua="良" lv="2" url="/city/mon/aqi/上海/浦东张江.html"><i>•</i>浦东张江</a></li>
-                        <li><a href="javascript:void(0)" mon="美国领事馆" aqi="102" pm25="41" qua="轻度污染" lv="3" url="/city/mon/aqi/上海/美国领事馆.html"><i>•</i>美国领事馆</a></li>
+                        <li><a class="dontSelect current" href="javascript:void(0)" mon="选择监测点" aqi="${airData.aqi}" pm25="${airData.pm25}" qua="${airData.quality}" lv="2"><i>•</i>全部监测点</a></li>
+                        <#list monitorLocations as monitorLocation>
+                            <li><a href="javascript:void(0)" mon="${monitorLocation.monitorName}" aqi="${monitorLocation.aqi}" pm25="${monitorLocation.pm25}" qua="${monitorLocation.quality}" lv="2"><i>•</i>${monitorLocation.monitorName}</a></li>
+                        </#list>
                     </ul>
                 </div>
             </div>
         </div>
 
-
         <!--AQI展示-->
         <div class="bi_aqiarea">
             <div class="bi_aqiarea_top">
-                <a class="bi_aqiarea_num" href="/city/shanghai.html">59</a>
+                <a class="bi_aqiarea_num" href="../city/${currentCity}">59</a>
                 <!--划上去可以摊开页面底部的曲线图-->
                 <p class="bi_aqiarea_right">
                     <span class="bi_aqiarea_wuran wuranlevel_2">良</span>
@@ -47,7 +45,7 @@
             </div>
             <div class="bi_aqiarea_bottom">
                 <p>PM2.5浓度：<span class="pm25_span">31</span>微克/立方米</p>
-                <p>击败了全国 55% 的城市，目前城市排名 161 </p>
+                <p>击败了全国 ${percent}% 的城市，目前城市排名 ${rank} </p>
             </div>
         </div>
 
@@ -62,16 +60,6 @@
 
         <!--天气位置-->
         <div class="bi_infoarea">
-            <!--       <div class="bi_info">
-                       &lt;!&ndash;鼠标划到分享按钮上的时候，先增加个“bi_info_hover”，再把下边的“bi_info_active”变为"display:block"&ndash;&gt;
-                       <a class="bi_info_share " href=""><i></i><span>分享</span></a>
-                       <div class="bi_info_share_active" style="display:none">
-                           <a class="bi_info_share_active_sina" title="分享到新浪微博" href="javascript:void(0)"></a>
-                           <a class="bi_info_share_active_qzone" title="分享到QQ空间" href="javascript:void(0)"></a>
-                       </div>
-                       <p class="bi_info_weather"><img src="http://p1.qhimg.com/d/_hao360/weather/7.png" title="小雨"> <span>小雨</span> 16~10℃</p>
-                       <div class="clear"></div>
-                   </div>-->
             <p class="bi_info_tips">数据来源：中国环境监测总站&nbsp;&nbsp;&nbsp;&nbsp;最后更新：2016-03-22 18:00</p>
         </div>
 
@@ -85,7 +73,7 @@
 
                         <li class="im_shenghuo_kouzhao1">
                             <!--鼠标划到对应的li上的时候，显示这个div-->
-                            <div class="im_shenghuo_item_hover1" style="display:none;" >
+                            <div class="im_shenghuo_item_hover1"  style="display:none;" >
                                 <p class="im_shenghuo_item_hover_title1"><i></i><span>请佩戴</span></p>
                                 <p class="im_shenghuo_item_hover_info1">出入密集场所请佩戴口罩</p>
                             </div>
@@ -97,7 +85,7 @@
 
                         <li class="im_shenghuo_yundong1">
                             <!--鼠标划到对应的li上的时候，显示这个div-->
-                            <div class="im_shenghuo_item_hover1" style="display:none;" >
+                            <div class="im_shenghuo_item_hover1" style="display:none;">
                                 <p class="im_shenghuo_item_hover_title1"><i></i><span>室内运动</span></p>
                                 <p class="im_shenghuo_item_hover_info1">请减少室外运动</p>
                             </div>
@@ -130,6 +118,7 @@
                                 <dd>开窗指数</dd>
                             </dl>
                         </li>
+
 
                     </ul>
                 </div>
@@ -173,31 +162,19 @@
         <div class="overview ui-switchable-content" style="top: 0px;">
             <!--工具条上方的热门城市部分内容-->
             <div class="hot_city">
-                <div class="city_default">
-                    <p class="city_default_one">
-                        <span>当前城市：</span><i class="current_city">上海</i>
-                        <a href="#" class="city_default_shezhi " city="上海" citypy="shanghai">设置为默认城市</a>
-                    </p>
-                    <p class="city_default_two"  style="display:none; ">
-                        <span style="font-weight:normal;">默认城市：</span>
-                        <a href="" class="default_city"></a>
-                        <a href="javascript:void(0)" class="city_default_shanchu">[删除]</a>
-                    </p>
-                    <div class="clear"></div>
-                </div>
                 <dl>
-                    <dt>热门城市:</dt>
+                    <dt>Hot Cities:</dt>
                     <dd>
-                        <a href="/beijing.html">北京</a>
-                        <a href="/shanghai.html">上海</a>
-                        <a href="/guangzhou.html">广州</a>
-                        <a href="/shenzhen.html">深圳</a>
-                        <a href="/hangzhou.html">杭州</a>
-                        <a href="/tianjin.html">天津</a>
-                        <a href="/chengdu.html">成都</a>
-                        <a href="/nanjing.html">南京</a>
-                        <a href="/xian.html">西安</a>
-                        <a href="/wuhan.html">武汉</a>
+                        <a href="/北京">北京</a>
+                        <a href="/上海">上海</a>
+                        <a href="/广州">广州</a>
+                        <a href="/深圳">深圳</a>
+                        <a href="/杭州">杭州</a>
+                        <a href="/天津">天津</a>
+                        <a href="/成都">成都</a>
+                        <a href="/南京">南京</a>
+                        <a href="/西安">西安</a>
+                        <a href="/武汉">武汉</a>
                     </dd>
                 </dl>
                 <div class="clear"></div>
@@ -206,281 +183,52 @@
             <!--筛选工具条-->
             <div class="city_control">
                 <div class="city_control_tab"><!---当前是谁，就在谁上边加“city_control_current”-->
-                    <a class="city_control_current tab_pc" href="javascript:void(0)">按省份</a>
-                    <a class="tab_fc" href="javascript:void(0)">按城市</a>
+                    <a class="city_control_current tab_pc" href="javascript:void(0)">Province</a>
+                    <a class="tab_fc" href="javascript:void(0)">City</a>
                 </div>
+
                 <div class="c_search">
                     <div class="search_city">
                         <input type="text" value="" placeholder="输入城市名" class="search_city_text" id="autocomplete">
                         <input type="button" class="search_btn search_btn_active">
                         <div class="clear"></div>
                     </div>
-                    <!--即时显示搜索结果-->
-                    <div class="search_result_width" style="display:none;">
-                        <ul class="search_result">
-                            <li><a href="">保定</a></li>
-                            <li><a href="">北京</a></li>
-                            <li><a href="">包头</a></li>
-                            <li><a href="">宝鸡</a></li>
-                        </ul>
-                    </div>
                 </div>
                 <div class="clear"></div>
             </div>
 
-            <div class="city_province ui-switchable-panel" style="display:block;">
-                <div class="city_province" style="display:block;">
+            <div class="city_province" style="display:block;">
+                <#list provinceCities.keySet() as province>
                     <!--一般城市-->
                     <div class="city_province_item">
                         <dl>
-                            <dt>安徽</dt>
+                            <dt>${province}</dt>
                             <dd>
-                                <a href="/hefei.html">合肥</a>
-                                <a href="/wuhu.html">芜湖</a>
-                                <a href="/maanshan.html">马鞍山</a>
-                                <a href="/anqing.html">安庆</a>
-                                <a href="/bozhou.html">亳州</a>
-                                <a href="/bengbu.html">蚌埠</a>
-                                <a href="/chuzhou.html">滁州</a>
-                                <a href="/chaohu.html">巢湖</a>
-                                <a href="/chizhou.html">池州</a>
-                                <a href="/huaibei.html">淮北</a>
-                                <a href="/huainan.html">淮南</a>
-                                <a href="/huangshan.html">黄山</a>
-                                <a href="/huangshanfengjingqu.html">黄山风景区</a>
-                                <a href="/jiuhuashanfengjingqu.html">九华山风景区</a>
-                                <a href="/tongling.html">铜陵</a>
-                                <a href="/fuyangshi.html">阜阳</a>
-                                <a href="/suzhoushi.html">宿州</a>
-                                <a href="/xuancheng.html">宣城</a>
-                                <a href="/liuan.html">六安</a>
+                                <#list provinceCities.get(province) as city>
+                                    <a href="/${city}">${city}</a>
+                                </#list>
                             </dd>
                         </dl>
                         <div class="clear"></div>
                     </div>
+                </#list>
+            </div>
+
+            <div class="city_province city_citys">
+                <#list cityPrefixes.keySet() as prefix>
                     <!--一般城市-->
                     <div class="city_province_item">
                         <dl>
-                            <dt>福建</dt>
+                            <dt class="cpi_capital">${prefix}</dt>
                             <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
+                                <#list cityPrefixes.get(prefix) as city>
+                                    <a href="/${city}">${city}</a>
+                                </#list>
                             </dd>
                         </dl>
                         <div class="clear"></div>
                     </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div><div class="city_province_item">
-                    <dl>
-                        <dt>福建</dt>
-                        <dd>
-                            <a href="/xiamen.html">厦门</a>
-                            <a href="/quanzhou.html">泉州</a>
-                            <a href="/fuzhou.html">福州</a>
-                            <a href="/longyan.html">龙岩</a>
-                            <a href="/nanping.html">南平</a>
-                            <a href="/putian.html">莆田</a>
-                            <a href="/sanming.html">三明</a>
-                            <a href="/zhangzhou.html">漳州</a>
-                            <a href="/ningde.html">宁德</a>
-                        </dd>
-                    </dl>
-                    <div class="clear"></div>
-                </div><div class="city_province_item">
-                    <dl>
-                        <dt>福建</dt>
-                        <dd>
-                            <a href="/xiamen.html">厦门</a>
-                            <a href="/quanzhou.html">泉州</a>
-                            <a href="/fuzhou.html">福州</a>
-                            <a href="/longyan.html">龙岩</a>
-                            <a href="/nanping.html">南平</a>
-                            <a href="/putian.html">莆田</a>
-                            <a href="/sanming.html">三明</a>
-                            <a href="/zhangzhou.html">漳州</a>
-                            <a href="/ningde.html">宁德</a>
-                        </dd>
-                    </dl>
-                    <div class="clear"></div>
-                </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>福建</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="city_province_item">
-                        <dl>
-                            <dt>厦门</dt>
-                            <dd>
-                                <a href="/xiamen.html">厦门</a>
-                                <a href="/quanzhou.html">泉州</a>
-                                <a href="/fuzhou.html">福州</a>
-                                <a href="/longyan.html">龙岩</a>
-                                <a href="/nanping.html">南平</a>
-                                <a href="/putian.html">莆田</a>
-                                <a href="/sanming.html">三明</a>
-                                <a href="/zhangzhou.html">漳州</a>
-                                <a href="/ningde.html">宁德</a>
-                            </dd>
-                        </dl>
-                        <div class="clear"></div>
-                    </div>
-
-
-                </div>
+                </#list>
             </div>
 
         </div>
@@ -488,19 +236,15 @@
 </div>
 
 <style>
-    .autocomplete-suggestions{position:absolute; z-index:50; background-color:#fff; width:200px;box-shadow:0 1px 5px rgba(0,0,0,.2);-moz-box-shadow:0 1px 5px rgba(0,0,0,.2);-webkit-box-shadow:0 1px 5px rgba(0,0,0,.2);-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius:5px; overflow-x:hidden;margin-top:5px;}
-    .autocomplete-suggestion{}
-    .autocomplete-suggestion a{display:block;line-height:30px; text-indent:5px; border-bottom:#ececec solid 1px; margin:0px 10px;}
-    .autocomplete-suggestion a:hover{color:#4a9828; background-color:#ececec;}
     .minicity {right: -900px;}
 </style>
 
 </@layout>
 
-<script type="text/javascript">
-    seajs.use('jquery.tinyscrollbar', function($, Tabs, Cookie) {
+<script>
+    seajs.use(['$', 'tabs', 'cookie', 'tinyscrollbar', 'autocomplete'], function($, Tabs, Cookie){
 
-        $(document).ready(function () {
+        $(document).ready(function(){
             new Tabs({
                 element: '.minicity',
                 triggers: '.city_control_tab a',
@@ -510,83 +254,393 @@
                 activeIndex: 0
             });
 
-            $('.tab_pc').click(function () {
+            $('.tab_pc').click(function(){
                 $('.pc_a_z').show();
                 $('.fc_a_z').hide();
             });
 
-            $('.tab_fc').click(function () {
+            $('.tab_fc').click(function(){
                 $('.pc_a_z').hide();
                 $('.fc_a_z').show();
             });
 
-            $('.minicity_clk').click(function () {
-                $('.minicity').animate({right: 0}, 'slow');
+            $('.minicity_clk').click(function(){
+                $('.minicity').animate({right:0}, 'slow');
             });
-            $('.mt_close').click(function () {
-                $('.minicity').animate({right: '-900px'}, 'slow');
+            $('.mt_close').click(function(){
+                $('.minicity').animate({right:'-900px'}, 'slow');
             });
 
-            var h = $(window).height() - 132;
-            if (h < 0)h = 0;
-            $(".viewport").css('height', h);
+            var h = $(window).height()-132;if(h<0)h=0;
+            $(".viewport").css('height',h);
             $('#scrollbar1').tinyscrollbar();
 
-            window.onresize = function () {
-                var h = $(window).height() - 132;
-                if (h < 0)h = 0;
-                $(".viewport").css('height', h);
-                $(".scrollbar").css('height', h);
-                $(".track").css('height', h);
+            window.onresize = function(){
+                var h = $(window).height()-132;if(h<0)h=0;
+                $(".viewport").css('height',h);
+                $(".scrollbar").css('height',h);
+                $(".track").css('height',h);
                 $('#scrollbar1').tinyscrollbar();
             }
 
-            $('.city_citys').addClass('hide');
+            //$('.city_citys').addClass('hide');
+
+            var checkCity = function(){
+                $.ajax({
+                    type: "post",
+                    dataType: 'json',
+                    url: 'http://www.pm25.com/city/cityCheck',
+                    data: {cityname: $('#autocomplete').val()},
+                    success:function(res){
+                        if(res.err == 0) {
+                            window.location.href = '/'+res.areapy+'.html';
+                        } else {
+                            alert('对不起，该城市不存在!')
+                        }
+                    }
+                });
+            }
+
+            $('.search_btn').click(function(){
+                checkCity();
+            });
+
+            $('.search_city_text').keypress(function(e){
+                if(e.which == 13) {
+                    checkCity();
+                }
+            });
+
+            $('.city_default_shezhi').click(function(){
+                var currentCity = $('.city_default_shezhi').attr('city');
+                Cookie.set('default_city', currentCity, {
+                    path: '/',
+                    expires: 18000
+                });
+                $('.city_default_two').show();
+                $('.default_city').text(currentCity);
+                $('.city_default_shezhi').hide();
+            });
+
+            $('.city_default_shanchu').click(function(){
+                Cookie.remove('default_city', {
+                    path: '/'
+                });
+                $('.city_default_two').hide();
+                $('.city_default_shezhi').show();
+            });
+
         });
+
     });
 </script>
-<script>
-    $(document).ready(function () {
 
-        $('.bi_location_content_dropdown').click(function (e) {
-            e.stopPropagation();
-            if ($('.bi_location_content_active').hasClass("hide")) {
-                $('.bi_location_content_active').removeClass('hide');
-                $('.bi_location_content ').addClass('bi_location_content_hover');
+<script>
+    seajs.use(['$', 'switchable', 'dadadan', 'danmu', 'danmuxml'], function($){
+        $(document).ready(function(){
+
+            $('.bi_location_content_dropdown').click(function(e){
+                e.stopPropagation();
+                if($('.bi_location_content_active').hasClass("hide")){
+                    $('.bi_location_content_active').removeClass('hide');
+                    $('.bi_location_content ').addClass('bi_location_content_hover');
+                } else {
+                    $('.bi_location_content_active').addClass("hide");
+                    $('.bi_location_content ').removeClass('bi_location_content_hover');
+                }
+            });
+
+            // 点击其他地方层消失
+            $(document).click(function(){
+                if(!$('.bi_location_content_active').hasClass("hide")){
+                    $('.bi_location_content_active').addClass("hide");
+                    $('.bi_location_content ').removeClass('bi_location_content_hover');
+                }
+            });
+
+            $('.dontSelect').click(function(){
+                $('.bi_location_content_active').addClass("hide");
+                $('.bi_location_content ').removeClass('bi_location_content_hover');
+            });
+
+            $('.bi_location_content_active li a').click(function(e){
+                var e = $(e.target);
+                var lv = e.attr('lv');
+                $('.mon_span').text(e.attr('mon'));
+                $('.bi_aqiarea_num').text(e.attr('aqi')).attr('href', e.attr('url'));
+                $('.pm25_span').text(e.attr('pm25'));
+                $('.bi_aqiarea_wuran').text(e.attr('qua')).removeClass('wuranlevel_1 wuranlevel_2 wuranlevel_3 wuranlevel_4 wuranlevel_5 wuranlevel_6').addClass('wuranlevel_' + lv);
+            });
+
+            $('.lzi_pic').switchable({
+                triggers: $('.lzi_num .tr-point'),
+                triggerType: 'click',
+                currentTriggerCls: 'current',
+                autoplay: true,
+                interval: 5,
+                panels: 'li',
+                effect: 'fade',
+                /* fade effect only supports steps == 1 */
+                // steps: 4,
+                easing: 'ease-in-out',
+                prev: $('.lzi_numbtn_pre'),
+                next: $('.lzi_numbtn_next'),
+                onSwitch: function(event, currentIndex) {
+                    var api = this;
+                    api.prevBtn.toggleClass('disabled', currentIndex === 0);
+                    api.nextBtn.toggleClass('disabled', currentIndex === api.length - 1);
+                }
+            });
+
+
+            var guideShow = function(){
+                guideShowFunc = setInterval(function(){
+                    var qty = Math.floor(Math.random() * ( 5 + 1));
+                    var hoverDom = $('.im_shenghuo_item_hover1');
+                    hoverDom.fadeOut();
+                    hoverDom.eq(qty).fadeIn();
+                }, 3000)
+            };
+
+            guideShow();
+
+            $('.im_shenghuo_details1 li').each(function(){
+                var hoverDom = $(this).find('.im_shenghuo_item_hover1');
+                $(this).hover(function(){
+                    $('.im_shenghuo_item_hover1').hide();
+                    clearInterval(guideShowFunc);
+                    hoverDom.show();
+                },function(){
+                    guideShow();
+                    hoverDom.hide();
+                });
+            });
+
+            $('.jiance_close_btn').click(function(){
+                $('.fixed_jiance').hide();
+                $('.jiance_zhao').hide();
+            });
+
+            $('.jiance_btn').click(function(){
+                $('.jiance_tanchu_width').show();
+                $('.jiance_zhao').show();
+            })
+
+            $('.jiance_tanchu_close').click(function(){
+                $('.jiance_tanchu_width').hide();
+                $('.jiance_zhao').hide();
+            });
+
+            if ($(".bi_news_closed li").length > 0) {
+                setInterval(function(){
+                    $('.bi_news_closed').find("li:first").animate({
+                        marginTop: "-25px"
+                    }, 2000, function(){
+                        $(this).css({
+                            marginTop: "0px"
+                        }).appendTo(".bi_news_closed");
+                    });
+                }, 5000);
             } else {
-                $('.bi_location_content_active').addClass("hide");
-                $('.bi_location_content ').removeClass('bi_location_content_hover');
+                $(".bi_news_closed").hide()
             }
-        });
 
-        // 点击其他地方层消失
-        $(document).click(function () {
-            if (!$('.bi_location_content_active').hasClass("hide")) {
-                $('.bi_location_content_active').addClass("hide");
-                $('.bi_location_content ').removeClass('bi_location_content_hover');
+            var title = encodeURIComponent('绿色呼吸PM2.5');
+            var city = $('.cml_city').text();
+            var desc = encodeURIComponent('【上海2016-03-22 18:00：良，PM2.5当前浓度31微克/立方米】#PM2.5#指数为59，预计24小时内吸入446.4微克，沉淀进肺泡无法排出297.6微克，心肺疾病死亡风险升高6.7%，癌症死亡风险升高9.3%，更多http://www.pm25.com/');
+            var url = location.href;
+            var pic = '';
+            if(pic != ''){
+                pic = 'http://www.pm25.com/' + pic;
             }
-        });
+            $('.bi_info_share_active_sina, .jtb_share_sina').click(function(){window.open('http://v.t.sina.com.cn/share/share.php?appkey=57458049&url='+url+'&title='+desc+'&content=gb2312&pic='+pic+'&ralateUid=5108207785', '绿色呼吸PM25', 'height=816, width=768,top=0,left=500,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');});
+            $('.bi_info_share_active_qzone, .jtb_share_qzone').click(function(){window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+url+'&desc='+desc+'&title='+title, '绿色呼吸PM25', 'height=816, width=768,top=,left=500,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no');});
 
-        $('.dontSelect').click(function () {
-            $('.bi_location_content_active').addClass("hide");
-            $('.bi_location_content ').removeClass('bi_location_content_hover');
-        });
 
-        $('.bi_location_content_active li a').click(function (e) {
-            var e = $(e.target);
-            var lv = e.attr('lv');
-            $('.mon_span').text(e.attr('mon'));
-            $('.bi_aqiarea_num').text(e.attr('aqi')).attr('href', e.attr('url'));
-            $('.pm25_span').text(e.attr('pm25'));
-            $('.bi_aqiarea_wuran').text(e.attr('qua')).removeClass('wuranlevel_1 wuranlevel_2 wuranlevel_3 wuranlevel_4 wuranlevel_5 wuranlevel_6').addClass('wuranlevel_' + lv);
+            // duoshuo
+            var duoshuo_uid = '';
+            var duoshuo_uname;
+            var thread_key = 'city_shanghai';
+
+            $.ajax({
+                type: 'get',
+                dataType: 'json',
+                url: '/duoshuo/uinfo',
+                success:function(r){
+                    if(r.code == 0) {
+                        duoshuo_uname = r.response.name;
+                        $('.duoshuo_avatar').attr('src', r.response.avatar_url).attr('title', r.response.avatar_url);
+                        $('.duoshuo_uname').text(r.response.name);
+                    }
+                }
+            });
+
+            $('.alert_login').click(function(){
+                $('.tan_login_width, .tanmu_max_zhezhao').show();
+            });
+
+            $('.mmi_btn').click(function(){
+                var message = $('.mmi_ipt').val();
+                if(message == '') {alert('评论内容不能为空');return false;}
+                if(duoshuo_uid == '') {
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: '/duoshuo/loacladd',
+                        data: {thread_key: thread_key, message: message, author_name: '游客'},
+                        success:function(r){
+                            if(r.code == 200) {
+                                $('.mmi_ipt').val('');
+                                dmAdd(r.response.message);
+                            } else if(r.code == 400) {
+                                alert(r.response);
+                            }
+                        }
+                    });
+                } else {
+                    $.ajax({
+                        type: 'post',
+                        dataType: 'json',
+                        url: '/duoshuo/loacladd',
+                        data: {thread_key: thread_key, message: message},
+                        success:function(r){
+                            if(r.code == 0) {
+                                $('.mmi_ipt').val('');
+                                dmAdd(r.response.message);
+                            }
+                        }
+                    });
+                }
+            });
+
+            // danmu
+            $('.bi_opentanmu').click(function(){
+                $('.tanmubox').show();
+                $('.abp').show();
+                if(cm == undefined) {
+                    cm = dmInit();
+                } else {
+                    dmStart();
+                }
+            });
+            $('.close_minilogin').click(function(){
+                $('.tanmubox').hide();
+                $('.abp').hide();
+                dmStop();
+                mindanmu();
+            });
+
+            $('.login_close').click(function(){
+                $('.tan_login_width, .tanmu_max_zhezhao').hide();
+            });
+
+            var cm;
+            var tmr = -1;
+            var start = 0;
+            var playhead = 0;
+
+            var dmInit = function(){
+                if(cm != undefined) return cm;
+                // danmu
+                cm = new CommentManager(document.getElementById('danmu'));
+                cm.init();
+
+                tmr = -1;
+                start = 0;
+                playhead = 0;
+
+                CommentLoader('/duoshuo/localxml/' + thread_key, cm);
+                cm.startTimer();
+                start = new Date().getTime();
+                tmr = setInterval(function(){
+                    playhead = new Date().getTime() - start;
+                    cm.time(playhead);
+                },42);
+
+                return cm;
+            }
+
+            var dmStart = function(){
+                if(tmr !== -1)
+                    return;
+                cm.startTimer();
+                start = new Date().getTime() - playhead;
+                tmr = setInterval(function(){
+                    playhead = new Date().getTime() - start;
+                    cm.time(playhead);
+                },42);
+            }
+
+            var dmStop = function(){
+                cm.stopTimer();
+                clearInterval(tmr);
+                tmr = -1;
+            }
+
+            var dmReset = function(){
+                playhead = 0;
+                start = (new Date()).getTime() + 1000;
+                cm.clear();
+            }
+
+            var dmAdd = function(msg){
+                cm.send({
+                    'border': false,
+                    'color': 16777215,
+                    'data': 1308104419,
+                    'dbid': 31188880,
+                    'hash': "Db20c852",
+                    'mode': 1,
+                    'pool': 0,
+                    'position': "absolute",
+                    'size': 25,
+                    'stime': 0,
+                    'text': msg
+                });
+            }
+
+            $('.message_quanping').click(function(){
+                if($('.message_quanping').attr('data-full') == 0) {
+                    fulldanmu();
+                } else {
+                    mindanmu()
+                }
+            });
+
+            $('.message_quanping').click(function(){
+                dmReset();
+            });
+
+            var fulldanmu = function(){
+                $('#danmu').css({
+                    'position': 'fixed',
+                    'top': '0px',
+                    'bottom': '0px',
+                    'left': '0px',
+                    'right': '0px',
+                    'width': 'auto',
+                    'height': 'auto',
+                    'background-color': 'rgba(0, 0, 0, 0.7)'
+                });
+                $('.tanmu_mini_width').css({
+                    'position': 'fixed',
+                    'z-index': '999',
+                    'bottom': '0px',
+                    'top': 'auto'
+                });
+                $('.message_quanping').attr('data-full', 1).html('<i></i>退出全屏');
+                $('.tanmu_mini_zhezhao').hide();
+            }
+
+            var mindanmu = function(){
+                $('#danmu').removeAttr('style').css({'width':'100%','height':'290px'});
+                $('.tanmu_mini_width').removeAttr('style');
+                $('.message_quanping').attr('data-full', 0).html('<i></i>全屏浏览');
+                $('.tanmu_mini_zhezhao').show();
+            }
+
         });
     });
 </script>
-<script>
-    seajs.config({
-        base: "resource/static/js"
-    });
-</script>
-<@javascript>
-    <script src="resource/static/js/sea.js"></script>
-</@javascript>
+
+
