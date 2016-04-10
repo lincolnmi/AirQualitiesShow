@@ -1,5 +1,5 @@
 ﻿
-.banner_index_width{ width:100%; height:480px; position:absolute; top:83px; left:0px; z-index:10;}
+.banner_index_width{ width:100%; height:480px; position:absolute; top:90px; left:0px;}
 .banner_index{ width:980px; height:480px; margin:0px auto; position:relative;}
 /*切换城市*/
 .bi_location{ width:980px; height:75px; border-bottom:#fff solid 1px;border-bottom:rgba(255, 255, 255, 0.3) solid 1px;*border-bottom:#fff solid 1px;_border-bottom:#fff solid 1px; position:absolute; top:50px; left:0px;}
@@ -54,12 +54,12 @@ ul.bi_news_closed li a.bi_news_closed_remen i{ background-position:-4px -72px;}
 .bi_aqiarea_top{border-bottom:#fff solid 1px;border-bottom:rgba(255, 255, 255, 0.3) solid 1px;*border-bottom:#fff solid 1px;_border-bottom:#fff solid 1px; margin-bottom:20px;}
 a.bi_aqiarea_num{ float:left; display:inline; font-size:100px; color:#fff; font-family:Arial, Helvetica, sans-serif; }
 span.bi_aqiarea_wuran{ float:left; display:inline; padding:4px 15px; margin:50px 0px 3px 10px; color:#fff;}
-span.wuranlevel_1{background-color:#6eb720;}
-span.wuranlevel_2{background-color:#d6c60f;}
-span.wuranlevel_3{background-color:#ec7e22;}
-span.wuranlevel_4{background-color:#ce3333;}
-span.wuranlevel_5{background-color:#a61d71;}
-span.wuranlevel_6{background-color:#420045;}
+span.wuranlevel_1{background-color:#7db364;}
+span.wuranlevel_2{background-color:#e3b649;}
+span.wuranlevel_3{background-color:#e38748;}
+span.wuranlevel_4{background-color:#e07373;}
+span.wuranlevel_5{background-color:#9590c9;}
+span.wuranlevel_6{background-color:#9f6aa2;}
 
 p.bi_aqiarea_right{float:left; display:inline; width:90px;}
 span.bi_aqiarea_tips{ float:left; display:inline; height:20px; line-height:20px; text-align:center; color:#fff; margin-left:15px;}
@@ -94,8 +94,8 @@ i.icons_weather_qing{ background-position:0px 0px;}
 .index_main1{ width:980px; height:350px;margin:0px auto;}
 .im_shenghuo1{width:980px; position:absolute; top:0px; right:0px;}
 p.im_shenghuo_title1{ float:right;display:inline; font-size:30px; color:#fff; right:0px }
-ul.im_shenghuo_details1{ position:inherit;width:325px; height:210px; ; margin:0px auto; overflow:hidden; z-index:5;right:0px;top:70px;}
-ul.im_shenghuo_details1 li{ float:left; display:inline; width:162px; height:74px;; position:relative; margin-top:15px;}
+ul.im_shenghuo_details1{ position:inherit;width:325px; height:310px; ; margin:0px auto; overflow:hidden; z-index:5;right:0px;top:70px;}
+ul.im_shenghuo_details1 li{ float:left; display:inline; width:162px; height:110px;; position:relative; margin-top:15px;}
 ul.im_shenghuo_details1 li dl{text-align:center;}
 ul.im_shenghuo_details1 li dl dt{}
 ul.im_shenghuo_details1 li dl dd{ font-size:14px; color:#fff; cursor:default;}
@@ -398,7 +398,7 @@ a.itg_content_link i{ display:inline-block; width:14px; height:11px; margin-left
 /*旋转的太阳*/
 @keyframes taiyangxuanzhuan{0%{} 100%{-webkit-transform:perspective(0px) translate(0px,0px) translateZ(0px) scale(1,1) rotate(360deg)}}
 @-webkit-keyframes taiyangxuanzhuan{0%{} 100%{-webkit-transform:perspective(0px) translate(0px,0px) translateZ(0px) scale(1,1) rotate(360deg)}}
-@-moz-keyframes taiyangxuanzhuan{0%{} 100%{-moz-transform:translate(0px,0px) scale(1,1) skew(0deg) rotate(360deg)}}
+@-moz-keyframes taiyangxuanzhuan{0%{} 100%{-moz-transform:translate(0px,0px) scale(1,1) skew(0deg) rotate(360deg)}}	
 /*上下动的气球*/
 @keyframes shangxia_qiqiu {0%{ margin-bottom:0px; }20%{ margin-bottom:10px;}80%{ margin-bottom:-10px;}100%{ margin-bottom:0px; }}
 @-webkit-keyframes shangxia_qiqiu {0%{ margin-bottom:0px; }20%{ margin-bottom:10px;}80%{ margin-bottom:-10px;}100%{ margin-bottom:0px; }}
@@ -419,7 +419,7 @@ a.itg_content_link i{ display:inline-block; width:14px; height:11px; margin-left
 @keyframes youdong_sunnyxiaoyun{0%{right:-20px;}50%{ right:20px;}100% {right:0px; }}
 @-moz-keyframes youdong_sunnyxiaoyun {0%{right:-20px;}50%{ right:20px;}100% {right:0px; }}
 @-webkit-keyframes youdong_sunnyxiaoyun  {0%{right:-20px;}50%{ right:20px;}100% {right:0px; }}
-
+	
 
 
 /*控制天气----雨天*/

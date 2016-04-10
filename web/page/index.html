@@ -1,9 +1,9 @@
 <#include "/page/template/_layout.html"/>
 
 <@css>
-<link href="resource/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="resource/static/css/index.css" rel="stylesheet" media="screen">
 <link href="resource/static/css/tinyscrollbar.css" rel="stylesheet" media="screen">
+<link href="css/style.min.css" rel="stylesheet" type="text/css" />
 </@css>
 
 <@javascript>
@@ -33,12 +33,26 @@
     <#return level>
 </#function>
 
-<div class="banner_index_width">
+    <#if airData.quality=="优">
+        <div class="banner_index_width banner_bg_level1">
+    <#elseif  airData.quality=="良">
+        <div class="banner_index_width banner_bg_level2">
+    <#elseif  airData.quality=="轻度污染">
+        <div class="banner_index_width banner_bg_level3">
+    <#elseif  airData.quality=="中度污染">
+        <div class="banner_index_width banner_bg_level4">
+    <#elseif  airData.quality=="重度污染">
+        <div class="banner_index_width banner_bg_level5">
+    <#elseif  airData.quality=="严重污染">
+        <div class="banner_index_width banner_bg_level6">
+    <#else>
+        <div class="banner_index_width wuranlevel_1">
+    </#if>
     <div class="banner_index">
         <!--切换城市-->
         <div class="bi_location">
             <a class="bi_location_add minicity_clk" href="javascript:void(0)"></a>
-            <h2 class="bi_loaction_city">${currentCity}</h2>
+            <h2 class="bi_loaction_city"><a href="/city/${currentCity}" style="color:#FFFFFF">${currentCity}</a></h2>
             <!--鼠标划上来后，在这里加“bi_location_content_hover”-->
             <div class="bi_location_content ">
                 <a class="bi_location_content_dropdown" href="javascript:void(0)"><span class="mon_span">选择监测点</span><i></i></a>
@@ -56,7 +70,7 @@
         <!--AQI展示-->
         <div class="bi_aqiarea">
             <div class="bi_aqiarea_top">
-                <a class="bi_aqiarea_num" href="../city/${currentCity}">${airData.pm25}</a>
+                <a class="bi_aqiarea_num">${airData.aqi}</a>
                 <!--划上去可以摊开页面底部的曲线图-->
                 <p class="bi_aqiarea_right">
                     <span class="bi_aqiarea_wuran ${cityAir.wuranLevel}">${cityAir.quality}</span>
@@ -72,7 +86,7 @@
 
         <!--天气位置-->
         <div class="bi_infoarea">
-            <p class="bi_info_tips">数据来源：PM2.5in&nbsp;&nbsp;&nbsp;&nbsp;最后更新：2016-03-22 18:00</p>
+            <p class="bi_info_tips">&nbsp;&nbsp;&nbsp;&nbsp;最后更新：${timePoint}</p>
         </div>
 
         <!-- 我的生活指南-->
@@ -136,22 +150,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<!--banner部分-底部-夜晚-->
-<div class="weather_neight_width">
-    <div class="shatan_width">
-        <div class="weather_neight_shatan"><i class="weather_neight_shatan_content"></i></div>
-    </div>
-    <div class="weather_neight">
-        <div class="weather_neight_liuxing"><i class="weather_neight_liuxing_content"></i></div>
-        <div class="weather_neight_yueliang"><i class="weather_neight_yueliang_content"></i></div>
-        <div class="weather_neight_zhangpeng"><i class="weather_neight_zhangpeng_content"></i></div>
-        <div class="weather_neight_paiwu"><i class="weather_neight_paiwu_content"></i></div>
-        <div class="weather_neight_shu"><i class="weather_neight_shu_content"></i></div>
-        <div class="weather_neight_caoduo"><i class="weather_neight_caoduo_content"></i></div>
-        <div class="weather_neight_z"><i class="weather_neight_z_content"></i></div>
     </div>
 </div>
 
@@ -247,6 +245,7 @@
     </div>
 </div>
 
+
 <style>
     .minicity {right: -900px;}
 </style>
@@ -295,17 +294,17 @@
                 $('#scrollbar1').tinyscrollbar();
             }
 
-            //$('.city_citys').addClass('hide');
+            $('.city_citys').addClass('hide');
 
             var checkCity = function(){
                 $.ajax({
                     type: "post",
                     dataType: 'json',
-                    url: 'http://www.pm25.com/city/cityCheck',
+                    url: '/checkCity',
                     data: {cityname: $('#autocomplete').val()},
                     success:function(res){
                         if(res.err == 0) {
-                            window.location.href = '/'+res.areapy+'.html';
+                            window.location.href = '/'+res.cityname;
                         } else {
                             alert('对不起，该城市不存在!')
                         }
