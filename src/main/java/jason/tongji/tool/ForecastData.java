@@ -12,8 +12,9 @@ import java.util.Map;
  * Created by Jason on 2016/4/2.
  */
 public class ForecastData {
-    private static final int size = 5;
-    private static int maxValue = 0;
+    private static final int size = 24;
+    private static int maxValue = 500;
+    private static ArrayList<String> dataSets = new ArrayList<String>();
 
     private static HashMap<String,ArrayList<AirData>> processData() {
         HashMap<String,ArrayList<AirData>> cityAirData = new HashMap<String, ArrayList<AirData>>();
@@ -32,10 +33,13 @@ public class ForecastData {
         return cityAirData;
     }
 
+    public static String getLast24HourData() {
+        return dataSets.get(dataSets.size()-1);
+    }
+
     public static void writeTrainData(String fileName) {
         HashMap<String,ArrayList<AirData>> cityAirData = processData();
         Iterator<Map.Entry<String, ArrayList<AirData>>> it = cityAirData.entrySet().iterator();
-        ArrayList<String> dataSets = new ArrayList<String>();
         while (it.hasNext()) {
             ArrayList<AirData> aqi = it.next().getValue();
             dataSets.addAll(getDataSet(aqi));
@@ -46,23 +50,22 @@ public class ForecastData {
     private static ArrayList<String> getDataSet(ArrayList<AirData> airDatas) {
         ArrayList<String> dataSets = new ArrayList<String>();
         int length = airDatas.size(),i = 0;
+        ArrayList<Integer> AQIs = new ArrayList<Integer>();
         for (i=0;i<length-1;i++) {
             StringBuilder dataSet = new StringBuilder();
-
             AirData airData = airDatas.get(i);
-            int aqi = (int) airDatas.get(i+1).getDouble("aqi").doubleValue();
-            int co = (int) airData.getDouble("co").doubleValue();
-            int pm25 = (int) airData.getDouble("pm25").doubleValue();
-            int pm10 = (int) airData.getDouble("pm10").doubleValue();
-            int so2 = (int) airData.getDouble("so2").doubleValue();
-            int no2 = (int) airData.getDouble("no2").doubleValue();
-
-            if (aqi>maxValue) {
-                maxValue = aqi;
+            int aqi = (int) airData.getDouble("aqi").doubleValue();
+            if (AQIs.size()==25) {
+                AQIs.remove(0);
             }
-            dataSet.append(co + " " + pm25 + " " + pm10 + " " + so2 +" "+no2+" ");
-            dataSet.append(aqi);
-            dataSets.add(dataSet.toString());
+            AQIs.add(aqi);
+            maxValue = Math.max(maxValue,aqi);
+            if (AQIs.size()==25) {
+                for (int value:AQIs) {
+                    dataSet.append(value+" ");
+                }
+                dataSets.add(dataSet.toString());
+            }
         }
         return dataSets;
     }
@@ -106,5 +109,6 @@ public class ForecastData {
             e.printStackTrace();
         }
     }
+
 
 }
