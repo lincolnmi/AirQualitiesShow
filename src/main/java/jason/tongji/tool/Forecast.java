@@ -87,7 +87,7 @@ public class Forecast {
         return "";
     }*/
 
-    public static ArrayList<Integer> getPredictData(String area,int size) {
+    public static ArrayList<String> getPredictData(String area,int size) {
         Classifier cfs = buildTrain();
         List<AirData> airDatas = AirData.dao.getLastNumAirDataByCity(area,24);
 
@@ -101,7 +101,7 @@ public class Forecast {
         testData.add(getStr(AQIs));
         //write test data
         ForecastData.writeArffData(testData, "test.arff");
-        ArrayList<Integer> result = new ArrayList<Integer>();
+        ArrayList<String> result = new ArrayList<String>();
         String path = ForecastData.class.getClassLoader().getResource("/").getPath();
         path = path.replace("/WEB-INF/classes/","/resource/static/data/test.arff");
         File file= new File(path);
@@ -114,7 +114,7 @@ public class Forecast {
                 ins = loader.getDataSet();
                 ins.setClassIndex(ins.numAttributes()-1);
                 int predict = getPredict(cfs,ins.instance(i));
-                result.add(predict);
+                result.add(predict+"");
                 AQIs.remove(0);
                 AQIs.add(predict+"");
                 testData.add(getStr(AQIs));

@@ -6,10 +6,8 @@
 <link href="css/style.min.css" rel="stylesheet" type="text/css" />
 </@css>
 
-<@javascript>
 <script src="resource/static/js/sea.js"></script>
 <script src="resource/static/js/common.js"></script>
-</@javascript>
 
 <@layout>
 
@@ -144,14 +142,12 @@
                                 <dd>开窗指数</dd>
                             </dl>
                         </li>
-
-
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 
 <div id="scrollbar1" class="minicity ui-switchable" style="display:block;" data-widget-cid="widget-0">
     <div class="minicity_title">
@@ -245,7 +241,15 @@
     </div>
 </div>
 
-
+<div class="main">
+    <div class="panel_graph panel_onlyone">
+        <p class="pg_title">${currentCity} Future 24 hours AQI Trend</p>
+        <div class="pg_area">
+            <!--曲线图从这里开始,放到这里-->
+            <div id="forecast_aqi" class="pg_content" style="background-color:#f7f7f7;"></div>
+        </div>
+    </div>
+</div>
 <style>
     .minicity {right: -900px;}
 </style>
@@ -655,3 +659,7 @@
 </script>
 
 
+<@javascript>
+<script src="resource/static/js/echarts.min.js"></script>
+<script src="resource/static/js/forecast-aqi.js"></script>
+</@javascript>

@@ -1,6 +1,6 @@
 ﻿
 /*banner区域*/
-.citydata_banner_width{ width:100%; height:340px; border-bottom:#fff solid 1px;}
+.citydata_banner_width{ width:100%; height:340px; border-bottom:#fff solid 1px;top:83px;}
 .banner_bg_level1{ background-color:#7db364;}
 .banner_bg_level2{background-color:#e3b649;}
 .banner_bg_level3{background-color:#e38748;}
@@ -168,6 +168,7 @@ p.rank_data_showmore_tips{ float:right; display:inline; color:#555; font-size:14
 .panel_graph{ margin:20px 0px 50px 0px;}
 p.pg_title{ font-size:20px; color:#555; margin:10px 0px 20px 0px; text-indent:20px;}
 .pg_area,.pj_area{position:relative;width:980px;height:auto; overflow:hidden;}
+.map_area{position:relative;width:100%;height:auto; overflow:hidden;}
 .pj_area_tab{ }
 p.pj_area_links{ position:absolute; top:15px; right:0px;}
 p.pj_area_links a{ padding-left:20px; color:#1e9e69;}
@@ -175,6 +176,10 @@ p.pj_area_links a:hover{ text-decoration:underline;}
 .pg_area_tab a,.pj_area_tab a{ float:left; display:inline; text-align:center; font-size:14px; width:162px; height:40px; line-height:40px; color:#555; border:#e8e8e8 solid 1px; background-color:#fff; margin-right:1px; border-top-left-radius:3px;-moz-border-top-left-radius:3px;-webkit-border-top-left-radius:3px;border-top-right-radius:3px;-moz-border-top-right-radius:3px;-webkit-border-top-right-radius:3px;}
 .pg_area_tab a:hover,.pg_area_tab a.current,.pj_area_tab a:hover,.pj_area_tab a.current{ border:#45a873 solid 1px; background-color:#57b382; color:#fff;}
 .pg_content{ height:310px; width:978px; background-color:#f7f7f7; border:#e5e5e5 solid 1px; padding-top:10px;}
+
+.map{ width:80%; margin:0px auto; position:relative; padding-bottom:40px;}
+.map_area{position:relative;width:100%;height:auto; overflow:hidden;}
+.map_content{ height:600px; width:100%; background-color:#f7f7f7; border:#e5e5e5 solid 1px; padding-top:10px;}
 
 /*单独一个曲线图时（没有切片）*/
 .panel_onlyone{ background-color:#f7f7f7; border:#e5e5e5 solid 1px; margin-top:40px;}

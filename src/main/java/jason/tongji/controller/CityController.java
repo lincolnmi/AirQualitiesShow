@@ -100,6 +100,7 @@ public class CityController extends Controller {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH,-7);
         timePoint = getTime(calendar);
+        timePoint = "2016-03-20T10:00:00Z";
         return AirData.dao.getRangeAirData(cityName,timePoint);
     }
 

@@ -34,6 +34,12 @@ public class AirData extends Model<AirData> {
         return dao.find(sql).get(0);
     }
 
+    public List<AirData> getLastNumAirDataByCity(String cityName,int num) {
+        String sql = "select * from airdata WHERE area = '" + cityName +"' ORDER BY timePoint LIMIT "+num + "  ";
+        System.out.println(sql);
+        return dao.find(sql);
+    }
+
     public List<AirData> getLast24HourAirDataByCity(String cityName,String timePoint) {
         timePoint = "2016-03-23T12:00:00Z";
         String sql = "select * from airdata where timePoint >= '"+timePoint+"' AND area = '" + cityName +"'";
