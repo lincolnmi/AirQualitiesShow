@@ -9,7 +9,7 @@ public class FrontgroundRouter extends Routes {
 		add("/", CommonController.class);
         add("/rank", RankController.class);
         add("/city", CityController.class);
-        add("/monitorLocation", MonitorLocationController.class);
+        add("/monitorLocation", MonitorLocationsController.class);
         add("/home", HomeController.class);
         add("/comparison", ComparisonController.class);
         add("/checkCity", CheckCityController.class);

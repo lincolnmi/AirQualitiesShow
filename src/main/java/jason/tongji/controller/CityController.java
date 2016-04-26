@@ -2,6 +2,8 @@ package jason.tongji.controller;
 
 import com.jfinal.core.Controller;
 import jason.tongji.model.AirData;
+import jason.tongji.model.City;
+import jason.tongji.model.CityProvince;
 import jason.tongji.model.MonitorLocation;
 import jason.tongji.tool.EchartsDataScript;
 import jason.tongji.tool.Helper;
@@ -11,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -50,6 +53,13 @@ public class CityController extends Controller {
         initEchartsDataScript(lastMonthAirData,color,"pg_content_30d","graph-last30d-aqi.js");
 
         String tips = Helper.getTips(airData.getStr("quality"));
+
+        HashMap<String, ArrayList<String>> provinceCities = CityProvince.getProvinceCities();
+        HashMap<String,ArrayList<String>> cityPrefixes = City.getCityPrefixes();
+        setAttr("currentCity", cityName);
+        setAttr("provinceCities", provinceCities);
+        setAttr("cityPrefixes", cityPrefixes);
+
         setAttr("airData", airData);
         setAttr("cityName",cityName);
         setAttr("timePoint",timePoint.replace("T"," ").replace("Z"," "));
