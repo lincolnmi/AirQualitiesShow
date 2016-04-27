@@ -45,7 +45,7 @@ public class CommonController extends Controller {
             predictData = readFromFile(path);
         }
         ArrayList<String> xAxis_data = getxAxisData(Calendar.getInstance(),size);
-        initEchartsDataScript(xAxis_data,predictData,"#d4d4d4","forecast_aqi","forecast-aqi.js");
+        initEchartsDataScript(xAxis_data,predictData,"#9590c9","forecast_aqi","forecast-aqi.js");
 
         //String timePoint = getTime(Calendar.getInstance());
         String timePoint = GlobalConfig.timePoint;
@@ -102,13 +102,18 @@ public class CommonController extends Controller {
 
     private boolean needRepredict(String path) {
         File file = new File(path);
-        long currentTime = System.currentTimeMillis()/1000;
+        if (!file.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+        /*long currentTime = System.currentTimeMillis()/1000;
         long createTime = file.lastModified()/1000;
         if (currentTime-createTime>=3600) {
             return true;
         } else {
             return false;
-        }
+        }*/
     }
 
     private ArrayList<String> getxAxisData(Calendar calendar, int size) {

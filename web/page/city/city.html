@@ -19,6 +19,7 @@
     <div class="citydata_banner">
         <div class="citydata_banner_top">
             <div class="citydata_changecity">
+                <!--<a class="bi_location_add minicity_clk" href="javascript:void(0)"></a>-->
                 <span class="city_name">${cityName}</span>
                 <span class="city_description">Air Quality Index</span>
             </div>
@@ -144,6 +145,101 @@
             </div>
         </div>
 
+        <div id="scrollbar1" class="minicity ui-switchable" style="display:block;" data-widget-cid="widget-0">
+            <div class="minicity_title">
+                <a class="mt_close"><i></i></a>
+                <p>
+                    <!--<span class="minicity_title_wenzi">选择城市</span>-->
+                    <a href="/comparison" class="mt_maplink" target="_blank">进入地图模式&gt;&gt;</a>
+                </p>
+            </div>
+            <div class="scrollbar" style="height: 499px;">
+                <div class="track" style="height: 499px;">
+                    <div class="thumb" style="top: 0px; height: 54.3077px;">
+                        <div class="end"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="minicity_content viewport" style="height: 499px;">
+                <div class="overview ui-switchable-content" style="top: 0px;">
+                    <!--工具条上方的热门城市部分内容-->
+                    <div class="hot_city">
+                        <dl>
+                            <dt>Hot Cities:</dt>
+                            <dd>
+                                <a href="/北京">北京</a>
+                                <a href="/上海">上海</a>
+                                <a href="/广州">广州</a>
+                                <a href="/深圳">深圳</a>
+                                <a href="/杭州">杭州</a>
+                                <a href="/天津">天津</a>
+                                <a href="/成都">成都</a>
+                                <a href="/南京">南京</a>
+                                <a href="/西安">西安</a>
+                                <a href="/武汉">武汉</a>
+                            </dd>
+                        </dl>
+                        <div class="clear"></div>
+                    </div>
+
+                    <!--筛选工具条-->
+                    <div class="city_control">
+                        <div class="city_control_tab"><!---当前是谁，就在谁上边加“city_control_current”-->
+                            <a class="city_control_current tab_pc" href="javascript:void(0)">Province</a>
+                            <a class="tab_fc" href="javascript:void(0)">City</a>
+                        </div>
+
+                        <div class="c_search">
+                            <div class="search_city">
+                                <input type="text" value="" placeholder="输入城市名" class="search_city_text" id="autocomplete">
+                                <input type="button" class="search_btn search_btn_active">
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="city_province" style="display:block;">
+                        <#list provinceCities.keySet() as province>
+                            <!--一般城市-->
+                            <div class="city_province_item">
+                                <dl>
+                                    <dt>${province}</dt>
+                                    <dd>
+                                        <#list provinceCities.get(province) as city>
+                                            <a href="/${city}">${city}</a>
+                                        </#list>
+                                    </dd>
+                                </dl>
+                                <div class="clear"></div>
+                            </div>
+                        </#list>
+                    </div>
+
+                    <div class="city_province city_citys">
+                        <#list cityPrefixes.keySet() as prefix>
+                            <!--一般城市-->
+                            <div class="city_province_item">
+                                <dl>
+                                    <dt class="cpi_capital">${prefix}</dt>
+                                    <dd>
+                                        <#list cityPrefixes.get(prefix) as city>
+                                            <a href="/${city}">${city}</a>
+                                        </#list>
+                                    </dd>
+                                </dl>
+                                <div class="clear"></div>
+                            </div>
+                        </#list>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .minicity {right: -900px;}
+        </style>
 
         <div class="panel_graph panel_onlyone">
             <p class="pg_title">${cityName} Last 24 hours AQI Trend</p>
@@ -175,9 +271,106 @@
 
 </@layout>
 
+
+
 <@script>
     <script src="resource/static/js/echarts.min.js"></script>
+    <script src="resource/static/js/sea.js"></script>
 </@script>
+
+<script>
+    seajs.use(['$', 'tabs', 'cookie', 'tinyscrollbar', 'autocomplete'], function($, Tabs, Cookie){
+
+        $(document).ready(function(){
+            new Tabs({
+                element: '.minicity',
+                triggers: '.city_control_tab a',
+                triggerType: 'click',
+                activeTriggerClass: 'city_control_current',
+                panels: '.city_province',
+                activeIndex: 0
+            });
+
+            $('.tab_pc').click(function(){
+                $('.pc_a_z').show();
+                $('.fc_a_z').hide();
+            });
+
+            $('.tab_fc').click(function(){
+                $('.pc_a_z').hide();
+                $('.fc_a_z').show();
+            });
+
+            $('.minicity_clk').click(function(){
+                $('.minicity').animate({right:0}, 'slow');
+            });
+            $('.mt_close').click(function(){
+                $('.minicity').animate({right:'-900px'}, 'slow');
+            });
+
+            var h = $(window).height()-132;if(h<0)h=0;
+            $(".viewport").css('height',h);
+            $('#scrollbar1').tinyscrollbar();
+
+            window.onresize = function(){
+                var h = $(window).height()-132;if(h<0)h=0;
+                $(".viewport").css('height',h);
+                $(".scrollbar").css('height',h);
+                $(".track").css('height',h);
+                $('#scrollbar1').tinyscrollbar();
+            }
+
+            $('.city_citys').addClass('hide');
+
+            var checkCity = function(){
+                $.ajax({
+                    type: "post",
+                    dataType: 'json',
+                    url: '/checkCity',
+                    data: {cityname: $('#autocomplete').val()},
+                    success:function(res){
+                        if(res.err == 0) {
+                            window.location.href = '/'+res.cityname;
+                        } else {
+                            alert('对不起，该城市不存在!')
+                        }
+                    }
+                });
+            }
+
+            $('.search_btn').click(function(){
+                checkCity();
+            });
+
+            $('.search_city_text').keypress(function(e){
+                if(e.which == 13) {
+                    checkCity();
+                }
+            });
+
+            $('.city_default_shezhi').click(function(){
+                var currentCity = $('.city_default_shezhi').attr('city');
+                Cookie.set('default_city', currentCity, {
+                    path: '/',
+                    expires: 18000
+                });
+                $('.city_default_two').show();
+                $('.default_city').text(currentCity);
+                $('.city_default_shezhi').hide();
+            });
+
+            $('.city_default_shanchu').click(function(){
+                Cookie.remove('default_city', {
+                    path: '/'
+                });
+                $('.city_default_two').hide();
+                $('.city_default_shezhi').show();
+            });
+
+        });
+
+    });
+</script>
 
 <@javascript>
 <script src="resource/static/js/graph-last24-aqi.js"></script>

@@ -163,4 +163,14 @@ public class CityController extends Controller {
         return calendar;
     }
 
+    private int getRank(ArrayList<AirData> airDatas, AirData airData) {
+        int size = airDatas.size();
+        for (int i=0;i<size;i++) {
+            if (airDatas.get(i).get("area").equals(airData.get("area"))) {
+                return i+1;
+            }
+        }
+        return 1;
+    }
+
 }

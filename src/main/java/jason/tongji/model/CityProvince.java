@@ -55,5 +55,14 @@ public class CityProvince {
         return provinceResults;
     }
 
+    /*
+    key-province,value-List<city>
+     */
+    public static ArrayList<String> getProvinceCities(String province) {
+        if (provinceResults==null) {
+            provinceResults = getProvinceCities();
+        }
+        return provinceResults.get(province);
+    }
 
 }

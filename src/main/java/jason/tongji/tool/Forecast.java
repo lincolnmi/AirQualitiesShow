@@ -46,10 +46,9 @@ public class Forecast {
         return null;
     }
 
-    /*
 
-    public static String getFutureData() {
 
+   /* public static String getFutureData() {
 
         String path = ForecastData.class.getClassLoader().getResource("/").getPath();
                 path = path.replace("/WEB-INF/classes/","/resource/static/data/train.arff");
@@ -63,8 +62,6 @@ public class Forecast {
                     ins = loader.getDataSet();
                     cfs = new J48();
                     cfs.buildClassifier(ins);
-                    return cfs;
-
 
             ins.setClassIndex(ins.numAttributes()-1);
 

@@ -43,7 +43,7 @@ public class ComparisonController extends Controller {
         ArrayList<AirData> airDatas = AirData.dao.getAirData(timePoint);
         HashMap<String,String> cities = getCitiesData(airDatas);
         HashMap<String,String> provinces = getProvincesData(cities);
-        update(provinces,cities,"/resource/static/js/aqi-map-lastday.js");
+        update(provinces,cities,"/resource/static/js/aqi-province.js");
     }
 
     private HashMap<String, String> getProvincesData(HashMap<String,String> cities) {

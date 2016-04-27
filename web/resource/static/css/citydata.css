@@ -245,6 +245,23 @@ a.pr_item_special:hover i{ background-position:-441px -95px;}
 .bddcl_content_hover a.bddcl_dropdown i{   width: 0;height: 0;border-left: 5px solid transparent;border-right: 5px solid transparent;border-bottom: 5px solid #555; border-top:none;}
 .bddcl_info{ float:left; display:inline; font-size:20px; color:#888; margin-top:5px;}
 
+.bddcl_title{ float:left; display:inline; font-size:28px; color:#555;}
+.bddcl_province_content{ float:left; display:inline; position:relative;}
+.bddcl_province_content a.bddcl_province_dropdown{ float:left; display:inline; font-size:14px; padding:5px 15px; border:#bbb solid 1px; margin:6px 15px;  color:#888;}
+.bddcl_province_content a.bddcl_province_dropdown span{ float:left; display:inline;}
+.bddcl_province_content a.bddcl_province_dropdown i{ float:left; display:inline;width: 0;height: 0;border-left:5px solid transparent;border-right: 5px solid transparent;border-top: 5px solid #999; margin:6px 0px 0px 20px;}
+.bddcl_province_content_hover a.bddcl_province_dropdown{ background-color:#fff; border:#888 solid 1px; color:#555;}
+.bddcl_province_content_hover a.bddcl_province_dropdown i{   width: 0;height: 0;border-left: 5px solid transparent;border-right: 5px solid transparent;border-bottom: 5px solid #555; border-top:none;}
+.bddcl_info{ float:left; display:inline; font-size:20px; color:#888; margin-top:5px;}
+
+.bddcl_city_content{ float:left; display:inline; position:relative;}
+.bddcl_city_content a.bddcl_city_dropdown{ float:left; display:inline; font-size:14px; padding:5px 15px; border:#bbb solid 1px; margin:6px 15px;  color:#888;}
+.bddcl_city_content a.bddcl_city_dropdown span{ float:left; display:inline;}
+.bddcl_city_content a.bddcl_city_dropdown i{ float:left; display:inline;width: 0;height: 0;border-left:5px solid transparent;border-right: 5px solid transparent;border-top: 5px solid #999; margin:6px 0px 0px 20px;}
+.bddcl_city_content_hover a.bddcl_city_dropdown{ background-color:#fff; border:#888 solid 1px; color:#555;}
+.bddcl_city_content_hover a.bddcl_city_dropdown i{   width: 0;height: 0;border-left: 5px solid transparent;border-right: 5px solid transparent;border-bottom: 5px solid #555; border-top:none;}
+
+
 .bdd_city_right{ float:right; display:inline; color:#999; margin-top:10px;font-size:14px;}
 
 /*显示隐藏的监测点列表*/
@@ -255,6 +272,23 @@ a.pr_item_special:hover i{ background-position:-441px -95px;}
 .bddcl_content_active li.current a,.bddcl_content_active li a:hover{ background-color:#f4f4f4; color:#1e9e69;}
 .bddcl_content_active li a i{ color:#bbb; font-family:Arial, Helvetica, sans-serif; padding-right:10px;}
 .bddcl_content_active li.current a i,.bddcl_content_active li a:hover i{ color:#66a063;}
+
+.bddcl_province_content_active { position:absolute; top:34px; left:15px; width:300px; z-index:10; padding:10px; width:300px; background-color:#fff; border:#bbb solid 1px;-webkit-box-shadow:0 1px 9px rgba(0,0,0,.15);-moz-box-shadow:0 1px 9px rgba(0,0,0,.15);box-shadow:0 1px 9px rgba(0,0,0,.15);}
+.bddcl_province_content_active ul{ line-height:31px;}
+.bddcl_province_content_active li{ float:left; display:inline; width:50%;}
+.bddcl_province_content_active li a{ float:left; display:inline;width:100%; color:#555; text-indent:15px;font-size:14px;}
+.bddcl_province_content_active li.current a,.bddcl_content_active li a:hover{ background-color:#f4f4f4; color:#1e9e69;}
+.bddcl_province_content_active li a i{ color:#bbb; font-family:Arial, Helvetica, sans-serif; padding-right:10px;}
+.bddcl_province_content_active li.current a i,.bddcl_content_active li a:hover i{ color:#66a063;}
+
+.bddcl_city_content_active { position:absolute; top:34px; left:15px; width:300px; z-index:10; padding:10px; width:300px; background-color:#fff; border:#bbb solid 1px;-webkit-box-shadow:0 1px 9px rgba(0,0,0,.15);-moz-box-shadow:0 1px 9px rgba(0,0,0,.15);box-shadow:0 1px 9px rgba(0,0,0,.15);}
+.bddcl_city_content_active ul{ line-height:31px;}
+.bddcl_city_content_active li{ float:left; display:inline; width:50%;}
+.bddcl_city_content_active li a{ float:left; display:inline;width:100%; color:#555; text-indent:15px;font-size:14px;}
+.bddcl_city_content_active li.current a,.bddcl_content_active li a:hover{ background-color:#f4f4f4; color:#1e9e69;}
+.bddcl_city_content_active li a i{ color:#bbb; font-family:Arial, Helvetica, sans-serif; padding-right:10px;}
+.bddcl_city_content_active li.current a i,.bddcl_content_active li a:hover i{ color:#66a063;}
+
 .wuranwu_nav{ position:absolute; z-index:5; bottom:-4px; width:100%; height:40px; border-left:#e3e3e3 solid 1px;border-right:#e3e3e3 solid 1px;background-color:#ececec;border-bottom:#57b382 solid 4px;}
 .wuranwu_nav li{ float:left; display:inline; line-height:40px;}
 .wuranwu_nav li a{border-top:#e3e3e3 solid 1px; float:left; display:inline; width:139px; height:40px; color:#555; text-align:center;}

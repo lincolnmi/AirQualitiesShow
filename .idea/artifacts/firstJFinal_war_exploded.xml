@@ -16,6 +16,7 @@
           <element id="library" level="project" name="Gradle: c3p0:c3p0:0.9.1.2" />
           <element id="library" level="project" name="Gradle: mysql:mysql-connector-java:5.1.38" />
           <element id="library" level="project" name="Gradle: com.jfinal:cos:26Dec2008" />
+          <element id="library" level="project" name="weka (2)" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="firstJFinal/web/Web" />
