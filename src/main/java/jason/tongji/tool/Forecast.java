@@ -94,7 +94,7 @@ public class Forecast {
         ArrayList<String> AQIs = new ArrayList<String>();
         for (AirData airData:airDatas) {
             int aqi = (int) airData.getDouble("aqi").doubleValue();
-            AQIs.add(aqi+"");
+            AQIs.add(0,aqi+"");
         }
 
         ArrayList<String> testData = new ArrayList<String>();

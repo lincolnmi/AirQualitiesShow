@@ -21,7 +21,8 @@ public class ComparisonController extends Controller {
 
     public void index() {
         Calendar calendar = Calendar.getInstance();
-        String timePoint = getTime(calendar);
+        //String timePoint = getTime(calendar);
+        String timePoint = GlobalConfig.timePoint;
         setAttr("timePoint",timePoint.replace("T", " ").replace("Z"," "));
 
         ArrayList<AirData> airDatas = AirData.dao.getAirData(timePoint);
@@ -187,7 +188,7 @@ public class ComparisonController extends Controller {
             calendar.add(calendar.HOUR,-2);
         }
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH)+1;
+        int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         String timePoint = year + "-";

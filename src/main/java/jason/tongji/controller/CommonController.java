@@ -47,7 +47,8 @@ public class CommonController extends Controller {
         ArrayList<String> xAxis_data = getxAxisData(Calendar.getInstance(),size);
         initEchartsDataScript(xAxis_data,predictData,"#d4d4d4","forecast_aqi","forecast-aqi.js");
 
-        String timePoint = getTime(Calendar.getInstance());
+        //String timePoint = getTime(Calendar.getInstance());
+        String timePoint = GlobalConfig.timePoint;
         List<MonitorLocation> monitorLocations = MonitorLocation.dao.getMonitorLocations(cityName, timePoint);
         HashMap<String, ArrayList<String>> provinceCities = CityProvince.getProvinceCities();
         HashMap<String,ArrayList<String>> cityPrefixes = City.getCityPrefixes();
@@ -111,9 +112,11 @@ public class CommonController extends Controller {
     }
 
     private ArrayList<String> getxAxisData(Calendar calendar, int size) {
+
         ArrayList<String> result = new ArrayList<String>();
+        calendar = getCalendar(GlobalConfig.timePoint);
         for (int i=1;i<=size;i++) {
-            calendar.add(calendar.HOUR,1);
+            calendar.add(calendar.HOUR_OF_DAY,1);
             String timePoint = getTime(calendar);
             timePoint = timePoint.substring(8, 13).replace("T", "Day")+"H";
             result.add(timePoint);
@@ -129,6 +132,22 @@ public class CommonController extends Controller {
             }
         }
         return 1;
+    }
+
+    private Calendar getCalendar(String timePoint) {
+        Calendar calendar = Calendar.getInstance();
+        timePoint = timePoint.replace("Z","");
+        String[] times = timePoint.split("T");
+        String[] day = times[0].split("-");
+        String[] second = times[1].split(":");
+        calendar.set(Calendar.YEAR,Integer.valueOf(day[0]));
+        calendar.set(Calendar.MONTH,Integer.valueOf(day[1]));
+        calendar.set(Calendar.DAY_OF_MONTH,Integer.valueOf(day[2]));
+        calendar.set(Calendar.HOUR_OF_DAY,Integer.valueOf(second[0]));
+        calendar.set(Calendar.MINUTE,Integer.valueOf(second[1]));
+        calendar.set(Calendar.SECOND,Integer.valueOf(second[2]));
+
+        return calendar;
     }
 
     private String getTime(Calendar calendar) {

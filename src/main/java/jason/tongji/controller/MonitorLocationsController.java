@@ -1,6 +1,7 @@
 package jason.tongji.controller;
 
 import com.jfinal.core.Controller;
+import jason.tongji.config.GlobalConfig;
 import jason.tongji.model.City;
 import jason.tongji.model.MonitorLocation;
 import jason.tongji.tool.EchartsDataScript;
@@ -36,7 +37,8 @@ public class MonitorLocationsController extends Controller {
     }
 
     private void processCommon(String locationName,String pollution) {
-        String timePoint = getTime(Calendar.getInstance());
+        //String timePoint = getTime(Calendar.getInstance());
+        String timePoint = GlobalConfig.timePoint;
         MonitorLocation monitorLocation = MonitorLocation.dao.getMonitorLocation(locationName,timePoint).get(0);
         String cityName = City.dao.getCityName(monitorLocation.getInt("city_id"));
         List<MonitorLocation> monitorLocations = MonitorLocation.dao.getMonitorLocations(cityName, timePoint);
@@ -59,21 +61,21 @@ public class MonitorLocationsController extends Controller {
     }
 
     private List<MonitorLocation> getLastWeekMonitorData(String locationName, String timePoint, String pollution) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getCalendar(GlobalConfig.timePoint);
         calendar.add(Calendar.DAY_OF_MONTH,-7);
         timePoint = getTime(calendar);
         return MonitorLocation.dao.getRangeMonitorData(locationName, timePoint, pollution);
     }
 
     private List<MonitorLocation> getLast24HourMonitorData(String locationName, String timePoint, String pollution) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getCalendar(GlobalConfig.timePoint);
         calendar.add(Calendar.DAY_OF_MONTH,-1);
         timePoint = getTime(calendar);
         return MonitorLocation.dao.getRangeMonitorData(locationName, timePoint, pollution);
     }
 
     private List<MonitorLocation> getLastMonthMonitorData(String locationName, String timePoint, String pollution) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getCalendar(GlobalConfig.timePoint);
         calendar.add(Calendar.MONTH,-1);
         timePoint = getTime(calendar);
         return MonitorLocation.dao.getRangeMonitorData(locationName,timePoint,pollution);
@@ -120,7 +122,7 @@ public class MonitorLocationsController extends Controller {
             calendar.add(calendar.HOUR,-2);
         }
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH)+1;
+        int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         String timePoint = year + "-";
@@ -137,6 +139,22 @@ public class MonitorLocationsController extends Controller {
         }
         timePoint += hour + ":00:00Z";
         return timePoint;
+    }
+
+    private Calendar getCalendar(String timePoint) {
+        Calendar calendar = Calendar.getInstance();
+        timePoint = timePoint.replace("Z","");
+        String[] times = timePoint.split("T");
+        String[] day = times[0].split("-");
+        String[] second = times[1].split(":");
+        calendar.set(Calendar.YEAR,Integer.valueOf(day[0]));
+        calendar.set(Calendar.MONTH,Integer.valueOf(day[1]));
+        calendar.set(Calendar.DAY_OF_MONTH,Integer.valueOf(day[2]));
+        calendar.set(Calendar.HOUR_OF_DAY,Integer.valueOf(second[0]));
+        calendar.set(Calendar.MINUTE,Integer.valueOf(second[1]));
+        calendar.set(Calendar.SECOND,Integer.valueOf(second[2]));
+
+        return calendar;
     }
 
     public void AQI() {

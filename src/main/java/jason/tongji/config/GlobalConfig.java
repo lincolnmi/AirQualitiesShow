@@ -11,4 +11,5 @@ public class GlobalConfig {
 	public final static String SUCCESS = "success";
 	public final static String FAIL = "fail";
     public static String[] specialCities = new String[]{"上海","北京"};
+    public final static String timePoint = "2016-04-13T12:00:00Z";
 }

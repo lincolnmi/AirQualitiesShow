@@ -14,7 +14,8 @@ public class RankController extends Controller {
 
     public void index() {
         setAttr(GlobalConfig.NAV_KEY, GlobalConfig.NAV_RANK);
-        String timePoint = getCurrentTime();
+        //String timePoint = getCurrentTime();
+        String timePoint = GlobalConfig.timePoint;
         ArrayList<AirData> airData = AirData.dao.getAirData(timePoint);
         HashMap<String,String> cityProvinces = CityProvince.getCityProvinces();
         Iterator<AirData> it = airData.iterator();

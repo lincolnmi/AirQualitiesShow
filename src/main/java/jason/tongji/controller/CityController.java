@@ -1,6 +1,7 @@
 package jason.tongji.controller;
 
 import com.jfinal.core.Controller;
+import jason.tongji.config.GlobalConfig;
 import jason.tongji.model.AirData;
 import jason.tongji.model.City;
 import jason.tongji.model.CityProvince;
@@ -35,12 +36,12 @@ public class CityController extends Controller {
             }
         }
         System.out.println(cityName);
-        Calendar calendar = Calendar.getInstance();
-        String timePoint = getTime(calendar);
+
+        String timePoint = GlobalConfig.timePoint;
         List<MonitorLocation> monitorLocations = MonitorLocation.dao.getMonitorLocations(cityName,timePoint);
         AirData airData = AirData.dao.getAirDataByCity(cityName,timePoint);
         String color = Helper.getColorByQuality(airData.getStr("quality"));
-        timePoint = getLastDayTime();
+        //timePoint = getLastDayTime();
         List<AirData> last24AirData = AirData.dao.getLast24HourAirDataByCity(cityName, timePoint);
         initEchartsDataScript(last24AirData,color,"pg_content_24h","graph-last24-aqi.js");
 
@@ -69,7 +70,7 @@ public class CityController extends Controller {
     }
 
     private List<AirData> getLastMonthAirData(String cityName, String timePoint) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getCalendar(GlobalConfig.timePoint);
         calendar.add(Calendar.MONTH,-1);
         timePoint = getTime(calendar);
         return AirData.dao.getRangeAirData(cityName,timePoint);
@@ -107,10 +108,9 @@ public class CityController extends Controller {
     }
 
     private List<AirData> getLastWeekAirData(String cityName, String timePoint) {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getCalendar(GlobalConfig.timePoint);
         calendar.add(Calendar.DAY_OF_MONTH,-7);
         timePoint = getTime(calendar);
-        timePoint = "2016-03-20T10:00:00Z";
         return AirData.dao.getRangeAirData(cityName,timePoint);
     }
 
@@ -122,7 +122,7 @@ public class CityController extends Controller {
             calendar.add(calendar.HOUR,-2);
         }
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH)+1;
+        int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         String timePoint = year + "-";
@@ -142,10 +142,25 @@ public class CityController extends Controller {
     }
 
     private String getLastDayTime() {
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = getCalendar(GlobalConfig.timePoint);
         calendar.add(calendar.DAY_OF_MONTH,-1);
         return getTime(calendar);
     }
 
+    private Calendar getCalendar(String timePoint) {
+        Calendar calendar = Calendar.getInstance();
+        timePoint = timePoint.replace("Z","");
+        String[] times = timePoint.split("T");
+        String[] day = times[0].split("-");
+        String[] second = times[1].split(":");
+        calendar.set(Calendar.YEAR,Integer.valueOf(day[0]));
+        calendar.set(Calendar.MONTH,Integer.valueOf(day[1]));
+        calendar.set(Calendar.DAY_OF_MONTH,Integer.valueOf(day[2]));
+        calendar.set(Calendar.HOUR_OF_DAY,Integer.valueOf(second[0]));
+        calendar.set(Calendar.MINUTE,Integer.valueOf(second[1]));
+        calendar.set(Calendar.SECOND,Integer.valueOf(second[2]));
+
+        return calendar;
+    }
 
 }
